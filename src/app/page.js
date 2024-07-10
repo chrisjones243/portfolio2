@@ -1,26 +1,17 @@
-"use client";
+import { Heading, Box, Text, Flex } from "@chakra-ui/react";
 
-import {
-  Heading,
-  Text,
-  Box,
-  Image,
-  Grid,
-  GridItem,
-  AspectRatio,
-  useMediaQuery,
-} from "@chakra-ui/react";
-import { useColorMode } from "@chakra-ui/react";
+import Layout from "./components/layout";
+
+import Hero from "./sections/hero";
+import CaseStudies from "./sections/caseStudies";
 
 function HomePage() {
-  const isSmallScreen = useMediaQuery("(max-width: 600px)");
-
   return (
-    <Box>
-      <Heading as="h1" size="2xl" textAlign="center">
-        bcdhbcdh
-      </Heading>
-    </Box>
+    <Layout>
+      <Hero />
+      <CaseStudies />
+      <Box height={"100vh"} />
+    </Layout>
   );
 }
 
