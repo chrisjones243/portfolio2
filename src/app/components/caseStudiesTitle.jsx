@@ -1,8 +1,13 @@
 "use client";
 import { useState } from "react";
-import { Box, Text, Flex, Image } from "@chakra-ui/react";
-import { useTheme } from "@chakra-ui/react";
-import { useColorMode } from "@chakra-ui/react";
+import {
+  Box,
+  Text,
+  Flex,
+  Image,
+  useTheme,
+  useColorMode,
+} from "@chakra-ui/react";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -93,7 +98,7 @@ function CaseStudiesTitle() {
         <Flex flexDirection={"row"} ref={firstLine}>
           <Text fontWeight={"400"}>&nbsp;Case Studies&nbsp;</Text>
           {image} <Text fontWeight={"1000"}>&nbsp;Case Studies&nbsp;</Text>
-          {image} <Text fontWeight={"400"}>&nbsp;Case Studies&nbsp;</Text>
+          {image} <Text fontWeight={"400"}>&nbsp;Quesadillas&nbsp;</Text>
           {image} <Text fontWeight={"1000"}>&nbsp;Case Studies&nbsp;</Text>
           {image} <Text fontWeight={"400"}>&nbsp;Case Studies&nbsp;</Text>
           {image}
@@ -107,7 +112,7 @@ function CaseStudiesTitle() {
         >
           <Text fontWeight={"400"}>&nbsp;Case Studies&nbsp;</Text>
           {image} <Text fontWeight={"1000"}>&nbsp;Case Studies&nbsp;</Text>
-          {image} <Text fontWeight={"400"}>&nbsp;Case Studies&nbsp;</Text>
+          {image} <Text fontWeight={"400"}>&nbsp;Quesadillas&nbsp;</Text>
           {image} <Text fontWeight={"1000"}>&nbsp;Case Studies&nbsp;</Text>
           {image} <Text fontWeight={"400"}>&nbsp;Case Studies&nbsp;</Text>
           {image}
