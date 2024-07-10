@@ -1,5 +1,5 @@
 "use client";
-import { Box, Text, Flex } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import CaseStudiesTitle from "../components/caseStudiesTitle";
 
 function CaseStudies() {

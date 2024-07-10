@@ -12,7 +12,7 @@ function Hero() {
       width="75%"
       fontSize={["md", "lg", "2xl", "4xl", "6xl", "5rem"]}
       padding={20}
-      my={20}
+      my={130}
       // letterSpacing={4}
     >
       <Flex direction="row">
