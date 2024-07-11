@@ -3,7 +3,7 @@ import { Box, Text } from "@chakra-ui/react";
 function Contents() {
   const width = "calc(100% - 5)";
   return (
-    <Box position="fixed" zIndex={10} pl={10} top={["3", "5", "10"]}>
+    <Box position="fixed" pl={10} top={["3", "5", "10"]}>
       <Text fontSize="large" fontWeight="bold" mb={6}>
         Contents
       </Text>

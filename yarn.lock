@@ -1224,6 +1224,26 @@
   resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.11.8.tgz#6b79032e760a0899cd4204710beede972a3a185f"
   integrity sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==
 
+"@portabletext/react@^3.1.0":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@portabletext/react/-/react-3.1.0.tgz#95d08b67e74d380705726db6762321bf926796a6"
+  integrity sha512-ZGHlvS+NvId9RSqnflN8xF2KVZgAgD399dK1GaycurnGNZGZYTd5nZmc8by1yL76Ar8n/dbVtouUDJIkO4Tupw==
+  dependencies:
+    "@portabletext/toolkit" "^2.0.15"
+    "@portabletext/types" "^2.0.13"
+
+"@portabletext/toolkit@^2.0.15":
+  version "2.0.15"
+  resolved "https://registry.yarnpkg.com/@portabletext/toolkit/-/toolkit-2.0.15.tgz#f13764efeebfcc92bcb792b1c3724fa0456703fe"
+  integrity sha512-KRNEUAd6eOxE9y591qC0sE24ZG2q27OHXe0dsPclj4IoEzf8aEuDcHR64wfFtB0aHq9Wdx3pIinmhZZcl35/vg==
+  dependencies:
+    "@portabletext/types" "^2.0.13"
+
+"@portabletext/types@^2.0.13":
+  version "2.0.13"
+  resolved "https://registry.yarnpkg.com/@portabletext/types/-/types-2.0.13.tgz#7a4bf6dac30713fbe1b4bc01dc572af0af72955d"
+  integrity sha512-5xk5MSyQU9CrDho3Rsguj38jhijhD36Mk8S6mZo3huv6PM+t4M/5kJN2KFIxgvt4ONpvOEs1pVIZAV0cL0Vi+Q==
+
 "@rushstack/eslint-patch@^1.3.3":
   version "1.10.3"
   resolved "https://registry.yarnpkg.com/@rushstack/eslint-patch/-/eslint-patch-1.10.3.tgz#391d528054f758f81e53210f1a1eebcf1a8b1d20"
@@ -2354,10 +2374,10 @@ foreground-child@^3.1.0:
     cross-spawn "^7.0.0"
     signal-exit "^4.0.1"
 
-framer-motion@^11.2.14:
-  version "11.2.14"
-  resolved "https://registry.yarnpkg.com/framer-motion/-/framer-motion-11.2.14.tgz#739aa2eb7bcd4fe49f4cd9b88d352eb85d6cda8b"
-  integrity sha512-0Nwg++Jymj4Yn7LFKH/nKuGrgVZTEIgIbLjl+LBBFBEzNd4rX+n3z/doqjEbvjk1xcmsim9h7du2+LTYdQTULw==
+framer-motion@^11.3.0:
+  version "11.3.0"
+  resolved "https://registry.yarnpkg.com/framer-motion/-/framer-motion-11.3.0.tgz#dd2fe041577c520b2bf1b136b3ed31f866308f54"
+  integrity sha512-hjYjMUQaWuqilwRr5kC0CunHZFVMtKWHy/IdL/LPRBD0C491DKTvYwQRJ5qRXEAOT+Rth7Vi4XBe4TA4bFOn3A==
   dependencies:
     tslib "^2.4.0"
 
@@ -3412,6 +3432,11 @@ react-focus-lock@^2.9.4:
     react-clientside-effect "^1.2.6"
     use-callback-ref "^1.3.2"
     use-sidecar "^1.1.2"
+
+react-icons@^5.2.1:
+  version "5.2.1"
+  resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-5.2.1.tgz#28c2040917b2a2eda639b0f797bff1888e018e4a"
+  integrity sha512-zdbW5GstTzXaVKvGSyTaBalt7HSfuK5ovrzlpyiWHAFXndXTdd/1hdDHI4xBM1Mn7YriT6aqESucFl9kEXzrdw==
 
 react-is@^16.13.1, react-is@^16.7.0:
   version "16.13.1"

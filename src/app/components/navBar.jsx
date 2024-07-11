@@ -16,12 +16,13 @@ const NavBar = () => {
       left={0}
       px={[5, 10, 20]}
       width="full"
-      onClick={toggleColorMode}
+      zIndex={10}
     >
       <Box
         width={"calc(20% + 1px)"}
         border={`1px solid ${useTheme().colors.stroke}`}
         bg={`background.${colorMode}`}
+        onClick={toggleColorMode}
       >
         <AspectRatio
           ratio={422.28 / 435.38}
