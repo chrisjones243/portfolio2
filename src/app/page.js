@@ -5,6 +5,7 @@ import Layout from "./components/layout";
 import Hero from "./sections/hero";
 import CaseStudies from "./sections/caseStudies";
 import Experience from "./sections/experience";
+import Games from "./sections/Games";
 
 function HomePage() {
   return (
@@ -12,6 +13,7 @@ function HomePage() {
       <Hero />
       <CaseStudies />
       <Experience />
+      <Games />
     </Layout>
   );
 }
