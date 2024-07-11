@@ -12,7 +12,7 @@ function CaseStudies() {
     <Box>
       <CaseStudiesTitle />
       <Box
-        height={["50vh", "75vh", "75vh", "90vh"]}
+        height={["50vh", "75vh", "75vh", "84vh"]}
         border={`1px solid ${useTheme().colors.stroke}`}
         borderTop={0}
         bg={`background.${colorMode}`}

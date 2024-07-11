@@ -4,13 +4,14 @@ import Layout from "./components/layout";
 
 import Hero from "./sections/hero";
 import CaseStudies from "./sections/caseStudies";
+import Experience from "./sections/experience";
 
 function HomePage() {
   return (
     <Layout>
       <Hero />
       <CaseStudies />
-      <Box height={"100vh"} />
+      <Experience />
     </Layout>
   );
 }

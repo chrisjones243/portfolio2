@@ -16,36 +16,11 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 function CaseStudiesTitle() {
   const { colorMode } = useColorMode();
 
-  const symbol =
-    colorMode === "light" ? "jedi-order-dark.svg" : "jedi-order-light.svg";
-  const symbolSize = 20;
-
-  //   const image = (
-  //     <Image src={symbol} alt="Logo" width={symbolSize} height={symbolSize} />
-  //   );
-
   const image = "🌮";
-
-  const [offsetWidth, setOffsetWidth] = useState(0); // Step 1
 
   const firstLine = useRef(null);
   const secondLine = useRef(null);
   const slider = useRef(null);
-
-  useEffect(() => {
-    // Step 3
-    const updateWidth = () => {
-      if (firstLine.current) {
-        setOffsetWidth(firstLine.current.offsetWidth);
-      }
-    };
-
-    updateWidth(); // Update width initially
-
-    // Optional: Update width on window resize
-    window.addEventListener("resize", updateWidth);
-    return () => window.removeEventListener("resize", updateWidth);
-  }, [firstLine]); // Dependency array ensures effect runs when `current` changes
 
   let xPercent = 0;
   let direction = -1;
