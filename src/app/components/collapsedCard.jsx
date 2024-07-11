@@ -13,12 +13,6 @@ function CollapsedCard({ data, onClick, setPos }) {
   const { title, image } = data;
 
   const info = useRef(null);
-  const entire = useRef(null);
-
-  useEffect(() => {
-    setPos({ x: entire?.current?.offsetLeft, y: entire?.current?.offsetTop });
-    console.log(entire?.current?.offsetLeft, entire?.current?.offsetTop);
-  }, []);
 
   const variants = {
     hidden: {
@@ -41,7 +35,6 @@ function CollapsedCard({ data, onClick, setPos }) {
 
   return (
     <Flex
-      ref={entire}
       width="100%"
       height="100%"
       border={`1px solid ${useTheme().colors.stroke}`}

@@ -25,7 +25,11 @@ function ExpandedCard({ data, setClose, isOpen }) {
   };
 
   const components = {
-    span: ({ children }) => <Text>{children}</Text>,
+    block: ({ children }) => (
+      <Text fontStyle={"italic"} fontWeight={500}>
+        {children}
+      </Text>
+    ),
   };
 
   function disableScroll() {
@@ -135,7 +139,7 @@ function ExpandedCard({ data, setClose, isOpen }) {
             alignItems={"center"}
             justifyContent={"space-between"}
           >
-            <PortableText value={description} components={components} />
+            <PortableText components={components} value={description} s />
 
             <Icon as={FaExternalLinkAlt} cursor={"pointer"} />
           </Flex>
