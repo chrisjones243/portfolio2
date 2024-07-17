@@ -1,7 +1,7 @@
 import { create } from "zustand";
 
 export const useDimensions = create((set) => ({
-  height: "20 px",
+  height: 10,
   sections: 5,
   blockWidth: `calc(${100 / 5}% + 1px)`,
   setSections: (sections) =>

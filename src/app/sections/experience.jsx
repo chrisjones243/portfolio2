@@ -2,6 +2,7 @@
 import { Flex, Text, useTheme } from "@chakra-ui/react";
 import { useColorMode } from "@chakra-ui/react";
 import { useState, useRef } from "react";
+import { useDimensions } from "../../dimensions";
 
 const langs = [
   "Javascript",
@@ -32,6 +33,7 @@ const langsColor = [
 
 function Experience() {
   const { colorMode } = useColorMode();
+  const { height } = useDimensions();
 
   const [currentLang, setCurrentLang] = useState(0);
 
@@ -54,9 +56,8 @@ function Experience() {
 
   return (
     <Flex
-      height={["50vh", "75vh", "75vh", "70vh"]}
+      height={`${height * 7}vh`}
       width={"full"}
-      my={60}
       border={`1px solid ${useTheme().colors.stroke}`}
       bg={`background.${colorMode}`}
       alignItems={"center"}

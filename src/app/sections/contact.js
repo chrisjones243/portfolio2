@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 
 function Contact() {
   const { colorMode } = useColorMode();
+  const { height } = useDimensions();
+
   const [heading, setHeading] = useState(<Text>Contact</Text>);
 
   const handleClick = () => {

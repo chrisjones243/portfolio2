@@ -46,11 +46,11 @@ const NavBar = () => {
         border={`1px solid ${useTheme().colors.stroke}`}
         bg={`background.${colorMode}`}
         onClick={toggleColorMode}
-        height={height}
+        h={`${height}vh`}
         width={blockWidth}
         alignItems={"center"}
       >
-        <Icon as={Logo} w={10} h={10} m={4} />
+        <Icon as={Logo} w={10} h={10} m={4} color={`brand.${colorMode}`} />
       </Flex>
     </Box>
   );

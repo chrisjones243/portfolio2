@@ -1,5 +1,5 @@
 "use client";
-import { Box, Text, Flex } from "@chakra-ui/react";
+import { Box, Text, Flex, GridItem, Grid } from "@chakra-ui/react";
 import { useTheme } from "@chakra-ui/react";
 import { useColorMode } from "@chakra-ui/react";
 
@@ -8,42 +8,55 @@ import { useDimensions } from "../../dimensions.js";
 function Hero() {
   const { height, blockWidth } = useDimensions();
 
-  const h = height * 100;
+  console.log("Hero -> blockWidth", blockWidth);
+  console.log("Hero -> height", height);
+
+  const h = height * 8;
   console.log("Hero -> h", h);
 
-  const { colorMode } = useColorMode();
+  const oppositeColor = useColorMode().colorMode === "light" ? "dark" : "light";
+
+  const { colorMode, sections } = useColorMode();
   return (
-    <Box
+    <Grid
+      templateColumns="repeat(4, 1fr)"
       border={`1px solid ${useTheme().colors.stroke}`}
       bg={`background.${colorMode}`}
-      width="75%"
-      height={h}
+      // width="75%"
+      h={`${h}vh`}
       fontSize={["md", "lg", "2xl", "4xl", "6xl", "5rem"]}
-      padding={20}
-      my={130}
       letterSpacing={4}
     >
-      <Flex direction="row">
-        <Text fontWeight={"400"}>I&#39;m</Text>
-        <Text fontStyle={"italic"} fontWeight={"1000"}>
-          &nbsp;Chris
-        </Text>
-        <Text fontWeight={"400"}>,</Text>
-      </Flex>
-      <Flex direction="row">
-        <Text fontWeight={"400"}>a&nbsp;</Text>
-        <Text fontWeight={"400"} letterSpacing={0}>
-          university&nbsp;
-        </Text>
-        <Text fontWeight={"400"}>&nbsp;student,</Text>
-      </Flex>
-      <Flex direction="row">
-        <Text fontWeight={"400"}>looking for a </Text>
-        <Text fontStyle={"italic"} fontWeight={"1000"}>
-          &nbsp;job
-        </Text>
-      </Flex>
-    </Box>
+      <GridItem
+        colSpan={3}
+        p={10}
+        display={"flex"}
+        justifyContent={"center"}
+        flexDirection={"column"}
+      >
+        <Flex direction="row">
+          <Text fontWeight={"400"}>I&#39;m</Text>
+          <Text fontStyle={"italic"} fontWeight={"1000"}>
+            &nbsp;Chris
+          </Text>
+          <Text fontWeight={"400"}>,</Text>
+        </Flex>
+        <Flex direction="row">
+          <Text fontWeight={"400"}>a&nbsp;</Text>
+          <Text fontWeight={"400"} letterSpacing={0}>
+            university&nbsp;
+          </Text>
+          <Text fontWeight={"400"}>&nbsp;student,</Text>
+        </Flex>
+        <Flex direction="row">
+          <Text fontWeight={"400"}>looking for a </Text>
+          <Text fontStyle={"italic"} fontWeight={"1000"}>
+            &nbsp;job
+          </Text>
+        </Flex>
+      </GridItem>
+      <GridItem colSpan={1} bg={`background.${oppositeColor}`} />
+    </Grid>
   );
 }
 

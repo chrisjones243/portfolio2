@@ -8,19 +8,20 @@ function Cards() {
   return (
     <>
       <Grid
-        templateColumns="repeat(3, 1fr)"
-        gap={4}
-        height="100%"
-        py={10}
-        px={40}
+        templateColumns="repeat(4, 1fr)"
+        // py={10}
+        // px={40}
       >
-        <AnimatePresence>
-          {Array.from({ length: 6 }).map((_, i) => (
-            <GridItem colSpan={1} key={i}>
-              <Card />
-            </GridItem>
-          ))}
-        </AnimatePresence>
+        <GridItem colSpan={1} />
+        <GridItem colSpan={3}>
+          <AnimatePresence>
+            {Array.from({ length: 6 }).map((_, i) => (
+              <GridItem colSpan={1} key={i}>
+                <Card />
+              </GridItem>
+            ))}
+          </AnimatePresence>
+        </GridItem>
       </Grid>
     </>
   );

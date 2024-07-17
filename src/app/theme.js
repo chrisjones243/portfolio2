@@ -9,16 +9,16 @@ const config = {
 
 const colors = {
   font: {
-    dark: "#FFFFFF",
-    light: "#000000",
+    dark: "#DEDDCD",
+    light: "#111111",
   },
   brand: {
-    dark: "#FFFFFF",
-    light: "#000000",
+    dark: "#DEDDCD",
+    light: "#111111",
   },
   background: {
-    dark: "#000000",
-    light: "#FFFFFF",
+    dark: "#111111",
+    light: "#DEDDCD",
   },
   stroke: "#585858",
 };
@@ -31,8 +31,17 @@ const styles = {
   }),
 };
 
+const components = {
+  Text: {
+    baseStyle: (props) => ({
+      color: mode("font.light", "font.dark")(props),
+    }),
+  },
+};
+
 export const theme = extendTheme({
   config,
   colors,
   styles,
+  components,
 });

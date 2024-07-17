@@ -1,14 +1,19 @@
 "use client";
-import { Box, Text, useTheme, Flex, Icon } from "@chakra-ui/react";
+import { Box, Text, useTheme, Grid, GridItem, Icon } from "@chakra-ui/react";
 import { useColorMode } from "@chakra-ui/react";
-import { FaExpandAlt } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { Img } from "./img";
+import { useDimensions } from "../../dimensions";
 
-function CollapsedCard({ data, onClick, setPos }) {
+function CollapsedCard({ data, onClick }) {
   const { colorMode } = useColorMode(); // Get the current color mode
+  const oppositeColor = colorMode === "light" ? "dark" : "light";
   const [showInfo, setShowInfo] = useState(false);
+
+  const rightArrow = "right-arrow.svg";
+
+  const { height } = useDimensions();
 
   const { title, image } = data;
 
@@ -34,72 +39,39 @@ function CollapsedCard({ data, onClick, setPos }) {
   };
 
   return (
-    <Flex
-      width="100%"
-      height="100%"
-      border={`1px solid ${useTheme().colors.stroke}`}
-      overflow={"hidden"}
-      position="relative"
-      zIndex={0}
+    <Grid
       onMouseEnter={() => setShowInfo(true)}
       onMouseLeave={() => setShowInfo(false)}
       onClick={onClick}
       as={motion.div}
-      whileHover={{ scale: 1.02 }}
-      whileTap={{ scale: 0.98 }}
+      whileHover={{ opacity: 0.9 }}
+      whileTap={{ opacity: 0.8 }}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1, transition: { duration: 0.5 } }}
       exit={{ opacity: 0, transition: { duration: 0.5 } }}
       cursor={"pointer"}
+      height={`${height}vh`}
+      width="100%"
+      border={`1px solid ${useTheme().colors.stroke}`}
+      bg={`background.${colorMode}`}
+      templateColumns="repeat(3, 1fr)"
     >
-      <Box
-        as={motion.div}
-        variants={variants}
-        initial="notHovering"
-        animate={showInfo ? "hovering" : "notHovering"}
-        width="100%"
-        height="100%"
-        bg={`background.${colorMode}`}
-        position="absolute"
-        top={0}
-        left={0}
-      />
-      <Img
-        src={image}
-        alt={title}
-        width={300}
-        height={200}
-        minH="100%"
-        minW="100%"
-        objectFit="cover"
-      />
-
-      <Flex
-        ref={info}
-        as={motion.div}
-        initial="hidden"
-        animate={showInfo ? "visible" : "hidden"}
-        variants={variants}
-        bottom={-info?.current?.offsetHeight}
-        bg={`background.${colorMode}`}
-        borderTop={`1px solid ${useTheme().colors.stroke}`}
-        width="100%"
-        p={3}
-        position={"absolute"}
-        flexDirection={"row"}
-        alignItems={"center"}
-        justifyContent={"space-between"}
-      >
-        <Text
-          fontSize="md"
-          alignSelf={"Flex-end"}
-          // width={"100%"}
-        >
+      <GridItem colSpan={2} display={"flex"} alignItems={"center"} pl={10}>
+        <Text fontStyle={"italic"} fontWeight={600} fontSize={25}>
           {title}
         </Text>
-        <Icon as={FaExpandAlt} />
-      </Flex>
-    </Flex>
+      </GridItem>
+      <GridItem
+        colSpan={1}
+        bg={`background.${oppositeColor}`}
+        color={"black"}
+        display={"flex"}
+        alignItems={"center"}
+        justifyContent={"center"}
+      >
+        <Icon as={"right-arrow.svg"} />
+      </GridItem>
+    </Grid>
   );
 }
 

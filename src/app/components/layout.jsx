@@ -1,4 +1,6 @@
+"use client";
 import { Heading, Box, Grid, GridItem, Text } from "@chakra-ui/react";
+import { useDimensions } from "../../dimensions";
 
 import BackgroundLines from "./backgroundLines";
 import NavBar from "./navBar";
@@ -7,12 +9,15 @@ import Contents from "./contents";
 function Layout({ children }) {
   const width = "calc(100% - 5)";
   console.log("Layout -> width", width);
+
+  const { height, blockWidth } = useDimensions();
+
   return (
     <Box mx={[5, 10, 20]} width={width}>
       <Grid templateColumns="repeat(5, 1fr)}">
         <GridItem colSpan={4}>
           <NavBar />
-          <Box height={[90, 100, 120]} />
+          <Box height={`${height}vh`} mt={["3", "5", "10"]} />
           <Box>{children}</Box>
         </GridItem>
         <GridItem colSpan={1}>

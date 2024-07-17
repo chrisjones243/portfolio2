@@ -12,9 +12,11 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 // import Image from "next/image";
+import { useDimensions } from "../../dimensions";
 
 function CaseStudiesTitle() {
   const { colorMode } = useColorMode();
+  const { height, blockWidth } = useDimensions();
 
   const image = "🌮";
 
@@ -63,12 +65,17 @@ function CaseStudiesTitle() {
       border={`1px solid ${useTheme().colors.stroke}`}
       bg={`background.${colorMode}`}
       overflow={"hidden"}
+      h={`${height}vh`}
     >
       <Flex
         position={"relative"}
         whiteSpace={"nowrap"}
         fontSize={["md", "lg", "2xl", "4xl"]}
         ref={slider}
+        h={`${height}vh`}
+        display={"flex"}
+        flexDirection={"row"}
+        align={"center"}
       >
         <Flex flexDirection={"row"} ref={firstLine}>
           <Text fontWeight={"400"}>&nbsp;Case Studies&nbsp;</Text>

@@ -7,13 +7,20 @@ import CaseStudies from "./sections/caseStudies";
 import Experience from "./sections/experience";
 import Games from "./sections/Games";
 
+import Spacer from "./components/spacer";
+import { SP } from "next/dist/shared/lib/utils";
+
 function HomePage() {
   return (
     <Layout>
       <Hero />
+      <Spacer />
       <CaseStudies />
+      <Spacer />
       <Experience />
+      <Spacer />
       <Games />
+      <Spacer />
     </Layout>
   );
 }
