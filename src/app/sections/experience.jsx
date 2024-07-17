@@ -1,5 +1,5 @@
 "use client";
-import { Flex, Text, useTheme } from "@chakra-ui/react";
+import { Flex, Text, Box, useTheme } from "@chakra-ui/react";
 import { useColorMode } from "@chakra-ui/react";
 import { useState, useRef } from "react";
 import { useDimensions } from "../../dimensions";
@@ -33,6 +33,7 @@ const langsColor = [
 
 function Experience() {
   const { colorMode } = useColorMode();
+  const oppositeColor = colorMode === "light" ? "dark" : "light";
   const { height } = useDimensions();
 
   const [currentLang, setCurrentLang] = useState(0);
@@ -57,18 +58,18 @@ function Experience() {
   return (
     <Flex
       height={`${height * 7}vh`}
-      width={"full"}
       border={`1px solid ${useTheme().colors.stroke}`}
       bg={`background.${colorMode}`}
-      alignItems={"center"}
       onMouseMove={handleMouseMove}
+      direction={"column"}
     >
       <Flex
         direction={"column"}
         mx={10}
         fontSize={["2xl", "3xl", "4.5rem"]}
         letterSpacing={3}
-        width={"full"}
+        height={"full"}
+        justifyContent={"center"}
       >
         <Flex>
           <Text fontStyle={"italic"} fontWeight={"600"}>
@@ -84,6 +85,11 @@ function Experience() {
           {langs[currentLang]}
         </Text>
       </Flex>
+      <Box
+        width={"full"}
+        height={`${height}vh`}
+        bg={`background.${oppositeColor}`}
+      />
     </Flex>
   );
 }
