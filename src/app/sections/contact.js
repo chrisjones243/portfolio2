@@ -1,65 +1,122 @@
 "use client";
-import { Flex, Text, Box, useTheme } from "@chakra-ui/react";
+import {
+  Flex,
+  Text,
+  Input,
+  useTheme,
+  Box,
+  Button,
+  Grid,
+  GridItem,
+} from "@chakra-ui/react";
 import { useColorMode } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
+import { useDimensions } from "../../dimensions";
+import { forwardRef } from "react";
 
-function Contact() {
+const Contact = forwardRef(function Contact(props, ref) {
   const { colorMode } = useColorMode();
   const { height } = useDimensions();
+  const oppositeColor = colorMode === "light" ? "dark" : "light";
 
-  const [heading, setHeading] = useState(<Text>Contact</Text>);
-
-  const handleClick = () => {
-    setHeading(Title);
-  };
-
-  useEffect(() => {
-    setHeading(Title);
-  }, []);
-
-  const fontStyles = {
-    fontStyle: ["italic", "normal"],
-    fontWeight: ["200", "400", "600", "800", "1000"],
-  };
-
-  const random = (min, max) => {
-    return Math.floor(Math.random() * (max - min + 1) + min);
-  };
-
-  const Title = ({ text = "Contact" }) => {
+  const Button = ({ children, ...props }) => {
     return (
-      <Flex direction="row">
-        {text.split("").map((t, i) => (
-          <Text
-            key={i}
-            fontStyle={fontStyles.fontStyle[random(0, 1)]}
-            fontWeight={fontStyles.fontWeight[random(0, 4)]}
-            fontSize={["md", "lg", "2xl", "4xl"]}
-            m={0}
-            p={0}
-          >
-            {t}
-          </Text>
-        ))}
-      </Flex>
+      <Box
+        scrollMarginTop={`calc(${height}vh + 2.5rem)`}
+        bg={`background.${oppositeColor}`}
+        color={`font.${oppositeColor}`}
+        display={"flex"}
+        alignItems={"center"}
+        pl={10}
+        borderRadius={0}
+        borderTop={`1px solid ${useTheme().colors.stroke}`}
+        w={"full"}
+        height={"10vh"}
+        fontWeight={"600"}
+        fontSize={["md", "lg", "xl", "xl"]}
+        _hover={{
+          opacity: 0.9,
+          transition: "all 0.9s",
+        }}
+        _active={{
+          opacity: 0.8,
+          transition: "all 0.3s",
+        }}
+        {...props}
+      >
+        {children}
+      </Box>
     );
   };
 
   return (
-    <Flex direction="column">
-      <Box onClick={handleClick} p={10} cursor={"pointer"}>
-        {heading}
-      </Box>
-      <Box
-        border={`1px solid ${useTheme().colors.stroke}`}
-        bg={`background.${colorMode}`}
-        height={"50vh"}
-        mb={10}
-      >
-        {/* Add your contact form here */}
-      </Box>
-    </Flex>
+    <Grid
+      ref={ref}
+      templateColumns="repeat(2, 1fr)"
+      w="full"
+      h={`${height * 6}vh`}
+      bg={`background.${colorMode}`}
+      border={`1px solid ${useTheme().colors.stroke}`}
+    >
+      <GridItem>
+        <Flex direction="column">
+          <Flex h={`${height}vh`} pl={10} alignItems={"center"}>
+            <Text
+              fontStyle={"italic"}
+              fontWeight={"500"}
+              fontSize={["md", "lg", "2xl", "4xl"]}
+            >
+              Send Email
+            </Text>
+          </Flex>
+
+          <Input
+            placeholder="Email"
+            h={`${height}vh`}
+            borderRadius={0}
+            border={0}
+            borderTop={`1px solid ${useTheme().colors.stroke}`}
+          />
+          <Input
+            placeholder="Subject"
+            h={`${height}vh`}
+            borderRadius={0}
+            border={0}
+            borderTop={`1px solid ${useTheme().colors.stroke}`}
+          />
+          <Input
+            placeholder="Message"
+            h={`${height * 2}vh`}
+            borderRadius={0}
+            border={0}
+            borderTop={`1px solid ${useTheme().colors.stroke}`}
+          />
+          <Button>Send</Button>
+        </Flex>
+      </GridItem>
+      <GridItem borderLeft={`1px solid ${useTheme().colors.stroke}`}>
+        <Flex direction="column">
+          <Flex h={`${height}vh`} pl={10} alignItems={"center"}>
+            <Text
+              fontStyle={"italic"}
+              fontWeight={"500"}
+              fontSize={["md", "lg", "2xl", "4xl"]}
+            >
+              Social Media
+            </Text>
+          </Flex>
+
+          <Button onClick={() => window.open("https://www.linkedin.com/")}>
+            LinkedIn
+          </Button>
+          <Button>GitHub</Button>
+          <Button>Twitter</Button>
+          <Button>Instagram</Button>
+          <Button>Facebook</Button>
+        </Flex>
+      </GridItem>
+    </Grid>
   );
-}
+});
 
 export default Contact;

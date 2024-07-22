@@ -1,7 +1,7 @@
 "use client";
 import { Flex, Text, Box, useTheme } from "@chakra-ui/react";
 import { useColorMode } from "@chakra-ui/react";
-import { useState, useRef } from "react";
+import { useState, useRef, forwardRef } from "react";
 import { useDimensions } from "../../dimensions";
 
 const langs = [
@@ -31,7 +31,7 @@ const langsColor = [
   "gray.500",
 ];
 
-function Experience() {
+const Experience = forwardRef(function Experience(props, ref) {
   const { colorMode } = useColorMode();
   const oppositeColor = colorMode === "light" ? "dark" : "light";
   const { height } = useDimensions();
@@ -57,6 +57,8 @@ function Experience() {
 
   return (
     <Flex
+      ref={ref}
+      scrollMarginTop={`calc(${height}vh + 2.5rem)`}
       height={`${height * 7}vh`}
       border={`1px solid ${useTheme().colors.stroke}`}
       bg={`background.${colorMode}`}
@@ -92,6 +94,6 @@ function Experience() {
       />
     </Flex>
   );
-}
+});
 
 export default Experience;

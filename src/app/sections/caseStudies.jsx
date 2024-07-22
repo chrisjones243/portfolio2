@@ -1,15 +1,19 @@
 "use client";
+import { forwardRef } from "react";
+
 import { Box, useTheme } from "@chakra-ui/react";
 import CaseStudiesTitle from "../components/caseStudiesTitle";
 import { useColorMode } from "@chakra-ui/react";
+import { useDimensions } from "../../dimensions";
 
 import Cards from "../components/cards";
 
-function CaseStudies() {
+const CaseStudies = forwardRef(function CaseStudies(props, ref) {
   const { colorMode } = useColorMode();
+  const { height } = useDimensions();
 
   return (
-    <Box>
+    <Box ref={ref} scrollMarginTop={`calc(${height}vh + 2.5rem)`}>
       <CaseStudiesTitle />
       <Box
         // height={["50vh", "75vh", "75vh", "84vh"]}
@@ -21,6 +25,6 @@ function CaseStudies() {
       </Box>
     </Box>
   );
-}
+});
 
 export default CaseStudies;

@@ -6,22 +6,22 @@ import BackgroundLines from "./backgroundLines";
 import NavBar from "./navBar";
 import Contents from "./contents";
 
-function Layout({ children }) {
-  const width = "calc(100% - 5)";
-  console.log("Layout -> width", width);
+function Layout({ children, scrollTo, refs }) {
+  console.log("Layout -> refs", refs);
 
-  const { height, blockWidth } = useDimensions();
+  const width = "calc(100% - 5)";
+  const { height } = useDimensions();
 
   return (
-    <Box mx={[5, 10, 20]} width={width}>
+    <Box mx={[5, 10, 20]} py={["3", "5", "10"]} width={width}>
       <Grid templateColumns="repeat(5, 1fr)}">
         <GridItem colSpan={4}>
           <NavBar />
-          <Box height={`${height}vh`} mt={["3", "5", "10"]} />
+          <Box height={`${height}vh`} />
           <Box>{children}</Box>
         </GridItem>
         <GridItem colSpan={1}>
-          <Contents />
+          <Contents scrollTo={scrollTo} refs={refs} />
         </GridItem>
       </Grid>
       <BackgroundLines />

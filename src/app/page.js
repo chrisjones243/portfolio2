@@ -1,26 +1,35 @@
-import { Heading, Box, Text, Flex } from "@chakra-ui/react";
-
+"use client";
+import { useRef } from "react";
 import Layout from "./components/layout";
 
 import Hero from "./sections/hero";
 import CaseStudies from "./sections/caseStudies";
 import Experience from "./sections/experience";
 import Games from "./sections/Games";
+import Contact from "./sections/contact";
 
 import Spacer from "./components/spacer";
-import { SP } from "next/dist/shared/lib/utils";
 
 function HomePage() {
+  const HeroRef = useRef(null);
+  const CaseStudiesRef = useRef(null);
+  const ExperienceRef = useRef(null);
+  const GamesRef = useRef(null);
+  const ContactRef = useRef(null);
+
   return (
-    <Layout>
-      <Hero />
+    <Layout
+      refs={{ HeroRef, CaseStudiesRef, ExperienceRef, GamesRef, ContactRef }}
+    >
+      <Hero ref={HeroRef} />
       <Spacer />
-      <CaseStudies />
+      <CaseStudies ref={CaseStudiesRef} />
       <Spacer />
-      <Experience />
+      <Experience ref={ExperienceRef} />
       <Spacer />
-      <Games />
+      <Games ref={GamesRef} />
       <Spacer />
+      <Contact ref={ContactRef} />
     </Layout>
   );
 }

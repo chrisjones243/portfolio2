@@ -5,7 +5,9 @@ import { useColorMode } from "@chakra-ui/react";
 
 import { useDimensions } from "../../dimensions.js";
 
-function Hero() {
+import { forwardRef } from "react";
+
+const Hero = forwardRef(function Hero(props, ref) {
   const { height, blockWidth } = useDimensions();
 
   console.log("Hero -> blockWidth", blockWidth);
@@ -19,6 +21,8 @@ function Hero() {
   const { colorMode, sections } = useColorMode();
   return (
     <Grid
+      ref={ref}
+      scrollMarginTop={`calc(${height}vh + 2.5rem)`}
       templateColumns="repeat(4, 1fr)"
       border={`1px solid ${useTheme().colors.stroke}`}
       bg={`background.${colorMode}`}
@@ -58,6 +62,6 @@ function Hero() {
       <GridItem colSpan={1} bg={`background.${oppositeColor}`} />
     </Grid>
   );
-}
+});
 
 export default Hero;

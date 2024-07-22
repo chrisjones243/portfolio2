@@ -1,12 +1,19 @@
 "use client";
+import { forwardRef } from "react";
 import { Flex, Text, Box, useTheme } from "@chakra-ui/react";
 import { useColorMode } from "@chakra-ui/react";
+import { useDimensions } from "../../dimensions";
 
-function Games() {
+const Games = forwardRef(function Games(props, ref) {
   const { colorMode } = useColorMode();
+  const { height } = useDimensions();
 
   return (
-    <Flex direction="column">
+    <Flex
+      ref={ref}
+      direction="column"
+      scrollMarginTop={`calc(${height}vh + 2.5rem)`}
+    >
       <Text
         fontStyle={"italic"}
         fontWeight={"500"}
@@ -41,6 +48,6 @@ function Games() {
       </Box>
     </Flex>
   );
-}
+});
 
 export default Games;

@@ -50,7 +50,8 @@ function CollapsedCard({ data, onClick }) {
       cursor={"pointer"}
       height={`${height}vh`}
       width="100%"
-      border={`1px solid ${useTheme().colors.stroke}`}
+      borderTop={`1px solid ${useTheme().colors.stroke}`}
+      borderLeft={`1px solid ${useTheme().colors.stroke}`}
       bg={`background.${colorMode}`}
       templateColumns="repeat(3, 1fr)"
     >
@@ -62,7 +63,7 @@ function CollapsedCard({ data, onClick }) {
       <GridItem
         colSpan={1}
         bg={`background.${oppositeColor}`}
-        color={"black"}
+        color={`font.${oppositeColor}`}
         display={"flex"}
         alignItems={"center"}
         justifyContent={"center"}
