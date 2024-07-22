@@ -1,27 +1,30 @@
 import { Flex, Box } from "@chakra-ui/react";
 
 const BackgroundLines = ({ numberOfLines = 6 }) => {
-  const line = () => {
-    return <Box bg={"stroke"} h="100vh" w="1px" top={0} />;
-  };
-
   const lines = Array(numberOfLines)
     .fill()
     .map((_, i) => {
-      return <Box key={i}>{line()}</Box>;
+      return <Box key={i} bg={"stroke"} h="full" w="1px" />;
     });
 
   return (
     <Flex
+      position="absolute"
       justify="space-between"
-      width="full"
-      left={0}
-      px={[5, 10, 20]}
-      top={0}
+      direction={"column"}
       zIndex={-20}
-      position="fixed"
+      py={["3", "5", "10"]}
+      px={[5, 10, 20]}
+      width="full"
+      height="full"
+      left={0}
+      top={0}
     >
-      {lines}
+      <Box bg={"stroke"} w="full" h="1px" />
+      <Flex direction="row" justify="space-between" height="full">
+        {lines}
+      </Flex>
+      <Box bg={"stroke"} h="1px" />
     </Flex>
   );
 };

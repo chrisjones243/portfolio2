@@ -64,11 +64,11 @@ function Experience() {
       direction={"column"}
     >
       <Flex
+        height={`${height * 6}vh`}
         direction={"column"}
         mx={10}
         fontSize={["2xl", "3xl", "4.5rem"]}
         letterSpacing={3}
-        height={"full"}
         justifyContent={"center"}
       >
         <Flex>
