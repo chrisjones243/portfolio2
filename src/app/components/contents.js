@@ -10,13 +10,13 @@ function useOnScreen(ref) {
       new IntersectionObserver(([entry]) =>
         setIntersecting(entry.isIntersecting)
       ),
-    [ref]
+    []
   );
 
   useEffect(() => {
     observer.observe(ref.current);
     return () => observer.disconnect();
-  }, []);
+  }, [observer, ref]);
 
   return isIntersecting;
 }

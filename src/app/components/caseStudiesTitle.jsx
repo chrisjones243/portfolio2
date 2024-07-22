@@ -25,7 +25,7 @@ function CaseStudiesTitle() {
   const slider = useRef(null);
 
   let xPercent = 0;
-  let direction = -1;
+  const direction = useRef(-1);
 
   useEffect(() => {
     gsap.set(secondLine.current, {
@@ -38,8 +38,8 @@ function CaseStudiesTitle() {
         trigger: document.documentElement,
         scrub: 0.5,
         start: 0,
-        end: window.innerHeight,
-        onUpdate: (e) => (direction = e.direction * -1),
+        // onUpdate: (e) => (directionRef.current = e.direction * -1),
+        onUpdate: (e) => (direction.current = e.direction * -1),
       },
 
       x: "-200px",
