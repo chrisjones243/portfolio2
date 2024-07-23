@@ -23,12 +23,19 @@ function HomePage() {
     >
       <Hero ref={HeroRef} />
       <Spacer />
+      <Spacer />
       <CaseStudies ref={CaseStudiesRef} />
+      <Spacer />
       <Spacer />
       <Experience ref={ExperienceRef} />
       <Spacer />
+      <Spacer />
       <Games ref={GamesRef} />
       <Spacer />
+      <Spacer />
+      <Spacer />
+      <Spacer />
+
       <Contact ref={ContactRef} />
     </Layout>
   );

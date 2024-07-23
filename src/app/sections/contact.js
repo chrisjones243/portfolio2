@@ -5,49 +5,21 @@ import {
   Input,
   useTheme,
   Box,
-  Button,
   Grid,
   GridItem,
+  Textarea,
 } from "@chakra-ui/react";
 import { useColorMode } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useDimensions } from "../../dimensions";
 import { forwardRef } from "react";
+import { RightArrow } from "../components/icons";
+import { Button } from "../components/button";
 
 const Contact = forwardRef(function Contact(props, ref) {
   const { colorMode } = useColorMode();
   const { height } = useDimensions();
   const oppositeColor = colorMode === "light" ? "dark" : "light";
-
-  const Button = ({ children, ...props }) => {
-    return (
-      <Box
-        scrollMarginTop={`calc(${height}vh + 2.5rem)`}
-        bg={`background.${oppositeColor}`}
-        color={`font.${oppositeColor}`}
-        display={"flex"}
-        alignItems={"center"}
-        pl={10}
-        borderRadius={0}
-        borderTop={`1px solid ${useTheme().colors.stroke}`}
-        w={"full"}
-        height={"10vh"}
-        fontWeight={"600"}
-        fontSize={["md", "lg", "xl", "xl"]}
-        _hover={{
-          opacity: 0.9,
-          transition: "all 0.9s",
-        }}
-        _active={{
-          opacity: 0.8,
-          transition: "all 0.3s",
-        }}
-        {...props}
-      >
-        {children}
-      </Box>
-    );
-  };
 
   return (
     <Grid
@@ -76,6 +48,7 @@ const Contact = forwardRef(function Contact(props, ref) {
             borderRadius={0}
             border={0}
             borderTop={`1px solid ${useTheme().colors.stroke}`}
+            // isInvalid
           />
           <Input
             placeholder="Subject"
@@ -83,15 +56,18 @@ const Contact = forwardRef(function Contact(props, ref) {
             borderRadius={0}
             border={0}
             borderTop={`1px solid ${useTheme().colors.stroke}`}
+            // isInvalid
           />
-          <Input
+          <Textarea
             placeholder="Message"
             h={`${height * 2}vh`}
+            resize={"none"}
             borderRadius={0}
             border={0}
             borderTop={`1px solid ${useTheme().colors.stroke}`}
+            // isInvalid
           />
-          <Button>Send</Button>
+          <Button rightIcon={RightArrow}>Send</Button>
         </Flex>
       </GridItem>
       <GridItem borderLeft={`1px solid ${useTheme().colors.stroke}`}>
