@@ -15,7 +15,7 @@ import { RightArrow } from "./icons";
 
 import { useDimensions } from "../../dimensions";
 
-function CollapsedCard({ data, onClick }) {
+function CollapsedCard({ data, onClick, ...props }) {
   const { colorMode } = useColorMode(); // Get the current color mode
   const oppositeColor = colorMode === "light" ? "dark" : "light";
   const [showInfo, setShowInfo] = useState(false);
@@ -41,9 +41,10 @@ function CollapsedCard({ data, onClick }) {
       height={`${height}vh`}
       width="100%"
       borderTop={`1px solid ${useTheme().colors.stroke}`}
-      borderLeft={`1px solid ${useTheme().colors.stroke}`}
-      bg={`background.${colorMode}`}
+      // borderLeft={`1px solid ${useTheme().colors.stroke}`}
+      // bg={`background.${colorMode}`}
       templateColumns="repeat(3, 1fr)"
+      {...props}
     >
       <GridItem colSpan={2} display={"flex"} alignItems={"center"} pl={10}>
         <Text fontStyle={"italic"} fontWeight={600} fontSize={25}>

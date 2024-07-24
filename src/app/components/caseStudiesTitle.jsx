@@ -62,8 +62,8 @@ function CaseStudiesTitle() {
 
   return (
     <Box
-      border={`1px solid ${useTheme().colors.stroke}`}
-      bg={`background.${colorMode}`}
+      // border={`1px solid ${useTheme().colors.stroke}`}
+      // bg={`background.${colorMode}`}
       overflow={"hidden"}
       h={`${height}vh`}
     >

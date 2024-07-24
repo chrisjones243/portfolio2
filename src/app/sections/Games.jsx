@@ -49,8 +49,6 @@ const Games = forwardRef(function Games(props, ref) {
         color: `font.${oppositeColor}`,
         bg: `background.${oppositeColor}`,
       }}
-      borderTop={`1px solid ${useTheme().colors.stroke}`}
-      borderX={`1px solid ${useTheme().colors.stroke}`}
       bg={`background.${colorMode}`}
       h="full"
       w={`100%`}
@@ -63,15 +61,10 @@ const Games = forwardRef(function Games(props, ref) {
       ref={ref}
       direction="column"
       scrollMarginTop={`calc(${height}vh + 2.5rem)`}
+      border={`1px solid ${useTheme().colors.stroke}`}
+      bg={`background.${colorMode}`}
     >
-      <Flex
-        h={`${height}vh`}
-        pl={10}
-        alignItems={"center"}
-        w={"full"}
-        borderTop={`1px solid ${useTheme().colors.stroke}`}
-        borderX={`1px solid ${useTheme().colors.stroke}`}
-      >
+      <Flex h={`${height}vh`} pl={10} alignItems={"center"} w={"full"}>
         <Text
           fontStyle={"italic"}
           fontWeight={"500"}
@@ -81,21 +74,31 @@ const Games = forwardRef(function Games(props, ref) {
         </Text>
       </Flex>
       <Tabs>
-        <TabList w={"100%"} h={`${height}vh`} overflowY={"scroll"}>
+        <TabList
+          w={"100%"}
+          h={`${height}vh`}
+          overflowY={"scroll"}
+          borderBottom={0}
+          borderY={`1px solid ${useTheme().colors.stroke}`}
+        >
           {exampleObjects.map((object, index) => {
-            return <Tab key={index}>{object.title}</Tab>;
+            return (
+              <Tab
+                key={index}
+                borderLeft={
+                  index === 0 ? 0 : `1px solid ${useTheme().colors.stroke}`
+                }
+              >
+                {object.title}
+              </Tab>
+            );
           })}
         </TabList>
 
         <TabPanels h={`${height * 5}vh`} overflowY={"scroll"}>
           {exampleObjects.map((object, index) => {
             return (
-              <TabPanel
-                border={`1px solid ${useTheme().colors.stroke}`}
-                bg={`background.${colorMode}`}
-                h="50vh"
-                key={index}
-              >
+              <TabPanel h="50vh" key={index}>
                 <Box as="iframe" src={object.url} w="full" h="full" />
               </TabPanel>
             );

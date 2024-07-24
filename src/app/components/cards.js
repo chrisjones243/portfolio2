@@ -1,5 +1,5 @@
 "use client";
-import { Grid, GridItem } from "@chakra-ui/react";
+import { Grid, GridItem, useTheme } from "@chakra-ui/react";
 
 import Card from "./card";
 import { AnimatePresence } from "framer-motion";
@@ -7,12 +7,12 @@ import { AnimatePresence } from "framer-motion";
 function Cards() {
   return (
     <>
-      <Grid
-        templateColumns="repeat(4, 1fr)"
-        // py={10}
-        // px={40}
-      >
-        <GridItem colSpan={1} />
+      <Grid templateColumns="repeat(4, 1fr)">
+        <GridItem
+          colSpan={1}
+          borderTop={`1px solid ${useTheme().colors.stroke}`}
+          borderRight={`1px solid ${useTheme().colors.stroke}`}
+        />
         <GridItem colSpan={3}>
           <AnimatePresence>
             {Array.from({ length: 6 }).map((_, i) => (

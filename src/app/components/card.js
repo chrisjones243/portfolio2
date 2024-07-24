@@ -4,6 +4,7 @@ import CollapsedCard from "./collapsedCard";
 import ExpandedCard from "./expandedCard";
 
 import { motion, AnimatePresence } from "framer-motion";
+import { useTheme } from "@chakra-ui/react";
 
 import { useState } from "react";
 

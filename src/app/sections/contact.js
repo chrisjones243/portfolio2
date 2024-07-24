@@ -67,7 +67,12 @@ const Contact = forwardRef(function Contact(props, ref) {
             borderTop={`1px solid ${useTheme().colors.stroke}`}
             // isInvalid
           />
-          <Button rightIcon={RightArrow}>Send</Button>
+          <Button
+            rightIcon={RightArrow}
+            borderBottom={`1px solid ${useTheme().colors.stroke}`}
+          >
+            Send
+          </Button>
         </Flex>
       </GridItem>
       <GridItem borderLeft={`1px solid ${useTheme().colors.stroke}`}>
@@ -86,9 +91,11 @@ const Contact = forwardRef(function Contact(props, ref) {
             LinkedIn
           </Button>
           <Button>GitHub</Button>
-          <Button>Twitter</Button>
+          <Button>Leetcode</Button>
           <Button>Instagram</Button>
-          <Button>Facebook</Button>
+          <Button borderBottom={`1px solid ${useTheme().colors.stroke}`}>
+            {" "}
+          </Button>
         </Flex>
       </GridItem>
     </Grid>

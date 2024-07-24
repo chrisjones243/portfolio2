@@ -13,16 +13,14 @@ const CaseStudies = forwardRef(function CaseStudies(props, ref) {
   const { height } = useDimensions();
 
   return (
-    <Box ref={ref} scrollMarginTop={`calc(${height}vh + 2.5rem)`}>
+    <Box
+      ref={ref}
+      scrollMarginTop={`calc(${height}vh + 2.5rem)`}
+      border={`1px solid ${useTheme().colors.stroke}`}
+      bg={`background.${colorMode}`}
+    >
       <CaseStudiesTitle />
-      <Box
-        // height={["50vh", "75vh", "75vh", "84vh"]}
-        border={`1px solid ${useTheme().colors.stroke}`}
-        borderTop={0}
-        bg={`background.${colorMode}`}
-      >
-        <Cards />
-      </Box>
+      <Cards />
     </Box>
   );
 });
