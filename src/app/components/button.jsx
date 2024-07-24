@@ -1,20 +1,16 @@
 "use Client";
 import React from "react";
-import { Button as ChakraButton, Box, Flex, Icon } from "@chakra-ui/react";
+import { Box, Flex, Icon, Text, useColorMode } from "@chakra-ui/react";
 import { useTheme } from "@chakra-ui/react";
 import { useDimensions } from "../../dimensions";
 
 export const Button = ({ children, rightIcon, ...props }) => {
   const { height } = useDimensions();
-  const oppositeColor = useTheme().colorMode === "light" ? "dark" : "light";
+  const { colorMode } = useColorMode(); // Get the current color mode
   return (
     <Flex
       scrollMarginTop={`calc(${height}vh + 2.5rem)`}
-      bg={`background.${oppositeColor}`}
-      color={`font.${oppositeColor}`}
-      display={"flex"}
       alignItems={"center"}
-      borderRadius={0}
       borderTop={`1px solid ${useTheme().colors.stroke}`}
       w={"full"}
       height={"10vh"}
@@ -33,7 +29,7 @@ export const Button = ({ children, rightIcon, ...props }) => {
       px={10}
       {...props}
     >
-      {children}
+      <Text>{children}</Text>
 
       {rightIcon && (
         <Box
@@ -43,7 +39,7 @@ export const Button = ({ children, rightIcon, ...props }) => {
           width="30%"
           height="full"
         >
-          <Icon as={rightIcon} w="full" />
+          <Icon as={rightIcon} w="full" color={`brand.${colorMode}`} />
         </Box>
       )}
     </Flex>

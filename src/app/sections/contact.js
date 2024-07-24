@@ -29,6 +29,7 @@ const Contact = forwardRef(function Contact(props, ref) {
       h={`${height * 6}vh`}
       bg={`background.${colorMode}`}
       border={`1px solid ${useTheme().colors.stroke}`}
+      overflow={"hidden"}
     >
       <GridItem>
         <Flex direction="column">
