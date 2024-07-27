@@ -1,8 +1,10 @@
 "use client";
-import { Flex, Text, Box, useTheme } from "@chakra-ui/react";
+import { Flex, Text, Box, Icon, useTheme } from "@chakra-ui/react";
 import { useColorMode } from "@chakra-ui/react";
 import { useState, useRef, forwardRef } from "react";
 import { useDimensions } from "../../dimensions";
+
+import { BsCursor } from "react-icons/bs";
 
 const langs = [
   "Javascript",
@@ -87,11 +89,22 @@ const Experience = forwardRef(function Experience(props, ref) {
           {langs[currentLang]}
         </Text>
       </Flex>
-      <Box
+
+      <Flex
         width={"full"}
         height={`${height}vh`}
         bg={`background.${oppositeColor}`}
-      />
+        justifyContent={"flex-end"}
+        alignItems={"center"}
+      >
+        <Icon
+          as={BsCursor}
+          color={`brand.${oppositeColor}`}
+          m={10}
+          height={6}
+          width={6}
+        />
+      </Flex>
     </Flex>
   );
 });
