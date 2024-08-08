@@ -14,9 +14,10 @@ function ExpandedCard({ data, setClose, isOpen }) {
   const { colorMode } = useColorMode(); // Get the current color mode
   const stroke = useTheme().colors.stroke;
 
-  const { title, description, image } = data;
+  const { title, body, imageUrl } = data;
 
   const entire = useRef(null);
+  // Somen
 
   const handleClose = () => {
     console.log("Close");
@@ -119,15 +120,17 @@ function ExpandedCard({ data, setClose, isOpen }) {
               p={2}
             />
           </Flex>
-          <Img
-            src={image}
-            alt={title}
-            width={2360 / 6}
-            height={2360 / 6}
-            minW={"100%"}
-            minH={"100%"}
-            objectFit={"cover"}
-          />
+          {imageUrl && (
+            <Img
+              src={imageUrl}
+              alt={title}
+              width={2360 / 6}
+              height={2360 / 6}
+              minW={"100%"}
+              minH={"100%"}
+              objectFit={"cover"}
+            />
+          )}
           <Flex
             bottom={0}
             bg={`background.${colorMode}`}
@@ -139,7 +142,7 @@ function ExpandedCard({ data, setClose, isOpen }) {
             alignItems={"center"}
             justifyContent={"space-between"}
           >
-            <PortableText components={components} value={description} s />
+            <PortableText components={components} value={body} />
 
             <Icon as={FaExternalLinkAlt} cursor={"pointer"} />
           </Flex>
