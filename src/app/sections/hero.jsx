@@ -10,11 +10,7 @@ import { forwardRef } from "react";
 const Hero = forwardRef(function Hero(props, ref) {
   const { height, blockWidth } = useDimensions();
 
-  console.log("Hero -> blockWidth", blockWidth);
-  console.log("Hero -> height", height);
-
   const h = height * 8;
-  console.log("Hero -> h", h);
 
   const oppositeColor = useColorMode().colorMode === "light" ? "dark" : "light";
 

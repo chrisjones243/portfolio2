@@ -7,8 +7,6 @@ import NavBar from "./navBar";
 import Contents from "./contents";
 
 function Layout({ children, scrollTo, refs }) {
-  console.log("Layout -> refs", refs);
-
   const width = "calc(100% - 5)";
   const { height } = useDimensions();
 

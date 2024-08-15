@@ -5,13 +5,19 @@ import { useEffect, useMemo, useState } from "react";
 function useOnScreen(ref) {
   const [isIntersecting, setIntersecting] = useState(false);
 
-  const observer = useMemo(
-    () =>
-      new IntersectionObserver(([entry]) =>
+  const observer = useMemo(() => {
+    if (typeof IntersectionObserver !== "undefined") {
+      return new IntersectionObserver(([entry]) =>
         setIntersecting(entry.isIntersecting)
-      ),
-    []
-  );
+      );
+    } else {
+      // Fallback logic when IntersectionObserver is not available
+      return {
+        observe: () => {},
+        disconnect: () => {},
+      };
+    }
+  }, []);
 
   useEffect(() => {
     observer.observe(ref.current);

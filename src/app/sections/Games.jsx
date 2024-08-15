@@ -16,17 +16,17 @@ import { useDimensions } from "../../dimensions";
 
 const exampleObjects = [
   {
-    title: "Game of Life",
+    title: "Tic Tac Toe",
     description: "This is a description of game 1",
     url: "https://codepen.io/infinitestack/embed/xxoOKzd?default-tab=html%2Cresult",
   },
   {
-    title: "Card",
+    title: "Random Number",
     description: "This is a description of game 2",
     url: "https://codepen.io/tsuhre/embed/WNqxevY?default-tab=html%2Cresult",
   },
   {
-    title: "Tower Blocks",
+    title: "Coonect 4",
     description: "This is a description of game 3",
     url: "https://codepen.io/ste-vg/embed/ppLQNW?default-tab=html%2Cresult",
   },

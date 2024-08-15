@@ -20,7 +20,6 @@ function ExpandedCard({ data, setClose, isOpen }) {
   // Somen
 
   const handleClose = () => {
-    console.log("Close");
     enableScroll();
     setClose();
   };

@@ -16,6 +16,8 @@ import { forwardRef } from "react";
 import { RightArrow } from "../components/icons";
 import { Button } from "../components/button";
 
+import SendEmail from "../components/sendEmail";
+
 const Contact = forwardRef(function Contact(props, ref) {
   const { colorMode } = useColorMode();
   const { height } = useDimensions();
@@ -32,7 +34,8 @@ const Contact = forwardRef(function Contact(props, ref) {
       overflow={"hidden"}
     >
       <GridItem>
-        <Flex direction="column">
+        <SendEmail />
+        {/* <Flex direction="column">
           <Flex h={`${height}vh`} pl={10} alignItems={"center"}>
             <Text
               fontStyle={"italic"}
@@ -74,7 +77,7 @@ const Contact = forwardRef(function Contact(props, ref) {
           >
             Send
           </Button>
-        </Flex>
+        </Flex> */}
       </GridItem>
       <GridItem borderLeft={`1px solid ${useTheme().colors.stroke}`}>
         <Flex direction="column">

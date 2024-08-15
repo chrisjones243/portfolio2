@@ -4,7 +4,7 @@ import { Grid, GridItem, useTheme } from "@chakra-ui/react";
 import Card from "./card";
 import { AnimatePresence } from "framer-motion";
 
-import { client } from "@/client";
+import { client } from "../../client";
 import { useEffect, useState } from "react";
 
 function Cards() {
@@ -18,10 +18,8 @@ function Cards() {
 
   useEffect(() => {
     getData().then((res) => setData(res));
-    console.log(data);
   }, []);
 
-  console.log(data);
   return (
     <>
       <Grid templateColumns="repeat(4, 1fr)">
