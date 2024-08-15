@@ -48,8 +48,6 @@ function SendEmail() {
         "Content-Type": "application/json",
       },
     });
-    // console.log("Success:", response);
-    // console.log("Score: " + response.data.score);
 
     if (response?.data?.success && response.data.score > 0.5) {
       return true;
@@ -178,14 +176,19 @@ function SendEmail() {
                   </FormControl>
                 )}
               </Field>
-              <button type="submit">Send</button>
-              <Button
-                rightIcon={RightArrow}
-                borderBottom={`1px solid ${strokeColor}`}
+              <button
                 type="submit"
+                disabled={props.isSubmitting}
+                style={{ width: "100%" }}
               >
-                Send
-              </Button>
+                <Button
+                  rightIcon={RightArrow}
+                  borderBottom={`1px solid ${strokeColor}`}
+                  type="submit"
+                >
+                  Send
+                </Button>
+              </button>
             </Form>
           );
         }}
