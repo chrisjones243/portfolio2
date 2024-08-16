@@ -27,6 +27,9 @@ function SendEmail() {
   const theme = useTheme();
   const strokeColor = theme.colors.stroke;
 
+  const emailRegex =
+    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
   // Create an event handler so you can call the verification on button click event or form submit
   const handleReCaptchaVerify = useCallback(async () => {
     if (!executeRecaptcha) {
@@ -59,6 +62,8 @@ function SendEmail() {
     let error;
     if (!value) {
       error = "Email is required";
+    } else if (!emailRegex.test(value)) {
+      error = "Invalid email address";
     }
     return error;
   };
