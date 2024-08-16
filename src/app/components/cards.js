@@ -13,7 +13,8 @@ function Cards() {
     await client.fetch(`*[_type == "caseStudy"]{
     title,
     body,
-    "imageUrl": image.asset->url
+    "imageUrl": image.asset->url,
+    "videoUrl": video.asset->url,
   }`);
 
   useEffect(() => {

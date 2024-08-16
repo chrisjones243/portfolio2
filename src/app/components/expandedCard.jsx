@@ -1,5 +1,5 @@
 "use client";
-import { Box, Text, useTheme, Flex, Icon } from "@chakra-ui/react";
+import { Box, Text, useTheme, Flex, Icon, AspectRatio } from "@chakra-ui/react";
 import { useColorMode } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { useRef, useState } from "react";
@@ -14,10 +14,9 @@ function ExpandedCard({ data, setClose, isOpen }) {
   const { colorMode } = useColorMode(); // Get the current color mode
   const stroke = useTheme().colors.stroke;
 
-  const { title, body, imageUrl } = data;
+  const { title, body, imageUrl, videoUrl } = data;
 
   const entire = useRef(null);
-  // Somen
 
   const handleClose = () => {
     enableScroll();
@@ -119,16 +118,25 @@ function ExpandedCard({ data, setClose, isOpen }) {
               p={2}
             />
           </Flex>
-          {imageUrl && (
-            <Img
-              src={imageUrl}
-              alt={title}
-              width={2360 / 6}
-              height={2360 / 6}
-              minW={"100%"}
-              minH={"100%"}
-              objectFit={"cover"}
-            />
+          {videoUrl ? (
+            <AspectRatio ratio={16 / 9} width="100%">
+              <video controls>
+                <source src={videoUrl} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </AspectRatio>
+          ) : (
+            imageUrl && (
+              <Img
+                src={imageUrl}
+                alt={title}
+                width={2360 / 6}
+                height={2360 / 6}
+                minW={"100%"}
+                minH={"100%"}
+                objectFit={"cover"}
+              />
+            )
           )}
           <Flex
             bottom={0}

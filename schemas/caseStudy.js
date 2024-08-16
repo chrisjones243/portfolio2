@@ -20,6 +20,11 @@ export default defineType({
       },
     }),
     defineField({
+      name: "video",
+      title: "Video",
+      type: "file",
+    }),
+    defineField({
       name: "body",
       title: "Body",
       type: "array",

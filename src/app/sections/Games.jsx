@@ -40,6 +40,7 @@ const exampleObjects = [
 const Games = forwardRef(function Games(props, ref) {
   const { colorMode } = useColorMode();
   const { height } = useDimensions();
+  const theme = useTheme();
 
   const oppositeColor = colorMode === "light" ? "dark" : "light";
 
@@ -79,14 +80,14 @@ const Games = forwardRef(function Games(props, ref) {
           h={`${height}vh`}
           overflowY={"scroll"}
           borderBottom={0}
-          borderY={`1px solid ${useTheme().colors.stroke}`}
+          borderY={`1px solid ${theme.colors.stroke}`}
         >
           {exampleObjects.map((object, index) => {
             return (
               <Tab
                 key={index}
                 borderLeft={
-                  index === 0 ? 0 : `1px solid ${useTheme().colors.stroke}`
+                  index === 0 ? 0 : `1px solid ${theme.colors.stroke}`
                 }
               >
                 {object.title}
