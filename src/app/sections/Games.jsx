@@ -18,22 +18,22 @@ const exampleObjects = [
   {
     title: "Tic Tac Toe",
     description: "This is a description of game 1",
-    url: "https://codepen.io/infinitestack/embed/xxoOKzd?default-tab=html%2Cresult",
+    // url: "https://codesandbox.io/embed/memory-game-forked-y7kc27?autoresize=1&fontsize=14&hidenavigation=1&theme=dark",
   },
   {
     title: "Random Number",
     description: "This is a description of game 2",
-    url: "https://codepen.io/tsuhre/embed/WNqxevY?default-tab=html%2Cresult",
+    // url: "https://codepen.io/tsuhre/embed/WNqxevY?default-tab=html%2Cresult",
   },
   {
     title: "Coonect 4",
     description: "This is a description of game 3",
-    url: "https://codepen.io/ste-vg/embed/ppLQNW?default-tab=html%2Cresult",
+    // url: "https://codepen.io/ste-vg/embed/ppLQNW?default-tab=html%2Cresult",
   },
   {
     title: "Memory Game",
     description: "This is a description of game 4",
-    url: "https://codesandbox.io/embed/memory-game-forked-y7kc27?autoresize=1&fontsize=14&hidenavigation=1&theme=dark",
+    // url: "https://codesandbox.io/embed/memory-game-forked-y7kc27?autoresize=1&fontsize=14&hidenavigation=1&theme=dark",
   },
 ];
 

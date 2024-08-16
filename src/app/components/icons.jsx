@@ -12,6 +12,17 @@ export const RightArrow = createIcon({
   ),
 });
 
+export const DownArrow = createIcon({
+  displayName: "downArrow",
+  viewBox: "0 0 16 51",
+  path: (
+    <path
+      d="M7.29289 50.7071C7.68342 51.0976 8.31658 51.0976 8.7071 50.7071L15.0711 44.3431C15.4616 43.9526 15.4616 43.3195 15.0711 42.9289C14.6805 42.5384 14.0474 42.5384 13.6569 42.9289L8 48.5858L2.34314 42.9289C1.95262 42.5384 1.31945 42.5384 0.92893 42.9289C0.538406 43.3195 0.538406 43.9526 0.92893 44.3431L7.29289 50.7071ZM7 -4.37113e-08L7 50L9 50L9 4.37113e-08L7 -4.37113e-08Z"
+      fill="currentColor"
+    />
+  ),
+});
+
 export const Logo = createIcon({
   displayName: "Logo",
   viewBox: "0 0 422.28 435.38",

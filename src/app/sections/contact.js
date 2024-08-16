@@ -13,15 +13,29 @@ import { useColorMode } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useDimensions } from "../../dimensions";
 import { forwardRef } from "react";
-import { RightArrow } from "../components/icons";
+import { IoIosDownload } from "react-icons/io";
+import { DownArrow, RightArrow } from "../components/icons";
 import { Button } from "../components/button";
+import { client } from "../../client";
 
 import SendEmail from "../components/sendEmail";
 
 const Contact = forwardRef(function Contact(props, ref) {
   const { colorMode } = useColorMode();
   const { height } = useDimensions();
-  const oppositeColor = colorMode === "light" ? "dark" : "light";
+
+  const [resume, setResume] = useState();
+
+  const getResume = async () => {
+    const res = await client.fetch(`*[_type == "resume"][0]{
+    "fileUrl": file.asset->url,
+  }`);
+    setResume(res);
+  };
+
+  useEffect(() => {
+    getResume();
+  }, []);
 
   return (
     <Grid
@@ -35,49 +49,6 @@ const Contact = forwardRef(function Contact(props, ref) {
     >
       <GridItem>
         <SendEmail />
-        {/* <Flex direction="column">
-          <Flex h={`${height}vh`} pl={10} alignItems={"center"}>
-            <Text
-              fontStyle={"italic"}
-              fontWeight={"500"}
-              fontSize={["md", "lg", "2xl", "4xl"]}
-            >
-              Send Email
-            </Text>
-          </Flex>
-
-          <Input
-            placeholder="Email"
-            h={`${height}vh`}
-            borderRadius={0}
-            border={0}
-            borderTop={`1px solid ${useTheme().colors.stroke}`}
-            // isInvalid
-          />
-          <Input
-            placeholder="Subject"
-            h={`${height}vh`}
-            borderRadius={0}
-            border={0}
-            borderTop={`1px solid ${useTheme().colors.stroke}`}
-            // isInvalid
-          />
-          <Textarea
-            placeholder="Message"
-            h={`${height * 2}vh`}
-            resize={"none"}
-            borderRadius={0}
-            border={0}
-            borderTop={`1px solid ${useTheme().colors.stroke}`}
-            // isInvalid
-          />
-          <Button
-            rightIcon={RightArrow}
-            borderBottom={`1px solid ${useTheme().colors.stroke}`}
-          >
-            Send
-          </Button>
-        </Flex> */}
       </GridItem>
       <GridItem borderLeft={`1px solid ${useTheme().colors.stroke}`}>
         <Flex direction="column">
@@ -91,14 +62,38 @@ const Contact = forwardRef(function Contact(props, ref) {
             </Text>
           </Flex>
 
-          <Button onClick={() => window.open("https://www.linkedin.com/")}>
+          <Button
+            onClick={() =>
+              window.open("https://linkedin.com/in/chris-paul-jones")
+            }
+          >
             LinkedIn
           </Button>
-          <Button>GitHub</Button>
-          <Button>Leetcode</Button>
-          <Button>Instagram</Button>
-          <Button borderBottom={`1px solid ${useTheme().colors.stroke}`}>
-            {" "}
+          <Button
+            onClick={() => window.open("https://github.com/chrisjones243")}
+          >
+            GitHub
+          </Button>
+          <Button
+            onClick={() => window.open("https://leetcode.com/u/ChrisJones/")}
+          >
+            Leetcode
+          </Button>
+          <Button
+            onClick={() => window.open("https://www.instagram.com/c_jone5/")}
+          >
+            Instagram
+          </Button>
+          <Button
+            borderBottom={`1px solid ${useTheme().colors.stroke}`}
+            rightIcon={resume ? RightArrow : null}
+            onClick={() => {
+              if (resume) {
+                window.open(resume.fileUrl);
+              }
+            }}
+          >
+            {resume ? "CV" : null}
           </Button>
         </Flex>
       </GridItem>

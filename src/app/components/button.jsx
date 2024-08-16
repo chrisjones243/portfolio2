@@ -32,14 +32,8 @@ export const Button = ({ children, rightIcon, ...props }) => {
       <Text>{children}</Text>
 
       {rightIcon && (
-        <Box
-          display={"flex"}
-          alignItems={"center"}
-          justifyContent={"center"}
-          width="30%"
-          height="full"
-        >
-          <Icon as={rightIcon} w="full" color={`brand.${colorMode}`} />
+        <Box display={"flex"} alignItems={"center"} width="30%" height="full">
+          <Icon as={rightIcon} w="full" h="40%" color={`brand.${colorMode}`} />
         </Box>
       )}
     </Flex>
