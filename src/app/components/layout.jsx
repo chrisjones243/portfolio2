@@ -1,5 +1,5 @@
 "use client";
-import { Heading, Box, Grid, GridItem, Text, Button } from "@chakra-ui/react";
+import { Heading, Box, Grid, GridItem, Text, Link } from "@chakra-ui/react";
 import { useDimensions } from "../../dimensions";
 
 import BackgroundLines from "./backgroundLines";
@@ -36,22 +36,24 @@ function Layout({ children, scrollTo, refs }) {
       >
         {" "}
         This site is protected by reCAPTCHA,{" "}
-        <Button
+        <Link
           fontSize="sm"
-          variant="link"
           href="https://policies.google.com/privacy"
+          // color={"grey"}
+          isExternal
         >
           Privacy Policy
-        </Button>{" "}
+        </Link>{" "}
         and {""}
-        <Button
+        <Link
           fontSize="sm"
-          variant="link"
           href="https://policies.google.com/terms"
+          color={"grey"}
+          isExternal
         >
           {" "}
           Terms of Service
-        </Button>{" "}
+        </Link>{" "}
         apply.
       </Text>
     </Box>

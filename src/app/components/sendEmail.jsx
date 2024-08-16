@@ -87,13 +87,37 @@ function SendEmail() {
     const isHuman = await handleReCaptchaVerify();
 
     if (isHuman) {
-      toast({
-        title: "Email sent.",
-        description: "Your email has been sent.",
-        status: "success",
-        duration: 9000,
-        isClosable: true,
+      const sendEmail = await axios({
+        method: "post",
+        url: "/api/contact",
+        data: {
+          email: email.email,
+          subject: email.subject,
+          message: email.message,
+        },
+        headers: {
+          Accept: "application/json, text/plain, */*",
+          "Content-Type": "application/json",
+        },
       });
+      console.log(sendEmail);
+      if (sendEmail.status === 200) {
+        toast({
+          title: "Email sent.",
+          description: "Your email has been sent.",
+          status: "success",
+          duration: 9000,
+          isClosable: true,
+        });
+      } else {
+        toast({
+          title: "Email not sent.",
+          description: "Your email has not been sent.",
+          status: "error",
+          duration: 9000,
+          isClosable: true,
+        });
+      }
     } else {
       toast({
         title: "Email not sent.",
