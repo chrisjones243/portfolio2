@@ -13,6 +13,7 @@ import {
 } from "@chakra-ui/react";
 import { useColorMode } from "@chakra-ui/react";
 import { useDimensions } from "../../dimensions";
+import MemoryGame from "../components/games/memoryGame";
 
 const exampleObjects = [
   {
@@ -34,6 +35,7 @@ const exampleObjects = [
     title: "Memory Game",
     description: "This is a description of game 4",
     // url: "https://codesandbox.io/embed/memory-game-forked-y7kc27?autoresize=1&fontsize=14&hidenavigation=1&theme=dark",
+    component: <MemoryGame />,
   },
 ];
 
@@ -100,7 +102,8 @@ const Games = forwardRef(function Games(props, ref) {
           {exampleObjects.map((object, index) => {
             return (
               <TabPanel h="50vh" key={index}>
-                <Box as="iframe" src={object.url} w="full" h="full" />
+                {/* <Box as="iframe" src={object.url} w="full" h="full" /> */}
+                {object.component}
               </TabPanel>
             );
           })}
