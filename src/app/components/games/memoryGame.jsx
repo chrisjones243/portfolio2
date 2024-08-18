@@ -83,10 +83,6 @@ function MemoryGame() {
     randomAssign();
   }, []);
 
-  useEffect(() => {
-    randomAssign();
-  }, []);
-
   return (
     <Flex
       direction="row"

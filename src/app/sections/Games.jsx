@@ -14,22 +14,29 @@ import {
 import { useColorMode } from "@chakra-ui/react";
 import { useDimensions } from "../../dimensions";
 import MemoryGame from "../components/games/memoryGame";
+import RandomNumberGame from "../components/games/randomNumberGame";
+import Connect4Game from "../components/games/connect4Game";
+import TicTacToeGame from "../components/games/ticTacToeGame";
+import { component } from "sanity/structure";
 
 const exampleObjects = [
   {
     title: "Tic Tac Toe",
     description: "This is a description of game 1",
     // url: "https://codesandbox.io/embed/memory-game-forked-y7kc27?autoresize=1&fontsize=14&hidenavigation=1&theme=dark",
+    component: <TicTacToeGame />,
   },
   {
     title: "Random Number",
     description: "This is a description of game 2",
     // url: "https://codepen.io/tsuhre/embed/WNqxevY?default-tab=html%2Cresult",
+    component: <RandomNumberGame />,
   },
   {
     title: "Coonect 4",
     description: "This is a description of game 3",
     // url: "https://codepen.io/ste-vg/embed/ppLQNW?default-tab=html%2Cresult",
+    component: <Connect4Game />,
   },
   {
     title: "Memory Game",
