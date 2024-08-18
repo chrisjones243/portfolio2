@@ -24,7 +24,7 @@ const Hero = forwardRef(function Hero(props, ref) {
       bg={`background.${colorMode}`}
       // width="75%"
       h={`${h}vh`}
-      fontSize={["md", "lg", "2xl", "4xl", "6xl", "5rem"]}
+      fontSize={["lg", "2xl", "4xl", "6xl", "5rem"]}
       letterSpacing={4}
     >
       <GridItem

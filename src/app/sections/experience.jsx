@@ -65,6 +65,7 @@ const Experience = forwardRef(function Experience(props, ref) {
       border={`1px solid ${useTheme().colors.stroke}`}
       bg={`background.${colorMode}`}
       onMouseMove={handleMouseMove}
+      onClick={handleMouseMove}
       direction={"column"}
     >
       <Flex

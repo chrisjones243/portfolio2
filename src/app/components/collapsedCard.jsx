@@ -46,8 +46,13 @@ function CollapsedCard({ data, onClick, ...props }) {
       templateColumns="repeat(3, 1fr)"
       {...props}
     >
-      <GridItem colSpan={2} display={"flex"} alignItems={"center"} pl={10}>
-        <Text fontStyle={"italic"} fontWeight={600} fontSize={25}>
+      <GridItem
+        colSpan={2}
+        display={"flex"}
+        alignItems={"center"}
+        pl={[5, 7, 10]}
+      >
+        <Text fontStyle={"italic"} fontWeight={600} fontSize={[15, 20, 25]}>
           {title}
         </Text>
       </GridItem>
@@ -58,6 +63,7 @@ function CollapsedCard({ data, onClick, ...props }) {
         display={"flex"}
         alignItems={"center"}
         justifyContent={"center"}
+        p={[2, 3, 4]}
       >
         <Icon as={RightArrow} w="full" />
       </GridItem>

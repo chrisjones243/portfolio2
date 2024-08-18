@@ -268,7 +268,12 @@ function TicTacToeGame() {
       justifyContent={"center"}
       alignItems={"center"}
     >
-      <Flex direction="row" justifyContent="center" alignItems="center" gap={5}>
+      <Flex
+        direction="row"
+        justifyContent="center"
+        alignItems="center"
+        gap={[2, 4, 5]}
+      >
         <Button
           border={"1px solid"}
           borderColor={"stroke"}

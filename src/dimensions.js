@@ -6,4 +6,5 @@ export const useDimensions = create((set) => ({
   blockWidth: `calc(${100 / 5}% + 1px)`,
   setSections: (sections) =>
     set({ sections, width: `calc(${100 / (sections - 1)} + 1px)` }),
+  setBlockWidth: (blockWidth) => set({ blockWidth }),
 }));

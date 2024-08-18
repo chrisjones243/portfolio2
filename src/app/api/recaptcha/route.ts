@@ -31,18 +31,4 @@ export async function POST(req: Request) {
       { status: 500 }
     );
   }
-
-  // if (res && res.data?.success && res.data?.score > 0.5) {
-  //   console.log("Captcha verified", res.data.score);
-  //   return NextResponse.json({
-  //     success: true,
-  //     message: "Captcha verified",
-  //     score: res.data.score,
-  //   });
-  // } else {
-  //   return NextResponse.json(
-  //     { success: false, message: "Failed to verify captcha" },
-  //     { status: 500 }
-  //   );
-  // }
 }

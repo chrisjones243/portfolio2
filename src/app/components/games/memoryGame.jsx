@@ -76,7 +76,6 @@ function MemoryGame() {
       });
     }
     setElements(tempElements);
-    console.log(tempElements);
   };
 
   useEffect(() => {
@@ -84,16 +83,11 @@ function MemoryGame() {
   }, []);
 
   return (
-    <Flex
-      direction="row"
-      justifyContent="space-between"
-      alignContent={"center"}
-      height={"100%"}
-    >
+    <Flex direction={["column", "row", "row"]} height={"100%"}>
       <Flex
         direction="column"
         justifyContent="center"
-        width="30%"
+        width={["100%", "20%", "30%"]}
         alignItems={"center"}
       >
         <Text pb={2}> Matched: {matched}/6</Text>
@@ -114,11 +108,16 @@ function MemoryGame() {
         )}
       </Flex>
       <Grid
-        templateColumns="repeat(6, 1fr)"
+        templateColumns={[
+          "repeat(2, 1fr)",
+          "repeat(4, 1fr)",
+          "repeat(4, 1fr)",
+          "repeat(6, 1fr)",
+        ]}
         gap={10}
         w={"full"}
         h={"full"}
-        p={10}
+        p={[2, 5, 10]}
       >
         {elements.map((element) => (
           <Element
