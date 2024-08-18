@@ -33,7 +33,7 @@ const exampleObjects = [
     component: <RandomNumberGame />,
   },
   {
-    title: "Coonect 4",
+    title: "Connect 4",
     description: "This is a description of game 3",
     // url: "https://codepen.io/ste-vg/embed/ppLQNW?default-tab=html%2Cresult",
     component: <Connect4Game />,

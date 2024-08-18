@@ -1,10 +1,14 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { Flex, Grid, Text, useTheme } from "@chakra-ui/react";
+import { Flex, Grid, Text, useColorMode } from "@chakra-ui/react";
 import Element from "./element";
 import { Button } from "../button";
+import { set } from "sanity";
 
 function TicTacToeGame() {
+  const { colorMode } = useColorMode();
+  const oppositeColour = colorMode === "light" ? "dark" : "light";
+
   let board = Array(3)
     .fill(null)
     .map(() => Array(3).fill(null));
@@ -12,6 +16,8 @@ function TicTacToeGame() {
   let player = "X";
   let winner = null;
   let isDraw = false;
+
+  const [gameMode, setGameMode] = useState("🧑‍🤝‍🧑");
 
   const [boardState, setBoardState] = useState(board);
   const [playerState, setPlayerState] = useState(player);
@@ -77,12 +83,34 @@ function TicTacToeGame() {
   };
 
   const handleClick = (i, j) => {
+    const currentPlayer = playerState;
     if (boardState[i][j] === null && !winnerState && !isDrawState) {
-      let newBoard = boardState;
-      newBoard[i][j] = playerState;
+      let newBoard = [...boardState];
+      newBoard[i][j] = currentPlayer;
       setBoardState(newBoard);
       checkWinner();
-      setPlayerState(playerState === "X" ? "O" : "X");
+      setPlayerState(currentPlayer === "X" ? "O" : "X");
+      if (gameMode === "🎲" && !winnerState && !isDrawState) {
+        let available = [];
+        for (let i = 0; i < 3; i++) {
+          for (let j = 0; j < 3; j++) {
+            if (newBoard[i][j] === null) {
+              available.push({ i, j });
+            }
+          }
+        }
+        if (available.length > 0) {
+          let move = available[Math.floor(Math.random() * available.length)];
+          newBoard[move.i][move.j] = currentPlayer === "X" ? "O" : "X";
+          setBoardState(newBoard);
+          checkWinner();
+          setPlayerState(currentPlayer === "X" ? "X" : "O");
+        }
+      } else if (gameMode === "🤯" && !winnerState && !isDrawState) {
+        // Add your logic for the 🤯 game mode here
+      } else {
+        setPlayerState(currentPlayer === "X" ? "O" : "X");
+      }
     }
   };
 
@@ -91,6 +119,11 @@ function TicTacToeGame() {
     setPlayerState(player);
     setWinnerState(winner);
     setIsDrawState(isDraw);
+  };
+
+  const changeMode = (mode = "🧑‍🤝‍🧑") => {
+    setGameMode(mode);
+    resetGame();
   };
 
   return (
@@ -108,7 +141,10 @@ function TicTacToeGame() {
           borderColor={"stroke"}
           height={12}
           justifyContent={"center"}
-          // isDisbled={winnerState || isDrawState}
+          onClick={() => changeMode("🧑‍🤝‍🧑")}
+          bg={
+            gameMode === "🧑‍🤝‍🧑" ? `background.${oppositeColour}` : "transparent"
+          }
         >
           🧑‍🤝‍🧑
         </Button>
@@ -117,16 +153,22 @@ function TicTacToeGame() {
           borderColor={"stroke"}
           height={12}
           justifyContent={"center"}
-          // isDisbled={winnerState || isDrawState}
+          onClick={() => changeMode("🎲")}
+          bg={
+            gameMode === "🎲" ? `background.${oppositeColour}` : "transparent"
+          }
         >
-          🤖
+          🎲
         </Button>
         <Button
           border={"1px solid"}
           borderColor={"stroke"}
           height={12}
           justifyContent={"center"}
-          // isDisbled={winnerState || isDrawState}
+          onClick={() => changeMode("🤯")}
+          bg={
+            gameMode === "🤯" ? `background.${oppositeColour}` : "transparent"
+          }
         >
           🤯
         </Button>
