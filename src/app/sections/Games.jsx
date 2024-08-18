@@ -17,32 +17,23 @@ import MemoryGame from "../components/games/memoryGame";
 import RandomNumberGame from "../components/games/randomNumberGame";
 import Connect4Game from "../components/games/connect4Game";
 import TicTacToeGame from "../components/games/ticTacToeGame";
-import { component } from "sanity/structure";
 
-const exampleObjects = [
-  {
-    title: "Tic Tac Toe",
-    description: "This is a description of game 1",
-    // url: "https://codesandbox.io/embed/memory-game-forked-y7kc27?autoresize=1&fontsize=14&hidenavigation=1&theme=dark",
-    component: <TicTacToeGame />,
-  },
+const objects = [
   {
     title: "Random Number",
-    description: "This is a description of game 2",
-    // url: "https://codepen.io/tsuhre/embed/WNqxevY?default-tab=html%2Cresult",
     component: <RandomNumberGame />,
   },
   {
-    title: "Connect 4",
-    description: "This is a description of game 3",
-    // url: "https://codepen.io/ste-vg/embed/ppLQNW?default-tab=html%2Cresult",
-    component: <Connect4Game />,
+    title: "Tic Tac Toe",
+    component: <TicTacToeGame />,
   },
   {
     title: "Memory Game",
-    description: "This is a description of game 4",
-    // url: "https://codesandbox.io/embed/memory-game-forked-y7kc27?autoresize=1&fontsize=14&hidenavigation=1&theme=dark",
     component: <MemoryGame />,
+  },
+  {
+    title: "🤷‍♂️",
+    component: <Connect4Game />,
   },
 ];
 
@@ -91,7 +82,7 @@ const Games = forwardRef(function Games(props, ref) {
           borderBottom={0}
           borderY={`1px solid ${theme.colors.stroke}`}
         >
-          {exampleObjects.map((object, index) => {
+          {objects.map((object, index) => {
             return (
               <Tab
                 key={index}
@@ -106,7 +97,7 @@ const Games = forwardRef(function Games(props, ref) {
         </TabList>
 
         <TabPanels h={`${height * 5}vh`} overflowY={"scroll"}>
-          {exampleObjects.map((object, index) => {
+          {objects.map((object, index) => {
             return (
               <TabPanel h="50vh" key={index}>
                 {/* <Box as="iframe" src={object.url} w="full" h="full" /> */}

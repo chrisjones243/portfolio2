@@ -15,10 +15,10 @@ function Connect4Game() {
       alignItems={"center"}
     >
       <Text fontSize={["md", "lg", "xl", "2xl"]} fontWeight={"600"}>
-        Connect 4 Game 🎲
+        Undecided Game 👾
       </Text>
       <Text fontSize={["md", "lg", "xl", "2xl"]} fontWeight={"500"}>
-        Coming soon!
+        Coming soon! (or never)
       </Text>
     </Flex>
   );

@@ -1,28 +1,39 @@
-# Welcome to my personal website
 
-This is my personal website, where I will be sharing my projects, blog posts, and other things that I find interesting.
+# Portfolio Webite
 
-## Technologies
+This is a small website portfolio website (second version) to allow people to view my socials, and see some sample projects that I've done.
 
-- Next.js
-- Chakra UI
-- gsap
-- framer-motion
-- Sanity.io
-- Vercel
 
-## Getting Started
+## Tech Stack
 
-First, run the development server:
+**Client:** Next.js, Chakra UI, gsap, framer-motion
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+**Server:** Sanity.io, Vercel
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🔗 Links
+[![portfolio](https://img.shields.io/badge/my_portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://chris-jones.co.uk/)
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/chris-paul-jones)
+
+
+
+## Environment Variables
+
+To run this project, you will need to add the following environment variables to your .env file
+
+
+`NEXT_PUBLIC_SANITY_STUDIO_PROJECT_ID`
+
+`NEXT_PUBLIC_SANITY_STUDIO_DATASET`
+
+`SANITY_STUDIO_TOKEN`
+
+
+`NEXT_PUBLIC_RECAPTCHA_SITE_KEY`
+
+`RECAPTCHA_SECRET_KEY`
+
+`NEXT_PUBLIC_BURNER_USERNAME`
+
+`BURNER_PASSWORD`
+
+`PERSONAL_EMAIL`

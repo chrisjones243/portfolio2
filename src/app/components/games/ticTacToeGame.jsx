@@ -1,9 +1,7 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Flex, Grid, Text, useColorMode } from "@chakra-ui/react";
-import Element from "./element";
 import { Button } from "../button";
-import { set } from "sanity";
 
 function TicTacToeGame() {
   const { colorMode } = useColorMode();
