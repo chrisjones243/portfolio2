@@ -90,6 +90,7 @@ function TicTacToeGame() {
       setBoardState(newBoard);
       checkWinner();
       setPlayerState(currentPlayer === "X" ? "O" : "X");
+
       if (gameMode === "🎲" && !winnerState && !isDrawState) {
         let available = [];
         for (let i = 0; i < 3; i++) {
@@ -106,12 +107,146 @@ function TicTacToeGame() {
           checkWinner();
           setPlayerState(currentPlayer === "X" ? "X" : "O");
         }
-      } else if (gameMode === "🤯" && !winnerState && !isDrawState) {
-        // Add your logic for the 🤯 game mode here
+      } else if (gameMode === "🤖" && !winnerState && !isDrawState) {
+        let bestMove = findBestMove(
+          newBoard,
+          currentPlayer === "X" ? "O" : "X"
+        );
+        if (bestMove) {
+          newBoard[bestMove.i][bestMove.j] = currentPlayer === "X" ? "O" : "X";
+          setBoardState(newBoard);
+          checkWinner();
+          setPlayerState(currentPlayer === "X" ? "X" : "O");
+        }
       } else {
         setPlayerState(currentPlayer === "X" ? "O" : "X");
       }
     }
+  };
+
+  // Minimax algorithm implementation
+  const findBestMove = (board, player) => {
+    let bestScore = player === "X" ? -Infinity : Infinity;
+    let bestMove = null;
+
+    for (let i = 0; i < 3; i++) {
+      for (let j = 0; j < 3; j++) {
+        if (board[i][j] === null) {
+          board[i][j] = player;
+          let score = minimax(board, 0, false, player === "X" ? "O" : "X");
+          board[i][j] = null;
+          if (
+            (player === "X" && score > bestScore) ||
+            (player === "O" && score < bestScore)
+          ) {
+            bestScore = score;
+            bestMove = { i, j };
+          }
+        }
+      }
+    }
+    return bestMove;
+  };
+
+  const minimax = (board, depth, isMaximizing, player) => {
+    let scores = { X: 10, O: -10, tie: 0 };
+    let result = checkWinnerForMinimax(board);
+    if (result !== null) {
+      return scores[result];
+    }
+
+    if (isMaximizing) {
+      let bestScore = -Infinity;
+      for (let i = 0; i < 3; i++) {
+        for (let j = 0; j < 3; j++) {
+          if (board[i][j] === null) {
+            board[i][j] = player;
+            let score = minimax(
+              board,
+              depth + 1,
+              false,
+              player === "X" ? "O" : "X"
+            );
+            board[i][j] = null;
+            bestScore = Math.max(score, bestScore);
+          }
+        }
+      }
+      return bestScore;
+    } else {
+      let bestScore = Infinity;
+      for (let i = 0; i < 3; i++) {
+        for (let j = 0; j < 3; j++) {
+          if (board[i][j] === null) {
+            board[i][j] = player;
+            let score = minimax(
+              board,
+              depth + 1,
+              true,
+              player === "X" ? "O" : "X"
+            );
+            board[i][j] = null;
+            bestScore = Math.min(score, bestScore);
+          }
+        }
+      }
+      return bestScore;
+    }
+  };
+
+  const checkWinnerForMinimax = (board) => {
+    // Check rows
+    for (let i = 0; i < 3; i++) {
+      if (
+        board[i][0] !== null &&
+        board[i][0] === board[i][1] &&
+        board[i][0] === board[i][2]
+      ) {
+        return board[i][0];
+      }
+    }
+
+    // Check columns
+    for (let i = 0; i < 3; i++) {
+      if (
+        board[0][i] !== null &&
+        board[0][i] === board[1][i] &&
+        board[0][i] === board[2][i]
+      ) {
+        return board[0][i];
+      }
+    }
+
+    // Check diagonals
+    if (
+      board[0][0] !== null &&
+      board[0][0] === board[1][1] &&
+      board[0][0] === board[2][2]
+    ) {
+      return board[0][0];
+    }
+    if (
+      board[0][2] !== null &&
+      board[0][2] === board[1][1] &&
+      board[0][2] === board[2][0]
+    ) {
+      return board[0][2];
+    }
+
+    // Check draw
+    let draw = true;
+    for (let i = 0; i < 3; i++) {
+      for (let j = 0; j < 3; j++) {
+        if (board[i][j] === null) {
+          draw = false;
+        }
+      }
+    }
+    if (draw) {
+      return "tie";
+    }
+
+    return null;
   };
 
   const resetGame = () => {
@@ -165,12 +300,12 @@ function TicTacToeGame() {
           borderColor={"stroke"}
           height={12}
           justifyContent={"center"}
-          onClick={() => changeMode("🤯")}
+          onClick={() => changeMode("🤖")}
           bg={
-            gameMode === "🤯" ? `background.${oppositeColour}` : "transparent"
+            gameMode === "🤖" ? `background.${oppositeColour}` : "transparent"
           }
         >
-          🤯
+          🤖
         </Button>
       </Flex>
 
