@@ -7,8 +7,8 @@ export default defineConfig({
   name: "default",
   title: "Portfolio 2",
 
-  projectId: process.env.NEXT_PUBLIC_SANITY_STUDIO_PROJECT_ID,
-  dataset: process.env.NEXT_PUBLIC_SANITY_STUDIO_DATASET,
+  projectId: "focqo3a2",
+  dataset: "production",
   basePath: "/studio",
   plugins: [
     structureTool({
