@@ -105,6 +105,7 @@ function SendEmail() {
           "Content-Type": "application/json",
         },
       });
+      console.log(sendEmail);
       if (sendEmail.status === 200) {
         toast({
           title: "Email sent.",
