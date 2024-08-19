@@ -1,5 +1,5 @@
 "use client";
-import { Grid, GridItem, useTheme } from "@chakra-ui/react";
+import { Grid, GridItem, useMediaQuery } from "@chakra-ui/react";
 
 import Card from "./card";
 import { AnimatePresence } from "framer-motion";
@@ -9,6 +9,8 @@ import { useEffect, useState } from "react";
 
 function Cards() {
   const [data, setData] = useState(null);
+  const [isLessThan1050] = useMediaQuery("(max-width: 1050px)");
+
   const getData = async () =>
     await client.fetch(`*[_type == "caseStudy"]{
     title,
@@ -24,12 +26,16 @@ function Cards() {
   return (
     <>
       <Grid templateColumns="repeat(4, 1fr)">
-        <GridItem
-          colSpan={1}
-          borderTop={`1px solid ${useTheme().colors.stroke}`}
-          borderRight={`1px solid ${useTheme().colors.stroke}`}
-        />
-        <GridItem colSpan={3}>
+        {isLessThan1050 ? null : (
+          <GridItem
+            colSpan={1}
+            border={0}
+            borderTop={"1px"}
+            borderRight={"1px"}
+            borderColor={`stroke`}
+          />
+        )}
+        <GridItem colSpan={isLessThan1050 ? 4 : 3}>
           <AnimatePresence>
             {data?.map((item, i) => (
               <GridItem colSpan={1} key={i}>

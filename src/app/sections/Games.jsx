@@ -10,6 +10,7 @@ import {
   TabPanels,
   TabPanel,
   useTheme,
+  useMediaQuery,
 } from "@chakra-ui/react";
 import { useColorMode } from "@chakra-ui/react";
 import { useDimensions } from "../../dimensions";
@@ -42,6 +43,8 @@ const Games = forwardRef(function Games(props, ref) {
   const { height } = useDimensions();
   const theme = useTheme();
 
+  const [isLessThan1050] = useMediaQuery("(max-width: 1050px)");
+
   const oppositeColor = colorMode === "light" ? "dark" : "light";
 
   const Tab = (props) => (
@@ -65,7 +68,12 @@ const Games = forwardRef(function Games(props, ref) {
       border={`1px solid ${useTheme().colors.stroke}`}
       bg={`background.${colorMode}`}
     >
-      <Flex h={`${height}vh`} pl={10} alignItems={"center"} w={"full"}>
+      <Flex
+        h={`${height}vh`}
+        pl={isLessThan1050 ? 5 : 10}
+        alignItems={"center"}
+        w={"full"}
+      >
         <Text
           fontStyle={"italic"}
           fontWeight={"500"}
@@ -89,6 +97,7 @@ const Games = forwardRef(function Games(props, ref) {
                 borderLeft={
                   index === 0 ? 0 : `1px solid ${theme.colors.stroke}`
                 }
+                fontSize={["xs", "sm", "md", "md"]}
               >
                 {object.title}
               </Tab>
@@ -96,7 +105,10 @@ const Games = forwardRef(function Games(props, ref) {
           })}
         </TabList>
 
-        <TabPanels h={`${height * 5}vh`} overflowY={"scroll"}>
+        <TabPanels
+          h={isLessThan1050 ? `${height * 6}vh` : `${height * 5}vh`}
+          overflowY={"scroll"}
+        >
           {objects.map((object, index) => {
             return (
               <TabPanel h="50vh" key={index}>

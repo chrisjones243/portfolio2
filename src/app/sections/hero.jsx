@@ -1,5 +1,5 @@
 "use client";
-import { Box, Text, Flex, GridItem, Grid } from "@chakra-ui/react";
+import { Text, Flex, GridItem, Grid, useMediaQuery } from "@chakra-ui/react";
 import { useTheme } from "@chakra-ui/react";
 import { useColorMode } from "@chakra-ui/react";
 
@@ -9,12 +9,13 @@ import { forwardRef } from "react";
 
 const Hero = forwardRef(function Hero(props, ref) {
   const { height, blockWidth } = useDimensions();
+  const [isLessThan1050] = useMediaQuery("(max-width: 1050px)");
 
   const h = height * 8;
 
   const oppositeColor = useColorMode().colorMode === "light" ? "dark" : "light";
 
-  const { colorMode, sections } = useColorMode();
+  const { colorMode } = useColorMode();
   return (
     <Grid
       ref={ref}
@@ -22,16 +23,16 @@ const Hero = forwardRef(function Hero(props, ref) {
       templateColumns="repeat(4, 1fr)"
       border={`1px solid ${useTheme().colors.stroke}`}
       bg={`background.${colorMode}`}
-      // width="75%"
-      h={`${h}vh`}
-      fontSize={["lg", "2xl", "4xl", "6xl", "5rem"]}
-      letterSpacing={4}
+      h={isLessThan1050 ? null : `${h}vh`}
+      fontSize={["2xl", "4xl", "5xl", "5xl", "6xl", "5rem"]}
+      letterSpacing={isLessThan1050 ? 2 : 4}
     >
       <GridItem
-        colSpan={3}
+        colSpan={isLessThan1050 ? 4 : 3}
         p={10}
+        pl={isLessThan1050 ? 5 : 10}
         display={"flex"}
-        justifyContent={"center"}
+        justifyContent={isLessThan1050 ? null : "center"}
         flexDirection={"column"}
       >
         <Flex direction="row">
@@ -55,7 +56,9 @@ const Hero = forwardRef(function Hero(props, ref) {
           </Text>
         </Flex>
       </GridItem>
-      <GridItem colSpan={1} bg={`background.${oppositeColor}`} />
+      {isLessThan1050 ? null : (
+        <GridItem colSpan={1} bg={`background.${oppositeColor}`} />
+      )}
     </Grid>
   );
 });

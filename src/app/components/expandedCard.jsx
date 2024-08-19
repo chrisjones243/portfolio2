@@ -68,10 +68,11 @@ function ExpandedCard({ data, setClose, isOpen }) {
         />
         <Flex
           ref={entire}
-          width="60vw"
-          height="60vh"
+          width={["100vw", "90vw", "80vw", "70vw", "60vw"]}
           border={`1px solid ${stroke}`}
+          bg={`background.${colorMode}`}
           overflow={"hidden"}
+          flexDirection={"column"}
           position="fixed"
           top="50%"
           left="50%"
@@ -103,6 +104,7 @@ function ExpandedCard({ data, setClose, isOpen }) {
             bg={`background.${colorMode}`}
             width={10}
             height={10}
+            zIndex={1}
             borderBottom={`1px solid ${stroke}`}
             borderLeft={`1px solid ${stroke}`}
             alignItems={"center"}
@@ -120,7 +122,7 @@ function ExpandedCard({ data, setClose, isOpen }) {
           </Flex>
           {videoUrl ? (
             <AspectRatio ratio={16 / 9} width="100%">
-              <video controls>
+              <video autoPlay loop muted>
                 <source src={videoUrl} type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
@@ -144,14 +146,13 @@ function ExpandedCard({ data, setClose, isOpen }) {
             borderTop={`1px solid ${stroke}`}
             width="100%"
             p={3}
-            position={"absolute"}
+            // position={"absolute"}
             flexDirection={"row"}
             alignItems={"center"}
             justifyContent={"space-between"}
+            fontSize={["xs", "sm", "md", "md"]}
           >
             <PortableText components={components} value={body} />
-
-            <Icon as={FaExternalLinkAlt} cursor={"pointer"} />
           </Flex>
         </Flex>
       </Box>

@@ -264,15 +264,17 @@ function TicTacToeGame() {
       direction="column"
       w="full"
       h="full"
-      p={5}
       justifyContent={"center"}
       alignItems={"center"}
+      p={0}
+      m={0}
     >
       <Flex
+        pt={5}
         direction="row"
         justifyContent="center"
         alignItems="center"
-        gap={[2, 4, 5]}
+        gap={[1, 2, 4, 4, 5]}
       >
         <Button
           border={"1px solid"}
@@ -346,7 +348,7 @@ function TicTacToeGame() {
           borderColor={"stroke"}
           height={12}
           justifyContent={"center"}
-          mt={5}
+          mt={[2, 4, 5]}
         >
           Play again
         </Button>

@@ -1,7 +1,7 @@
 "use client";
-import { Flex, Text, Box, Icon, useTheme } from "@chakra-ui/react";
+import { Flex, Text, Icon, useMediaQuery } from "@chakra-ui/react";
 import { useColorMode } from "@chakra-ui/react";
-import { useState, useRef, forwardRef } from "react";
+import { useState, useRef, forwardRef, useEffect } from "react";
 import { useDimensions } from "../../dimensions";
 
 import { BsCursor } from "react-icons/bs";
@@ -38,10 +38,26 @@ const Experience = forwardRef(function Experience(props, ref) {
   const oppositeColor = colorMode === "light" ? "dark" : "light";
   const { height } = useDimensions();
 
+  const [isLessThan1050] = useMediaQuery("(max-width: 1050px)");
+
   const [currentLang, setCurrentLang] = useState(0);
 
   // Use a ref to throttle the mouse move event handling
   const throttleTimeout = useRef(null);
+
+  useEffect(() => {
+    let interval;
+    if (isLessThan1050) {
+      interval = setInterval(() => {
+        setCurrentLang(Math.floor(Math.random() * langs.length));
+      }, 250); // Adjust the interval time as needed
+    }
+    return () => {
+      if (interval) {
+        clearInterval(interval);
+      }
+    };
+  }, [isLessThan1050]);
 
   const handleMouseMove = () => {
     if (
@@ -61,18 +77,19 @@ const Experience = forwardRef(function Experience(props, ref) {
     <Flex
       ref={ref}
       scrollMarginTop={`calc(${height}vh + 2.5rem)`}
-      height={`${height * 7}vh`}
-      border={`1px solid ${useTheme().colors.stroke}`}
+      height={isLessThan1050 ? `${height * 5}vh` : `${height * 7}vh`}
+      border={`1px`}
+      borderColor={`stroke`}
       bg={`background.${colorMode}`}
       onMouseMove={handleMouseMove}
       onClick={handleMouseMove}
       direction={"column"}
     >
       <Flex
-        height={`${height * 6}vh`}
+        height={isLessThan1050 ? `${height * 4}vh` : `${height * 6}vh`}
         direction={"column"}
         mx={10}
-        fontSize={["2xl", "3xl", "4.5rem"]}
+        fontSize={["3xl", "3xl", "4xl", "6xl", "6xl", "4.5rem"]}
         letterSpacing={3}
         justifyContent={"center"}
       >

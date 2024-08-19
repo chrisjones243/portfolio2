@@ -1,7 +1,6 @@
 "use client";
-import React, { use, useEffect, useState } from "react";
-import { Flex, Input, Text } from "@chakra-ui/react";
-import Element from "./element";
+import React, { useEffect, useState } from "react";
+import { Flex, Input, Text, useMediaQuery } from "@chakra-ui/react";
 import { Button } from "../button";
 
 function RandomNumberGame() {
@@ -14,6 +13,8 @@ function RandomNumberGame() {
 
   const [userTries, setUserTries] = useState(0);
   const [computerTries, setComputerTries] = useState(0);
+
+  const [isLessThan1050] = useMediaQuery("(max-width: 1050px)");
 
   useEffect(() => {
     playAgain();
@@ -72,24 +73,33 @@ function RandomNumberGame() {
       alignItems={"center"}
       p={[5, 10, 20, 40]}
     >
-      <Text fontSize={["md", "lg", "xl", "2xl"]} fontWeight={"600"}>
+      <Text
+        fontSize={["md", "lg", "xl", "2xl"]}
+        fontWeight={"600"}
+        align={"center"}
+      >
         Guess the Random Number between 1 and 100 🎲
       </Text>
-      <Text fontSize={["md", "lg", "xl", "2xl"]} fontWeight={"500"} pb={10}>
+      <Text
+        fontSize={["md", "lg", "xl", "2xl"]}
+        fontWeight={"500"}
+        pb={10}
+        align={"center"}
+      >
         and beat the computer!
       </Text>
       {isGreater && (
         <Text fontSize={["md", "lg", "xl", "2xl"]} fontWeight={"500"}>
-          It's greater than {value} 🔼
+          It&rsquo;s greater than {value} 🔼
         </Text>
       )}
       {isLess && (
         <Text fontSize={["md", "lg", "xl", "2xl"]} fontWeight={"500"}>
-          It's less than {value} 🔽
+          It&rsquo;s less than {value} 🔽
         </Text>
       )}
       {randomNumber && !finished && (
-        <Flex direction="column" w={"50%"} mt={2}>
+        <Flex direction="column" w={isLessThan1050 ? "75%" : "50%"} mt={2}>
           <Input
             type="number"
             placeholder="Enter your guess"
