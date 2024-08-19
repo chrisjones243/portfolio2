@@ -1,11 +1,11 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { Flex, Input, Text, useMediaQuery } from "@chakra-ui/react";
 import { Button } from "../button";
 
 function RandomNumberGame() {
-  const [value, setValue] = useState(null);
-  const [randomNumber, setRandomNumber] = useState(null);
+  const [value, setValue] = useState("");
+  const [randomNumber, setRandomNumber] = useState();
   const [isGreater, setIsGreater] = useState(false);
   const [isLess, setIsLess] = useState(false);
 
@@ -16,11 +16,7 @@ function RandomNumberGame() {
 
   const [isLessThan1050] = useMediaQuery("(max-width: 1050px)");
 
-  useEffect(() => {
-    playAgain();
-  }, []);
-
-  const playAgain = () => {
+  const playAgain = useCallback(() => {
     const randomNumber = Math.floor(Math.random() * 100) + 1;
     setRandomNumber(randomNumber);
     setComputerTries(binarySearch(randomNumber));
@@ -29,7 +25,11 @@ function RandomNumberGame() {
     setFinished(false);
     setIsGreater(false);
     setIsLess(false);
-  };
+  }, []);
+
+  useEffect(() => {
+    playAgain();
+  }, [playAgain]);
 
   const binarySearch = (value) => {
     let low = 1;
@@ -106,7 +106,7 @@ function RandomNumberGame() {
             mb={10}
             borderRadius={0}
             borderColor={"stroke"}
-            value={value}
+            value={value !== null ? value : ""} // Ensure value is not null
             onChange={(e) => {
               setIsGreater(false);
               setIsLess(false);

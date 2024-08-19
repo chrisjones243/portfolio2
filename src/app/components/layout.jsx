@@ -24,7 +24,7 @@ function Layout({ children, scrollTo, refs }) {
     if (isLessThan1050) {
       setBlockWidth(`calc(${100 / 4}% + 1px)`);
     }
-  }, [isLessThan1050]);
+  }, [isLessThan1050, setBlockWidth]);
 
   return (
     <Box
