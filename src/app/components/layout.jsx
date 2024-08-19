@@ -1,6 +1,5 @@
 "use client";
 import {
-  Heading,
   Box,
   Grid,
   GridItem,

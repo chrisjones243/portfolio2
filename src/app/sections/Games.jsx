@@ -3,7 +3,6 @@ import { forwardRef } from "react";
 import {
   Flex,
   Text,
-  Box,
   Tabs,
   TabList,
   Tab as ChakraTab,

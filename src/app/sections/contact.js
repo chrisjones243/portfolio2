@@ -1,20 +1,10 @@
 "use client";
-import {
-  Flex,
-  Text,
-  Input,
-  useTheme,
-  Box,
-  Grid,
-  GridItem,
-  Textarea,
-} from "@chakra-ui/react";
+import { Flex, Text, useTheme, Grid, GridItem } from "@chakra-ui/react";
 import { useColorMode } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useDimensions } from "../../dimensions";
 import { forwardRef } from "react";
-import { IoIosDownload } from "react-icons/io";
-import { DownArrow, RightArrow } from "../components/icons";
+import { RightArrow } from "../components/icons";
 import { Button } from "../components/button";
 import { client } from "../../client";
 

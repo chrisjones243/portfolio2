@@ -12,7 +12,7 @@ import { RightArrow } from "./icons";
 
 import { useDimensions } from "../../dimensions";
 import { Formik, Form, Field } from "formik";
-import { useState, useCallback } from "react";
+import { useCallback } from "react";
 
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import axios from "axios";
@@ -105,7 +105,6 @@ function SendEmail() {
           "Content-Type": "application/json",
         },
       });
-      console.log(sendEmail);
       if (sendEmail.status === 200) {
         toast({
           title: "Email sent.",

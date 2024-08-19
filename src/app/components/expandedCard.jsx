@@ -6,7 +6,6 @@ import { useRef, useState } from "react";
 import { PortableText } from "@portabletext/react";
 import { Img } from "./img";
 
-import { FaExternalLinkAlt } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
 
 function ExpandedCard({ data, setClose, isOpen }) {

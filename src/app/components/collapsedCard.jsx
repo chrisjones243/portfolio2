@@ -1,13 +1,5 @@
 "use client";
-import {
-  Box,
-  Text,
-  useTheme,
-  Grid,
-  GridItem,
-  Icon,
-  createIcon,
-} from "@chakra-ui/react";
+import { Text, useTheme, Grid, GridItem, Icon } from "@chakra-ui/react";
 import { useColorMode } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";

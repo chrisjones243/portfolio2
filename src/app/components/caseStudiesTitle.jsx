@@ -1,13 +1,5 @@
 "use client";
-import { useState } from "react";
-import {
-  Box,
-  Text,
-  Flex,
-  Image,
-  useTheme,
-  useColorMode,
-} from "@chakra-ui/react";
+import { Box, Text, Flex, useColorMode } from "@chakra-ui/react";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";

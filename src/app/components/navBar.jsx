@@ -1,18 +1,12 @@
 "use client";
-import {
-  Flex,
-  Icon,
-  Box,
-  useTheme,
-  createIcon,
-  useColorMode,
-} from "@chakra-ui/react";
+import { Flex, Icon, Box, useColorMode, useMediaQuery } from "@chakra-ui/react";
 import React from "react";
 
 import { useDimensions } from "../../dimensions";
 import { Logo } from "./icons";
 
 const NavBar = () => {
+  const [isLessThan500] = useMediaQuery("(max-width: 500px)");
   const { colorMode, toggleColorMode } = useColorMode(); // Get the current color mode
 
   const { height, blockWidth } = useDimensions();
@@ -27,12 +21,14 @@ const NavBar = () => {
       zIndex={10}
     >
       <Flex
-        border={`1px solid ${useTheme().colors.stroke}`}
+        border={"1px"}
+        borderColor={`stroke`}
         bg={`background.${colorMode}`}
         onClick={toggleColorMode}
         h={`${height}vh`}
         width={blockWidth}
         alignItems={"center"}
+        justifyContent={isLessThan500 ? "center" : "flex-start"}
       >
         <Icon as={Logo} w={10} h={10} m={4} color={`brand.${colorMode}`} />
       </Flex>
