@@ -1,3 +1,4 @@
+"use client";
 import { Flex, Spinner, useColorMode } from "@chakra-ui/react";
 
 function Loading() {
