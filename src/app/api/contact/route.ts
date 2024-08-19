@@ -6,6 +6,14 @@ export async function POST(req: Request) {
   const password = process.env.BURNER_PASSWORD;
   const myEmail = process.env.PERSONAL_EMAIL;
 
+  if (!username || !password || !myEmail) {
+    console.error("Missing environment variables");
+    return NextResponse.json(
+      { error: "Missing environment variables" },
+      { status: 500 }
+    );
+  }
+
   const { subject, email, message } = await req.json();
 
   const transporter = nodemailer.createTransport({
@@ -30,17 +38,12 @@ export async function POST(req: Request) {
     `,
   };
 
-  await transporter.sendMail(mailData, function (err: any, info: any) {
-    if (err) {
-      return NextResponse.json(
-        { success: false, message: "Failed to send email" },
-        { status: 500 }
-      );
-    }
-  });
-
-  return NextResponse.json(
-    { success: true, message: "Email sent" },
-    { status: 200 }
-  );
+  try {
+    const info = await transporter.sendMail(mailData);
+    console.log("Email sent: ", info.response);
+    return NextResponse.json({ message: "Email sent successfully" });
+  } catch (err) {
+    console.error("Error sending email: ", err);
+    return NextResponse.json({ error: "Error sending email" }, { status: 500 });
+  }
 }
