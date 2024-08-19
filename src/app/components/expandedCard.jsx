@@ -13,7 +13,9 @@ function ExpandedCard({ data, setClose, isOpen }) {
   const { colorMode } = useColorMode(); // Get the current color mode
   const stroke = useTheme().colors.stroke;
 
-  const { title, body, imageUrl, videoUrl } = data;
+  const { title, body, imageUrl, videoUrl, imageDimensions } = data;
+
+  console.log(imageDimensions);
 
   const entire = useRef(null);
 
@@ -128,15 +130,16 @@ function ExpandedCard({ data, setClose, isOpen }) {
             </AspectRatio>
           ) : (
             imageUrl && (
-              <Img
-                src={imageUrl}
-                alt={title}
-                width={2360 / 6}
-                height={2360 / 6}
-                minW={"100%"}
-                minH={"100%"}
-                objectFit={"cover"}
-              />
+              <AspectRatio ratio={imageDimensions.aspectRatio} width="100%">
+                <Img
+                  src={imageUrl}
+                  alt={title}
+                  width={imageDimensions.width}
+                  height={imageDimensions.height}
+                  minW={"100%"}
+                  objectFit={"contain"}
+                />
+              </AspectRatio>
             )
           )}
           <Flex

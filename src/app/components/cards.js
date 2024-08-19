@@ -16,6 +16,7 @@ function Cards() {
     title,
     body,
     "imageUrl": image.asset->url,
+    "imageDimensions": image.asset->metadata.dimensions,
     "videoUrl": video.asset->url,
   }`);
 
