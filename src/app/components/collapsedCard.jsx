@@ -8,20 +8,15 @@ import { RightArrow } from "./icons";
 import { useDimensions } from "../../dimensions";
 
 function CollapsedCard({ data, onClick, ...props }) {
-  const { colorMode } = useColorMode(); // Get the current color mode
+  const { colorMode } = useColorMode();
   const oppositeColor = colorMode === "light" ? "dark" : "light";
-  const [showInfo, setShowInfo] = useState(false);
 
   const { height } = useDimensions();
 
   const { title } = data;
 
-  const info = useRef(null);
-
   return (
     <Grid
-      onMouseEnter={() => setShowInfo(true)}
-      onMouseLeave={() => setShowInfo(false)}
       onClick={onClick}
       as={motion.div}
       whileHover={{ opacity: 0.9 }}
@@ -33,8 +28,6 @@ function CollapsedCard({ data, onClick, ...props }) {
       height={`${height}vh`}
       width="100%"
       borderTop={`1px solid ${useTheme().colors.stroke}`}
-      // borderLeft={`1px solid ${useTheme().colors.stroke}`}
-      // bg={`background.${colorMode}`}
       templateColumns="repeat(3, 1fr)"
       {...props}
     >

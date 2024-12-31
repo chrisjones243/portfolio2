@@ -36,24 +36,11 @@ const Hero = forwardRef(function Hero(props, ref) {
         flexDirection={"column"}
       >
         <Flex direction="row">
-          <Text fontWeight={"400"}>I&#39;m</Text>
+          <Text fontWeight={"400"}>Hi, I&#39;m</Text>
           <Text fontStyle={"italic"} fontWeight={"1000"}>
-            &nbsp;Chris
+            &nbsp;Christopher Jones 👋
           </Text>
           <Text fontWeight={"400"}>,</Text>
-        </Flex>
-        <Flex direction="row">
-          <Text fontWeight={"400"}>a&nbsp;</Text>
-          <Text fontWeight={"400"} letterSpacing={0}>
-            university&nbsp;
-          </Text>
-          <Text fontWeight={"400"}>&nbsp;student,</Text>
-        </Flex>
-        <Flex direction="row">
-          <Text fontWeight={"400"}>looking for a </Text>
-          <Text fontStyle={"italic"} fontWeight={"1000"}>
-            &nbsp;job
-          </Text>
         </Flex>
       </GridItem>
       {isLessThan1050 ? null : (
