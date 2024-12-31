@@ -35,13 +35,11 @@ const Hero = forwardRef(function Hero(props, ref) {
         justifyContent={isLessThan1050 ? null : "center"}
         flexDirection={"column"}
       >
-        <Flex direction="row">
-          <Text fontWeight={"400"}>Hi, I&#39;m</Text>
-          <Text fontStyle={"italic"} fontWeight={"1000"}>
-            &nbsp;Christopher Jones 👋
-          </Text>
-          <Text fontWeight={"400"}>,</Text>
-        </Flex>
+        <Text fontWeight={"400"}>Hi, I&#39;m</Text>
+        <Text fontStyle={"italic"} fontWeight={"1000"}>
+          &nbsp;Christopher Jones
+        </Text>
+        👋
       </GridItem>
       {isLessThan1050 ? null : (
         <GridItem colSpan={1} bg={`background.${oppositeColor}`} />
