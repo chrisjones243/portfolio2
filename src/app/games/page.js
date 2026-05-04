@@ -93,9 +93,6 @@ export default function GamesPage() {
           <Text fontWeight="900" fontSize={["3xl", "4xl", "6xl"]} lineHeight="1" mb={2}>
             🕹️ Mini Games
           </Text>
-          <Text opacity={0.4} fontSize={["xs", "sm"]} textTransform="uppercase" letterSpacing="wider" mb={12}>
-            You found the easter egg
-          </Text>
         </motion.div>
 
         {/* Games grid */}

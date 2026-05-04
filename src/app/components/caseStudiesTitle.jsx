@@ -17,37 +17,49 @@ function CaseStudiesTitle() {
 
   const xPercent = useRef(0);
   const direction = useRef(-1);
+  const rafId = useRef(null);
 
   useEffect(() => {
-    gsap.set(secondLine.current, {
-      left: secondLine.current.getBoundingClientRect().width,
-    });
+    if (!firstLine.current || !secondLine.current || !slider.current) return;
 
     gsap.registerPlugin(ScrollTrigger);
-    gsap.to(slider.current, {
-      scrollTrigger: {
-        trigger: document.documentElement,
-        scrub: 0.5,
-        start: 0,
-        onUpdate: (e) => (direction.current = e.direction * -1),
-      },
 
-      x: "-200px",
+    const ctx = gsap.context(() => {
+      gsap.set(secondLine.current, {
+        left: secondLine.current.getBoundingClientRect().width,
+      });
+
+      gsap.to(slider.current, {
+        scrollTrigger: {
+          trigger: document.documentElement,
+          scrub: 0.5,
+          start: 0,
+          onUpdate: (e) => (direction.current = e.direction * -1),
+        },
+        x: "-200px",
+      });
     });
 
     const animate = () => {
-      if (xPercent.current > 0) {
-        xPercent.current = -100;
+      if (!firstLine.current || !secondLine.current) return;
+
+      if (xPercent.current < -100) {
+        xPercent.current = 0;
       }
 
       gsap.set(firstLine.current, { xPercent: xPercent.current });
       gsap.set(secondLine.current, { xPercent: xPercent.current });
-      requestAnimationFrame(animate);
 
-      xPercent.current += 0.02;
+      xPercent.current -= 0.02 * direction.current;
+      rafId.current = requestAnimationFrame(animate);
     };
 
-    requestAnimationFrame(animate);
+    rafId.current = requestAnimationFrame(animate);
+
+    return () => {
+      if (rafId.current) cancelAnimationFrame(rafId.current);
+      ctx.revert();
+    };
   }, []);
 
   return (

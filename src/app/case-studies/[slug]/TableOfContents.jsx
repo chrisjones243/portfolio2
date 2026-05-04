@@ -60,8 +60,7 @@ export default function TableOfContents({ markdown }) {
   return (
     <Box mb={8}>
       <Text
-        fontStyle="italic"
-        fontWeight={600}
+        fontWeight="bold"
         fontSize="sm"
         mb={4}
         opacity={0.5}
@@ -70,7 +69,7 @@ export default function TableOfContents({ markdown }) {
       >
         On this page
       </Text>
-      <Box as="nav" display="flex" flexDirection="column" gap={1}>
+      <Box as="nav" display="flex" flexDirection="column">
         {headings.map(({ id, text, level }) => (
           <Text
             key={id}
@@ -83,15 +82,13 @@ export default function TableOfContents({ markdown }) {
             }}
             pl={2}
             ml={level === 1 ? 0 : level === 2 ? 3 : 5}
-            py="2px"
             fontSize={level === 1 ? "sm" : "xs"}
             fontWeight={activeId === id ? "bold" : "normal"}
             color={activeId === id ? "fg" : "gray.500"}
             borderLeftWidth="2px"
             borderLeftColor={activeId === id ? "fg" : "transparent"}
             transition="all 0.2s"
-            _hover={{ opacity: 1, textDecoration: "none", color: "fg" }}
-            lineHeight={1.5}
+            _hover={{ color: "fg", textDecoration: "none" }}
             display="block"
             cursor="pointer"
           >

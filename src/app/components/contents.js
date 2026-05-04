@@ -42,9 +42,14 @@ function Contents({ refs }) {
 
   return (
     <Box position="fixed" pl={10} top={["6", "10", "20"]}>
-      <Text fontSize="large" fontWeight="bold" mb={6}>
+      <Text
+        fontSize="large"
+        fontWeight="bold"
+        mb={6}
+      >
         Contents
       </Text>
+      <Box as="nav" display="flex" flexDirection="column">
       <Text
         fontSize="md"
         pl={2}
@@ -54,7 +59,9 @@ function Contents({ refs }) {
         transition="all 0.2s"
         onClick={() => scrollTo(refs.HeroRef)}
         fontWeight={isHeroOnScreen ? "bold" : "normal"}
-        cursor={"pointer"}
+        cursor="pointer"
+        data-cursor="pointer"
+        _hover={{ color: "fg", textDecoration: "none" }}
       >
         Hero
       </Text>
@@ -67,7 +74,9 @@ function Contents({ refs }) {
         transition="all 0.2s"
         onClick={() => scrollTo(refs.CaseStudiesRef)}
         fontWeight={isCaseStudiesOnScreen ? "bold" : "normal"}
-        cursor={"pointer"}
+        cursor="pointer"
+        data-cursor="pointer"
+        _hover={{ color: "fg", textDecoration: "none" }}
       >
         Case studies
       </Text>
@@ -80,11 +89,12 @@ function Contents({ refs }) {
         transition="all 0.2s"
         onClick={() => scrollTo(refs.ExperienceRef)}
         fontWeight={isExperienceOnScreen ? "bold" : "normal"}
-        cursor={"pointer"}
+        cursor="pointer"
+        data-cursor="pointer"
+        _hover={{ color: "fg", textDecoration: "none" }}
       >
         Experience
       </Text>
-
       <Text
         fontSize="md"
         pl={2}
@@ -94,10 +104,13 @@ function Contents({ refs }) {
         transition="all 0.2s"
         onClick={() => scrollTo(refs.ContactRef)}
         fontWeight={isContactOnScreen ? "bold" : "normal"}
-        cursor={"pointer"}
+        cursor="pointer"
+        data-cursor="pointer"
+        _hover={{ color: "fg", textDecoration: "none" }}
       >
         Contact
       </Text>
+      </Box>
 
       {/* Controls row: theme toggle + easter egg */}
       <Flex mt={8} gap={2} alignItems="center">

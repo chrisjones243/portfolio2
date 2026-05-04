@@ -7,8 +7,7 @@ export default function CaseStudyLinks({ links }) {
   return (
     <Box mt={8}>
       <Text
-        fontStyle="italic"
-        fontWeight={600}
+        fontWeight="bold"
         fontSize="sm"
         mb={3}
         opacity={0.4}
