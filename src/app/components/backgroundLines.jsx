@@ -13,6 +13,7 @@ const BackgroundLines = ({ numberOfLines = 6 }) => {
       justify="space-between"
       direction={"column"}
       zIndex={-20}
+      pointerEvents="none"
       py={["3", "5", "10"]}
       pb={["20", "10", "10"]}
       px={[5, 10, 20]}

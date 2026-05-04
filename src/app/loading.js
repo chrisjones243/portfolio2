@@ -1,8 +1,7 @@
 "use client";
-import { Flex, Spinner, useColorMode } from "@chakra-ui/react";
+import { Flex, Spinner } from "@chakra-ui/react";
 
 function Loading() {
-  const { colorMode } = useColorMode();
   return (
     <Flex
       position="absolute"
@@ -10,14 +9,13 @@ function Loading() {
       align="center"
       width="100vw"
       height="100vh"
-      bg={`background.${colorMode}`}
+      bg="bg"
       zIndex={100}
     >
       <Spinner
-        thickness="4px"
-        speed="0.65s"
-        emptyColor={`background.${colorMode}`}
-        color={`brand.${colorMode}`}
+        borderWidth="4px"
+        animationDuration="0.65s"
+        color="fg"
         size="xl"
       />
     </Flex>

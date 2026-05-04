@@ -1,6 +1,5 @@
 "use client";
-import { Box, Text, useTheme, Flex, Icon, AspectRatio } from "@chakra-ui/react";
-import { useColorMode } from "@chakra-ui/react";
+import { Box, Text, Flex, Icon, AspectRatio } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { useRef, useState } from "react";
 import { PortableText } from "@portabletext/react";
@@ -10,12 +9,8 @@ import { IoClose } from "react-icons/io5";
 
 function ExpandedCard({ data, setClose, isOpen }) {
   const [mouseOverClose, setMouseOverClose] = useState(false);
-  const { colorMode } = useColorMode(); // Get the current color mode
-  const stroke = useTheme().colors.stroke;
 
   const { title, body, imageUrl, videoUrl, imageDimensions } = data;
-
-  console.log(imageDimensions);
 
   const entire = useRef(null);
 
@@ -59,7 +54,7 @@ function ExpandedCard({ data, setClose, isOpen }) {
           exit={{ opacity: 0 }}
           width="100%"
           height="100%"
-          bg={`background.${colorMode}`}
+          bg="bg"
           position="fixed"
           top={0}
           left={0}
@@ -70,8 +65,9 @@ function ExpandedCard({ data, setClose, isOpen }) {
         <Flex
           ref={entire}
           width={["100vw", "90vw", "80vw", "70vw", "60vw"]}
-          border={`1px solid ${stroke}`}
-          bg={`background.${colorMode}`}
+          borderWidth="1px"
+          borderColor="stroke"
+          bg="bg"
           overflow={"hidden"}
           flexDirection={"column"}
           position="fixed"
@@ -102,12 +98,14 @@ function ExpandedCard({ data, setClose, isOpen }) {
             position={"absolute"}
             top={0}
             right={0}
-            bg={`background.${colorMode}`}
+            bg="bg"
             width={10}
             height={10}
             zIndex={1}
-            borderBottom={`1px solid ${stroke}`}
-            borderLeft={`1px solid ${stroke}`}
+            borderBottomWidth="1px"
+            borderBottomColor="stroke"
+            borderLeftWidth="1px"
+            borderLeftColor="stroke"
             alignItems={"center"}
             justifyContent={"center"}
             onClick={handleClose}
@@ -115,7 +113,7 @@ function ExpandedCard({ data, setClose, isOpen }) {
           >
             <Icon
               as={IoClose}
-              color={`text.${colorMode}`}
+              color="fg"
               width="100%"
               height="100%"
               p={2}
@@ -144,8 +142,9 @@ function ExpandedCard({ data, setClose, isOpen }) {
           )}
           <Flex
             bottom={0}
-            bg={`background.${colorMode}`}
-            borderTop={`1px solid ${stroke}`}
+            bg="bg"
+            borderTopWidth="1px"
+            borderTopColor="stroke"
             width="100%"
             p={3}
             // position={"absolute"}

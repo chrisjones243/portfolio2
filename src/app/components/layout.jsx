@@ -9,15 +9,17 @@ import {
 } from "@chakra-ui/react";
 import { useDimensions } from "../../dimensions";
 
-import BackgroundLines from "./backgroundLines";
 import NavBar from "./navBar";
 import Contents from "./contents";
+import ShaderCanvas from "./shaderCanvas";
+import { useColorMode } from "../color-mode";
 import { useEffect } from "react";
 
 function Layout({ children, scrollTo, refs }) {
   const [isLessThan1050] = useMediaQuery("(max-width: 1050px)");
   const width = "calc(100% - 5)";
   const { height, setBlockWidth } = useDimensions();
+  const { colorMode } = useColorMode();
 
   useEffect(() => {
     if (isLessThan1050) {
@@ -27,11 +29,24 @@ function Layout({ children, scrollTo, refs }) {
 
   return (
     <Box
+      position="relative"
       mx={[5, 10, 20]}
       py={["3", "5", "10"]}
       pb={["20", "10", "10"]}
       width={width}
+      bg="bg"
+      minH="100vh"
+      zIndex={1}
     >
+      {/* Global barely-visible shader pinned to the viewport */}
+      <Box
+        position="fixed"
+        inset={0}
+        zIndex={0}
+        pointerEvents="none"
+      >
+        <ShaderCanvas isDark={colorMode === "dark"} alpha={0.15} />
+      </Box>
       <Grid templateColumns="repeat(5, 1fr)}">
         <GridItem colSpan={isLessThan1050 ? 5 : 4}>
           <NavBar />
@@ -44,8 +59,6 @@ function Layout({ children, scrollTo, refs }) {
           </GridItem>
         )}
       </Grid>
-      <BackgroundLines numberOfLines={isLessThan1050 ? 5 : 6} />
-
       <Text
         fontSize={["xs", "xs", "sm"]}
         textAlign="center"
@@ -55,14 +68,14 @@ function Layout({ children, scrollTo, refs }) {
         position={"absolute"}
         bottom={0}
         left={0}
-        color={"grey"}
+        color={"gray.500"}
       >
         {" "}
         This site is protected by reCAPTCHA,{" "}
         <Link
           fontSize={["xs", "xs", "sm"]}
           href="https://policies.google.com/privacy"
-          // color={"grey"}
+          color={"gray.500"}
           isExternal
         >
           Privacy Policy
@@ -71,7 +84,7 @@ function Layout({ children, scrollTo, refs }) {
         <Link
           fontSize={["xs", "xs", "sm"]}
           href="https://policies.google.com/terms"
-          color={"grey"}
+          color={"gray.500"}
           isExternal
         >
           {" "}

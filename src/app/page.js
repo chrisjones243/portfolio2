@@ -1,62 +1,36 @@
-"use client";
-import { useRef, useEffect, useState } from "react";
-import { useMediaQuery } from "@chakra-ui/react";
-import Layout from "./components/layout";
+import { serverClient } from "../serverClient";
+import HomePageClient from "./HomePageClient";
 
-import Hero from "./sections/hero";
-import CaseStudies from "./sections/caseStudies";
-import Experience from "./sections/experience";
-import Games from "./sections/Games";
-import Contact from "./sections/contact";
-
-import Spacer from "./components/spacer";
-
-import Loading from "./loading";
-
-function HomePage() {
-  const [isLayoutReady, setIsLayoutReady] = useState(false);
-
-  const HeroRef = useRef(null);
-  const CaseStudiesRef = useRef(null);
-  const ExperienceRef = useRef(null);
-  const GamesRef = useRef(null);
-  const ContactRef = useRef(null);
-
-  // Done this way to prevent layout shift
-  const [isAScreen] = useMediaQuery("(min-width: 0px)");
-
-  useEffect(() => {
-    setTimeout(() => {
-      setIsLayoutReady(isAScreen);
-    }, 1000);
-  }, [isAScreen]);
-
-  if (!isLayoutReady) {
-    return <Loading />;
-  }
+export default async function HomePage() {
+  const [caseStudies, resume, experience] = await Promise.all([
+    serverClient.fetch(`*[_type == "caseStudy"]{
+      title,
+      "slug": slug.current,
+      tags,
+      "imageUrl": image.asset->url,
+      "imageDimensions": image.asset->metadata.dimensions,
+      "videoUrl": video.asset->url,
+    }`),
+    serverClient.fetch(`*[_type == "resume"][0]{
+      "fileUrl": file.asset->url,
+    }`),
+    serverClient.fetch(`*[_type == "workExperience"] | order(startDate desc) {
+      jobTitle,
+      company,
+      location,
+      startDate,
+      endDate,
+      isCurrent,
+      description,
+      technologies,
+    }`),
+  ]);
 
   return (
-    <Layout
-      refs={{ HeroRef, CaseStudiesRef, ExperienceRef, GamesRef, ContactRef }}
-    >
-      <Hero ref={HeroRef} />
-      <Spacer />
-      <Spacer />
-      <CaseStudies ref={CaseStudiesRef} />
-      <Spacer />
-      <Spacer />
-      <Experience ref={ExperienceRef} />
-      <Spacer />
-      <Spacer />
-      <Games ref={GamesRef} />
-      <Spacer />
-      <Spacer />
-      <Spacer />
-      <Spacer />
-
-      <Contact ref={ContactRef} />
-    </Layout>
+    <HomePageClient
+      caseStudies={caseStudies}
+      resumeUrl={resume?.fileUrl ?? null}
+      experience={experience}
+    />
   );
 }
-
-export default HomePage;

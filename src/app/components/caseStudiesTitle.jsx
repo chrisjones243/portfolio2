@@ -1,5 +1,5 @@
 "use client";
-import { Box, Text, Flex, useColorMode } from "@chakra-ui/react";
+import { Box, Text, Flex } from "@chakra-ui/react";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -7,16 +7,15 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useDimensions } from "../../dimensions";
 
 function CaseStudiesTitle() {
-  const { colorMode } = useColorMode();
   const { height, blockWidth } = useDimensions();
 
-  const image = "🌮";
+  const image = "✦";
 
   const firstLine = useRef(null);
   const secondLine = useRef(null);
   const slider = useRef(null);
 
-  let xPercent = 0;
+  const xPercent = useRef(0);
   const direction = useRef(-1);
 
   useEffect(() => {
@@ -30,27 +29,26 @@ function CaseStudiesTitle() {
         trigger: document.documentElement,
         scrub: 0.5,
         start: 0,
-        // onUpdate: (e) => (directionRef.current = e.direction * -1),
         onUpdate: (e) => (direction.current = e.direction * -1),
       },
 
       x: "-200px",
     });
 
+    const animate = () => {
+      if (xPercent.current > 0) {
+        xPercent.current = -100;
+      }
+
+      gsap.set(firstLine.current, { xPercent: xPercent.current });
+      gsap.set(secondLine.current, { xPercent: xPercent.current });
+      requestAnimationFrame(animate);
+
+      xPercent.current += 0.02;
+    };
+
     requestAnimationFrame(animate);
   }, []);
-
-  const animate = () => {
-    if (xPercent > 0) {
-      xPercent = -100;
-    }
-
-    gsap.set(firstLine.current, { xPercent: xPercent });
-    gsap.set(secondLine.current, { xPercent: xPercent });
-    requestAnimationFrame(animate);
-
-    xPercent += 0.02;
-  };
 
   return (
     <Box
@@ -72,7 +70,7 @@ function CaseStudiesTitle() {
         <Flex flexDirection={"row"} ref={firstLine}>
           <Text fontWeight={"400"}>&nbsp;Case Studies&nbsp;</Text>
           {image} <Text fontWeight={"1000"}>&nbsp;Case Studies&nbsp;</Text>
-          {image} <Text fontWeight={"400"}>&nbsp;Quesadillas&nbsp;</Text>
+          {image} <Text fontWeight={"400"}>&nbsp;Selected Work&nbsp;</Text>
           {image} <Text fontWeight={"1000"}>&nbsp;Case Studies&nbsp;</Text>
           {image} <Text fontWeight={"400"}>&nbsp;Case Studies&nbsp;</Text>
           {image}
@@ -86,7 +84,7 @@ function CaseStudiesTitle() {
         >
           <Text fontWeight={"400"}>&nbsp;Case Studies&nbsp;</Text>
           {image} <Text fontWeight={"1000"}>&nbsp;Case Studies&nbsp;</Text>
-          {image} <Text fontWeight={"400"}>&nbsp;Quesadillas&nbsp;</Text>
+          {image} <Text fontWeight={"400"}>&nbsp;Selected Work&nbsp;</Text>
           {image} <Text fontWeight={"1000"}>&nbsp;Case Studies&nbsp;</Text>
           {image} <Text fontWeight={"400"}>&nbsp;Case Studies&nbsp;</Text>
           {image}

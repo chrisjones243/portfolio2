@@ -1,29 +1,24 @@
 "use Client";
 import React from "react";
-import { Box, Flex, Icon, Text, useColorMode } from "@chakra-ui/react";
-import { useTheme } from "@chakra-ui/react";
+import { Box, Flex, Icon, Text } from "@chakra-ui/react";
 import { useDimensions } from "../../dimensions";
 
 export const Button = ({ children, rightIcon, ...props }) => {
   const { height } = useDimensions();
-  const { colorMode } = useColorMode(); // Get the current color mode
   return (
     <Flex
+      role="group"
       scrollMarginTop={`calc(${height}vh + 2.5rem)`}
       alignItems={"center"}
-      borderTop={`1px solid ${useTheme().colors.stroke}`}
+      borderTopWidth="1px"
+      borderTopColor="stroke"
       w={"full"}
       height={"10vh"}
       fontWeight={"600"}
       fontSize={["md", "lg", "xl", "xl"]}
-      _hover={{
-        opacity: 0.9,
-        transition: "all 0.9s",
-      }}
-      _active={{
-        opacity: 0.8,
-        transition: "all 0.3s",
-      }}
+      transition="opacity 0.3s"
+      _hover={{ opacity: 0.9 }}
+      _active={{ opacity: 0.8, transition: "all 0.3s" }}
       cursor={"pointer"}
       justifyContent={"space-between"}
       px={10}
@@ -32,8 +27,14 @@ export const Button = ({ children, rightIcon, ...props }) => {
       <Text>{children}</Text>
 
       {rightIcon && (
-        <Box display={"flex"} alignItems={"center"} width="30%" height="full">
-          <Icon as={rightIcon} w="full" h="40%" color={`brand.${colorMode}`} />
+        <Box
+          display={"flex"}
+          alignItems={"center"}
+          flexShrink={0}
+          transition="transform 0.35s cubic-bezier(0.22, 1, 0.36, 1)"
+          _groupHover={{ transform: "translateX(6px)" }}
+        >
+          <Icon as={rightIcon} w={6} h={6} color="fg" />
         </Box>
       )}
     </Flex>

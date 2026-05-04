@@ -1,47 +1,32 @@
-import { extendTheme } from "@chakra-ui/react";
+import { createSystem, defaultConfig, defineConfig } from "@chakra-ui/react";
 
-import { mode } from "@chakra-ui/theme-tools";
-
-const config = {
-  initialColorMode: "dark",
-  useSystemColorMode: false,
-};
-
-const colors = {
-  font: {
-    dark: "#DEDDCD",
-    light: "#111111",
-  },
-  brand: {
-    dark: "#DEDDCD",
-    light: "#111111",
-  },
-  background: {
-    dark: "#111111",
-    light: "#DEDDCD",
-  },
-  stroke: "#585858",
-};
-
-const styles = {
-  global: (props) => ({
+const config = defineConfig({
+  globalCss: {
     body: {
-      bg: mode("background.light", "background.dark")(props),
+      color: "fg",
     },
-  }),
-};
-
-const components = {
-  Text: {
-    baseStyle: (props) => ({
-      color: mode("font.light", "font.dark")(props),
-    }),
   },
-};
-
-export const theme = extendTheme({
-  config,
-  colors,
-  styles,
-  components,
+  theme: {
+    tokens: {
+      colors: {
+        // Single-value token — same in light and dark
+        stroke: { value: "#585858" },
+      },
+    },
+    semanticTokens: {
+      colors: {
+        // Page background
+        bg: { value: { _light: "#DEDDCD", _dark: "#111111" } },
+        // Inverted background (used for the contrasting column / panel)
+        bgInverse: { value: { _light: "#111111", _dark: "#DEDDCD" } },
+        // Foreground / text / icon colour
+        fg: { value: { _light: "#111111", _dark: "#DEDDCD" } },
+        // Inverted foreground
+        fgInverse: { value: { _light: "#DEDDCD", _dark: "#111111" } },
+      },
+    },
+  },
 });
+
+export const system = createSystem(defaultConfig, config);
+

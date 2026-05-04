@@ -1,6 +1,7 @@
 import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
 import { visionTool } from "@sanity/vision";
+import { media } from "sanity-plugin-media";
 import { schemaTypes } from "./schemas";
 
 export default defineConfig({
@@ -24,12 +25,16 @@ export default defineConfig({
             S.listItem("resume")
               .title("Resume")
               .child(S.documentTypeList("resume").title("Resume")),
+            S.listItem("workExperience")
+              .title("Work Experience")
+              .child(
+                S.documentTypeList("workExperience").title("Work Experience"),
+              ),
           ]),
     }),
     visionTool(),
+    media(),
   ],
 
-  schema: {
-    types: schemaTypes,
-  },
+  schema: { types: schemaTypes },
 });

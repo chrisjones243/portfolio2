@@ -1,93 +1,156 @@
 "use client";
-import { Flex, Text, useTheme, Grid, GridItem } from "@chakra-ui/react";
-import { useColorMode } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { Flex, Text, Grid, GridItem, Box } from "@chakra-ui/react";
+import { motion } from "framer-motion";
+import { useColorMode } from "../color-mode";
 import { useDimensions } from "../../dimensions";
 import { forwardRef } from "react";
-import { RightArrow } from "../components/icons";
-import { Button } from "../components/button";
-import { client } from "../../client";
-
+import ShaderCanvas from "../components/shaderCanvas";
 import SendEmail from "../components/sendEmail";
 
-const Contact = forwardRef(function Contact(props, ref) {
-  const { colorMode } = useColorMode();
+const SOCIALS = [
+  { label: "LinkedIn", href: "https://linkedin.com/in/chris-paul-jones" },
+  { label: "GitHub", href: "https://github.com/chrisjones243" },
+  { label: "LeetCode", href: "https://leetcode.com/u/ChrisJones/" },
+  { label: "Instagram", href: "https://www.instagram.com/c_jone5/" },
+];
+
+const fadeUp = {
+  initial: { opacity: 0, y: 20 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, margin: "-60px" },
+  transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
+};
+
+function SocialRow({ label, href, delay, borderBottom }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 16 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1], delay }}
+      style={{ flex: 1, display: "flex", flexDirection: "column" }}
+    >
+      <Flex
+        as="a"
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        role="group"
+        borderTopWidth="1px"
+        borderTopColor="stroke"
+        borderBottomWidth={borderBottom ? "1px" : "0"}
+        borderBottomColor="stroke"
+        flex="1"
+        minH="10vh"
+        px={10}
+        alignItems="center"
+        justifyContent="space-between"
+        cursor="pointer"
+        bg="transparent"
+        color="fg"
+        transition="background 0.25s ease, color 0.25s ease"
+        _hover={{ bg: "fg", color: "bg" }}
+      >
+        <Text fontWeight="600" fontSize={["md", "lg", "xl"]} color="inherit">{label}</Text>
+      </Flex>
+    </motion.div>
+  );
+}
+
+const Contact = forwardRef(function Contact({ resumeUrl }, ref) {
   const { height } = useDimensions();
+  const { colorMode } = useColorMode();
 
-  const [resume, setResume] = useState();
-
-  const getResume = async () => {
-    const res = await client.fetch(`*[_type == "resume"][0]{
-    "fileUrl": file.asset->url,
-  }`);
-    setResume(res);
-  };
-
-  useEffect(() => {
-    getResume();
-  }, []);
+  const allLinks = resumeUrl
+    ? [...SOCIALS, { label: "CV / Resume", href: resumeUrl }]
+    : SOCIALS;
 
   return (
-    <Grid
+    <Box
       ref={ref}
-      templateColumns="repeat(2, 1fr)"
       w="full"
-      h={`${height * 6}vh`}
-      bg={`background.${colorMode}`}
-      border={`1px solid ${useTheme().colors.stroke}`}
-      overflow={"hidden"}
+      bg="bg"
+      overflow="hidden"
+      borderRadius="2xl"
+      position="relative"
     >
-      <GridItem>
-        <SendEmail />
-      </GridItem>
-      <GridItem borderLeft={`1px solid ${useTheme().colors.stroke}`}>
-        <Flex direction="column">
-          <Flex h={`${height}vh`} pl={10} alignItems={"center"}>
-            <Text
-              fontStyle={"italic"}
-              fontWeight={"500"}
-              fontSize={["md", "lg", "2xl", "4xl"]}
-            >
-              Social Media
-            </Text>
-          </Flex>
+      <ShaderCanvas isDark={colorMode === "dark"} alpha={0.38} viewportAlign />
 
-          <Button
-            onClick={() =>
-              window.open("https://linkedin.com/in/chris-paul-jones")
-            }
+      <Grid
+        templateColumns={["1fr", "1fr", "1fr 1fr"]}
+        position="relative"
+        zIndex={1}
+      >
+        {/* Left — contact form */}
+        <GridItem
+          borderRightWidth={["0", "0", "1px"]}
+          borderRightColor="stroke"
+          borderBottomWidth={["1px", "1px", "0"]}
+          borderBottomColor="stroke"
+        >
+          <motion.div {...fadeUp}>
+            <Box px={10} pt={10} pb={6}>
+              <Text
+                fontWeight="900"
+                fontSize={["2xl", "3xl", "4xl", "5xl"]}
+                lineHeight="1.1"
+              >
+                Get in touch.
+              </Text>
+              <Text
+                mt={2}
+                opacity={0.45}
+                fontSize={["xs", "sm"]}
+                textTransform="uppercase"
+                letterSpacing="wider"
+              >
+                I&apos;d love to hear from you
+              </Text>
+            </Box>
+          </motion.div>
+          <SendEmail />
+        </GridItem>
+
+        {/* Right — social links */}
+        <GridItem display="flex" flexDirection="column">
+          <motion.div
+            {...fadeUp}
+            transition={{ ...fadeUp.transition, delay: 0.1 }}
           >
-            LinkedIn
-          </Button>
-          <Button
-            onClick={() => window.open("https://github.com/chrisjones243")}
-          >
-            GitHub
-          </Button>
-          <Button
-            onClick={() => window.open("https://leetcode.com/u/ChrisJones/")}
-          >
-            Leetcode
-          </Button>
-          <Button
-            onClick={() => window.open("https://www.instagram.com/c_jone5/")}
-          >
-            Instagram
-          </Button>
-          <Button
-            borderBottom={`1px solid ${useTheme().colors.stroke}`}
-            rightIcon={resume ? RightArrow : null}
-            onClick={() => {
-              if (resume) {
-                window.open(resume.fileUrl);
-              }
-            }}
-          >
-            {resume ? "CV" : null}
-          </Button>
-        </Flex>
-      </GridItem>
-    </Grid>
+            <Box px={10} pt={10} pb={6}>
+              <Text
+                fontWeight="900"
+                fontSize={["2xl", "3xl", "4xl", "5xl"]}
+                lineHeight="1.1"
+              >
+                Connect.
+              </Text>
+              <Text
+                mt={2}
+                opacity={0.45}
+                fontSize={["xs", "sm"]}
+                textTransform="uppercase"
+                letterSpacing="wider"
+              >
+                Find me online
+              </Text>
+            </Box>
+          </motion.div>
+
+          <Flex direction="column" flex="1">
+            {allLinks.map((s, i) => (
+              <SocialRow
+                key={s.label}
+                label={s.label}
+                href={s.href}
+                delay={0.15 + i * 0.07}
+                borderBottom={i === allLinks.length - 1}
+              />
+            ))}
+          </Flex>
+        </GridItem>
+      </Grid>
+    </Box>
   );
 });
 
