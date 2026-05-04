@@ -106,7 +106,7 @@ export default function CustomCursor() {
           width: hovered ? 44 : 30,
           height: hovered ? 44 : 30,
           border: `1.5px solid ${ringStroke}`,
-          backgroundColor: hovered ? ringFill : "transparent",
+          backgroundColor: hovered ? ringFill : "rgba(0,0,0,0)",
           opacity: hidden ? 0 : 1,
           transition: { duration: 0.2, ease: [0.22, 1, 0.36, 1] },
         }}

@@ -1,6 +1,7 @@
 "use client";
 
 import { ChakraProvider } from "@chakra-ui/react";
+import { ThemeProvider } from "next-themes";
 import { system } from "./theme";
 import { ColorModeProvider } from "./color-mode";
 import { Toaster } from "../toaster";
@@ -13,19 +14,21 @@ import "./global.css";
 
 export function Providers({ children }) {
   return (
-    <GoogleReCaptchaProvider
-      reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
-      className="recaptcha"
-    >
-      <ChakraProvider value={system}>
-        <ColorModeProvider>
-          {children}
-          <Toaster />
-          <CustomCursor />
-          <Analytics />
-          <SpeedInsights />
-        </ColorModeProvider>
-      </ChakraProvider>
-    </GoogleReCaptchaProvider>
+    <ThemeProvider attribute="class" defaultTheme="dark" disableTransitionOnChange>
+      <GoogleReCaptchaProvider
+        reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+        className="recaptcha"
+      >
+        <ChakraProvider value={system}>
+          <ColorModeProvider>
+            {children}
+            <Toaster />
+            <CustomCursor />
+            <Analytics />
+            <SpeedInsights />
+          </ColorModeProvider>
+        </ChakraProvider>
+      </GoogleReCaptchaProvider>
+    </ThemeProvider>
   );
 }
