@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 
 // Single shared clock — all canvas instances use identical elapsed time
 const START_TIME = Date.now();
@@ -97,6 +97,23 @@ const FRAG = `
 // viewportAlign=true: reads the canvas's position in the viewport each frame
 // so the UV matches the global background canvas exactly.
 export default function ShaderCanvas({ isDark, alpha = 0.30, viewportAlign = false }) {
+  const [instanceKey, setInstanceKey] = useState(0);
+
+  // Remount the canvas when tab becomes visible after a context loss on mobile
+  useEffect(() => {
+    function onVisibilityChange() {
+      if (!document.hidden) {
+        setInstanceKey(k => k + 1);
+      }
+    }
+    document.addEventListener("visibilitychange", onVisibilityChange);
+    return () => document.removeEventListener("visibilitychange", onVisibilityChange);
+  }, []);
+
+  return <ShaderCanvasInner key={instanceKey} isDark={isDark} alpha={alpha} viewportAlign={viewportAlign} />;
+}
+
+function ShaderCanvasInner({ isDark, alpha = 0.30, viewportAlign = false }) {
   const canvasRef  = useRef(null);
   const isDarkRef  = useRef(isDark);
   const alphaRef   = useRef(alpha);
@@ -233,11 +250,26 @@ export default function ShaderCanvas({ isDark, alpha = 0.30, viewportAlign = fal
 
     tryStart();
 
+    function onContextLost(e) {
+      e.preventDefault();
+      cancelAnimationFrame(raf);
+    }
+    function onContextRestored() {
+      // Full reinit is handled by React re-running the effect via key change,
+      // but a simpler approach is to just reload the page state on mobile.
+      // Re-trigger render loop after context is restored.
+      render();
+    }
+    canvas.addEventListener("webglcontextlost", onContextLost);
+    canvas.addEventListener("webglcontextrestored", onContextRestored);
+
     return () => {
       cancelAnimationFrame(raf);
       ro.disconnect();
       io.disconnect();
       document.removeEventListener("visibilitychange", onVisibility);
+      canvas.removeEventListener("webglcontextlost", onContextLost);
+      canvas.removeEventListener("webglcontextrestored", onContextRestored);
       gl.deleteShader(vs);
       gl.deleteShader(fs);
       gl.deleteBuffer(buf);
