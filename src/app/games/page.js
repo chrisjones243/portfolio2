@@ -15,7 +15,7 @@ const fadeUp = {
   transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
 };
 
-function GamePanel({ title, description, delay, children }) {
+function GamePanel({ title, description, delay, children, colorMode }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 24 }}
@@ -27,12 +27,13 @@ function GamePanel({ title, description, delay, children }) {
         bg="bg"
         borderRadius="2xl"
         overflow="hidden"
-        borderWidth="1px"
-        borderColor="stroke"
         h="full"
         display="flex"
         flexDirection="column"
+        position="relative"
       >
+        <ShaderCanvas isDark={colorMode === "dark"} alpha={0.38} viewportAlign />
+        <Box position="relative" zIndex={1} display="flex" flexDirection="column" flex={1}>
         <Box px={8} pt={8} pb={4}>
           <Text fontWeight="900" fontSize={["xl", "2xl", "3xl"]} lineHeight="1.1">
             {title}
@@ -45,6 +46,7 @@ function GamePanel({ title, description, delay, children }) {
         </Box>
         <Box px={8} pb={8} flex={1} display="flex" flexDirection="column">
           {children}
+        </Box>
         </Box>
       </Box>
     </motion.div>
@@ -60,8 +62,11 @@ export default function GamesPage() {
   }, []);
 
   return (
-    <Box position="relative" minH="100vh" bg="bg">
-      <ShaderCanvas isDark={colorMode === "dark"} alpha={0.15} />
+    <Box position="relative" minH="100vh" bg="bg" color="fg" zIndex={1}>
+      {/* Global shader pinned to viewport — matches home page */}
+      <Box position="fixed" inset={0} zIndex={0} pointerEvents="none">
+        <ShaderCanvas isDark={colorMode === "dark"} alpha={0.28} />
+      </Box>
 
       <Box
         position="relative"
@@ -81,9 +86,9 @@ export default function GamesPage() {
             opacity={0.5}
             _hover={{ opacity: 1 }}
             transition="opacity 0.2s"
-            mb={10}
             fontSize="sm"
             fontWeight="500"
+            mb={40}
             cursor="pointer"
             background="none"
             border="none"
@@ -100,8 +105,8 @@ export default function GamesPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: 0.05 }}
         >
-          <Text fontWeight="900" fontSize={["3xl", "4xl", "6xl"]} lineHeight="1" mb={2}>
-            🕹️ Mini Games
+          <Text fontWeight={900} fontSize={["2xl", "3xl", "4xl", "5xl"]} lineHeight="1.1" mb={4}>
+            Mini Games
           </Text>
         </motion.div>
 
@@ -112,6 +117,7 @@ export default function GamesPage() {
               title="Tic Tac Toe"
               description="Pick your player settings" 
               delay={0.1}
+              colorMode={colorMode}
             >
               <TicTacToeGame />
             </GamePanel>
@@ -121,6 +127,7 @@ export default function GamesPage() {
               title="Memory"
               description="Match all the pairs"
               delay={0.18}
+              colorMode={colorMode}
             >
               <MemoryGame />
             </GamePanel>

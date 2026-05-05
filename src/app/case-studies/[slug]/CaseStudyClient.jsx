@@ -4,6 +4,8 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { BsArrowLeft } from "react-icons/bs";
 import { TAG_COLORS } from "../../components/tagColors";
+import { useColorMode } from "../../color-mode";
+import ShaderCanvas from "../../components/shaderCanvas";
 import CaseStudyHero from "./CaseStudyHero";
 import MarkdownRenderer from "./MarkdownRenderer";
 import TableOfContents from "./TableOfContents";
@@ -12,20 +14,26 @@ import CaseStudyLinks from "./CaseStudyLinks";
 export default function CaseStudyClient({ data }) {
   const { title, markdown, links, imageUrl, videoUrl, tags } = data;
   const router = useRouter();
+  const { colorMode } = useColorMode();
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "instant" });
   }, []);
 
   return (
-    <Box
-      minH="100vh"
-      bg="bg"
-      color="fg"
-      mx={[5, 10, 20]}
-      py={["3", "5", "10"]}
-      pb={["20", "10", "10"]}
-    >
+    <Box position="relative" minH="100vh" bg="bg" color="fg" zIndex={1}>
+      {/* Global shader pinned to viewport — matches home page */}
+      <Box position="fixed" inset={0} zIndex={0} pointerEvents="none">
+        <ShaderCanvas isDark={colorMode === "dark"} alpha={0.28} />
+      </Box>
+
+      <Box
+        position="relative"
+        zIndex={1}
+        mx={[5, 10, 20]}
+        py={["3", "5", "10"]}
+        pb={["20", "10", "10"]}
+      >
       {/* Header: back link then title, stacked left */}
       <Box mb={4}>
         <Flex
@@ -99,10 +107,21 @@ export default function CaseStudyClient({ data }) {
           top={["auto", "auto", "2rem"]}
           alignSelf="start"
         >
-          <TableOfContents markdown={markdown} />
-          {links?.length > 0 && <CaseStudyLinks links={links} />}
+          <Box
+            bg="bg"
+            borderRadius="2xl"
+            overflow="hidden"
+            position="relative"
+          >
+            <ShaderCanvas isDark={colorMode === "dark"} alpha={0.38} viewportAlign />
+            <Box position="relative" zIndex={1} p={6}>
+              <TableOfContents markdown={markdown} />
+              {links?.length > 0 && <CaseStudyLinks links={links} />}
+            </Box>
+          </Box>
         </GridItem>
       </Grid>
+      </Box>
     </Box>
   );
 }

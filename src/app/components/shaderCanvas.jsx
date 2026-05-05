@@ -238,6 +238,9 @@ export default function ShaderCanvas({ isDark, alpha = 0.30, viewportAlign = fal
       ro.disconnect();
       io.disconnect();
       document.removeEventListener("visibilitychange", onVisibility);
+      gl.deleteShader(vs);
+      gl.deleteShader(fs);
+      gl.deleteBuffer(buf);
       gl.deleteProgram(program);
     };
   }, [viewportAlign]);
