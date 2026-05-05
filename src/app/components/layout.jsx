@@ -23,7 +23,7 @@ function Layout({ children, scrollTo, refs }) {
       position="relative"
       mx={[5, 10, 20]}
       py={["3", "5", "10"]}
-      pb={["20", "10", "10"]}
+      pb={["32", "24", "24"]}
       width={width}
       bg="bg"
       minH="100vh"
@@ -50,9 +50,8 @@ function Layout({ children, scrollTo, refs }) {
       </Grid>
       <Text
         fontSize={["xs", "xs", "sm"]}
-        textAlign="center"
+        textAlign="left"
         width={"100%"}
-        px={[5, 10, 20]}
         pb={2}
         position={"absolute"}
         bottom={0}
@@ -80,6 +79,8 @@ function Layout({ children, scrollTo, refs }) {
           Terms of Service
         </Link>{" "}
         apply.
+        <br />
+        * Open to interpretation
       </Text>
     </Box>
   );

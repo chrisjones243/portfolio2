@@ -165,8 +165,8 @@ const Experience = forwardRef(function Experience({ experience }, ref) {
         onClick={handleMouseMove}
       >
         <Flex>
-          <Text fontStyle="italic" fontWeight="600">
-            Incredible
+          <Text fontStyle="italic" fontWeight="900">
+            Incredible<Box as="sup" fontWeight="400" fontSize="0.5em">*</Box>
           </Text>
           <Text fontWeight="200">&nbsp;at</Text>
         </Flex>

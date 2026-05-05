@@ -1,15 +1,18 @@
 "use client";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import remarkMath from "remark-math";
 import rehypeSlug from "rehype-slug";
 import rehypeRaw from "rehype-raw";
+import rehypeKatex from "rehype-katex";
+import "katex/dist/katex.min.css";
 import { Box } from "@chakra-ui/react";
 
 // Inline styles use CSS vars that Chakra exposes on :root
 const prose = {
-  h1: { fontSize: "clamp(1.5rem, 3vw, 2.25rem)", fontWeight: 600, fontStyle: "italic", marginBottom: "1rem", marginTop: "2.5rem", lineHeight: 1.2 },
-  h2: { fontSize: "clamp(1.2rem, 2.5vw, 1.75rem)", fontWeight: 600, fontStyle: "italic", marginBottom: "0.75rem", marginTop: "2rem", lineHeight: 1.25 },
-  h3: { fontSize: "clamp(1rem, 2vw, 1.35rem)", fontWeight: 600, marginBottom: "0.5rem", marginTop: "1.75rem", lineHeight: 1.3 },
+  h1: { fontSize: "clamp(1.5rem, 3vw, 2.25rem)", fontWeight: 900, marginBottom: "1rem", marginTop: "2.5rem", lineHeight: 1.2 },
+  h2: { fontSize: "clamp(1.2rem, 2.5vw, 1.75rem)", fontWeight: 900, marginBottom: "0.75rem", marginTop: "2rem", lineHeight: 1.25 },
+  h3: { fontSize: "clamp(1rem, 2vw, 1.35rem)", fontWeight: 700, marginBottom: "0.5rem", marginTop: "1.75rem", lineHeight: 1.3 },
   p: { fontSize: "clamp(0.9rem, 1.5vw, 1.05rem)", lineHeight: 1.8, marginBottom: "1.25rem" },
   a: { textDecoration: "underline", textUnderlineOffset: "3px", opacity: 0.8 },
   ul: { paddingLeft: "1.5rem", marginBottom: "1.25rem", listStyleType: "disc" },
@@ -31,8 +34,8 @@ export default function MarkdownRenderer({ markdown }) {
   return (
     <Box>
       <ReactMarkdown
-        remarkPlugins={[remarkGfm]}
-        rehypePlugins={[rehypeSlug, rehypeRaw]}
+        remarkPlugins={[remarkGfm, remarkMath]}
+        rehypePlugins={[rehypeSlug, rehypeRaw, rehypeKatex]}
         components={{
           h1: ({ node, ...props }) => <h1 style={prose.h1} {...props} />,
           h2: ({ node, ...props }) => <h2 style={prose.h2} {...props} />,

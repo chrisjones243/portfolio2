@@ -43,7 +43,7 @@ function Contents({ refs }) {
   return (
     <Box position="fixed" pl={10} top={["6", "10", "20"]}>
       <Text
-        fontSize="large"
+        fontSize="lg"
         fontWeight="bold"
         mb={6}
       >

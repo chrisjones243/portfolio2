@@ -33,7 +33,7 @@ function CollapsedCard({ data, ...props }) {
         _hover={{ bg: "bgInverse", color: "fgInverse" }}
         {...props}
       >
-        <Text fontStyle="italic" fontWeight={600} fontSize={[15, 20, 25]}>
+        <Text fontWeight={700} fontSize={["sm", "lg", "2xl"]}>
           {title}
         </Text>
         {tags?.length > 0 && (

@@ -21,7 +21,7 @@ function ExpandedCard({ data, setClose, isOpen }) {
 
   const components = {
     block: ({ children }) => (
-      <Text fontStyle={"italic"} fontWeight={500}>
+      <Text fontWeight={400}>
         {children}
       </Text>
     ),

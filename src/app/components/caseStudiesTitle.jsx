@@ -81,9 +81,9 @@ function CaseStudiesTitle() {
       >
         <Flex flexDirection={"row"} ref={firstLine}>
           <Text fontWeight={"400"}>&nbsp;Case Studies&nbsp;</Text>
-          {image} <Text fontWeight={"1000"}>&nbsp;Case Studies&nbsp;</Text>
+          {image} <Text fontWeight={"900"}>&nbsp;Case Studies&nbsp;</Text>
           {image} <Text fontWeight={"400"}>&nbsp;Selected Work&nbsp;</Text>
-          {image} <Text fontWeight={"1000"}>&nbsp;Case Studies&nbsp;</Text>
+          {image} <Text fontWeight={"900"}>&nbsp;Case Studies&nbsp;</Text>
           {image} <Text fontWeight={"400"}>&nbsp;Case Studies&nbsp;</Text>
           {image}
         </Flex>
@@ -95,9 +95,9 @@ function CaseStudiesTitle() {
           ref={secondLine}
         >
           <Text fontWeight={"400"}>&nbsp;Case Studies&nbsp;</Text>
-          {image} <Text fontWeight={"1000"}>&nbsp;Case Studies&nbsp;</Text>
+          {image} <Text fontWeight={"900"}>&nbsp;Case Studies&nbsp;</Text>
           {image} <Text fontWeight={"400"}>&nbsp;Selected Work&nbsp;</Text>
-          {image} <Text fontWeight={"1000"}>&nbsp;Case Studies&nbsp;</Text>
+          {image} <Text fontWeight={"900"}>&nbsp;Case Studies&nbsp;</Text>
           {image} <Text fontWeight={"400"}>&nbsp;Case Studies&nbsp;</Text>
           {image}
         </Flex>

@@ -43,8 +43,7 @@ const Games = forwardRef(function Games(props, ref) {
           w={"full"}
         >
           <Text
-            fontStyle={"italic"}
-            fontWeight={"500"}
+            fontWeight={"900"}
             fontSize={["md", "lg", "2xl", "4xl"]}
           >
             Mini Games
