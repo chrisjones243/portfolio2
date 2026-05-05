@@ -30,8 +30,6 @@ export default function HomePageClient({
       <Experience ref={ExperienceRef} experience={experience} />
       <Spacer />
       <Spacer />
-      <Spacer />
-      <Spacer />
       <Contact ref={ContactRef} resumeUrl={resumeUrl} />
     </Layout>
   );

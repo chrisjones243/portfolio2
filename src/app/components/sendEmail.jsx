@@ -130,8 +130,6 @@ function SendEmail() {
             role="group"
             borderTopWidth="1px"
             borderTopColor="stroke"
-            borderBottomWidth="1px"
-            borderBottomColor="stroke"
             w="full"
             h={`${height}vh`}
             alignItems="center"
