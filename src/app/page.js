@@ -13,6 +13,7 @@ export default async function HomePage() {
     }`),
     serverClient.fetch(`*[_type == "resume"][0]{
       "fileUrl": file.asset->url,
+      availableForWork,
     }`),
     serverClient.fetch(`*[_type == "workExperience"] | order(startDate desc) {
       jobTitle,
@@ -31,6 +32,7 @@ export default async function HomePage() {
       caseStudies={caseStudies}
       resumeUrl={resume?.fileUrl ?? null}
       experience={experience}
+      availableForWork={resume?.availableForWork ?? false}
     />
   );
 }

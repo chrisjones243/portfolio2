@@ -9,12 +9,17 @@ import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import CustomCursor from "./components/customCursor";
+import PageCurtain from "./components/pageCurtain";
 
 import "./global.css";
 
 export function Providers({ children }) {
   return (
-    <ThemeProvider attribute="class" defaultTheme="dark" disableTransitionOnChange>
+    <ThemeProvider
+      attribute="class"
+      defaultTheme="dark"
+      disableTransitionOnChange
+    >
       <GoogleReCaptchaProvider
         reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
         className="recaptcha"
@@ -22,6 +27,7 @@ export function Providers({ children }) {
         <ChakraProvider value={system}>
           <ColorModeProvider>
             {children}
+            <PageCurtain />
             <Toaster />
             <CustomCursor />
             <Analytics />

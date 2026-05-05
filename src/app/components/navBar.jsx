@@ -1,5 +1,5 @@
 "use client";
-import { Flex, Icon, Box, useMediaQuery } from "@chakra-ui/react";
+import { Flex, Icon, Box } from "@chakra-ui/react";
 import { useColorMode } from "../color-mode";
 import React from "react";
 import { motion, useScroll, useTransform, useMotionTemplate } from "framer-motion";
@@ -10,9 +10,8 @@ import Link from "next/link";
 
 const NavBar = () => {
   const { colorMode, toggleColorMode } = useColorMode();
-  const { height, blockWidth } = useDimensions();
+  const { height } = useDimensions();
   const { scrollYProgress } = useScroll();
-  const [isLessThan1050] = useMediaQuery("(max-width: 1050px)");
 
   const rotateDeg = useTransform(scrollYProgress, [0, 1], [0, 360]);
   const maskImage = useMotionTemplate`conic-gradient(from -90deg, black 0deg, black ${rotateDeg}deg, transparent ${rotateDeg}deg)`;
@@ -43,7 +42,7 @@ const NavBar = () => {
           style={{ backdropFilter: "blur(18px)", WebkitBackdropFilter: "blur(18px)" }}
           boxShadow={ring}
           h={pillH}
-          w={blockWidth}
+          w={["25%", "25%", "20%"]}
           alignItems="center"
           justifyContent="flex-start"
           position="relative"
@@ -71,8 +70,8 @@ const NavBar = () => {
         </Flex>
 
         {/* Mobile-only controls pill: theme toggle + games */}
-        {isLessThan1050 && (
-          <Flex
+        <Flex
+          display={["flex", "flex", "none"]}
             bg={bgColor}
             style={{ backdropFilter: "blur(18px)", WebkitBackdropFilter: "blur(18px)" }}
             boxShadow={ring}
@@ -119,7 +118,6 @@ const NavBar = () => {
               <Icon as={BsController} w={4} h={4} />
             </Flex>
           </Flex>
-        )}
       </Flex>
     </Box>
   );

@@ -1,5 +1,5 @@
 "use client";
-import { Flex, Text, Icon, useMediaQuery, Box, Badge } from "@chakra-ui/react";
+import { Flex, Text, Icon, Box, Badge, Skeleton } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { useState, useRef, forwardRef, useEffect } from "react";
 import { useDimensions } from "../../dimensions";
@@ -37,26 +37,27 @@ const langsColor = [
 const Experience = forwardRef(function Experience({ experience }, ref) {
   const { height } = useDimensions();
   const { colorMode } = useColorMode();
-  const [isLessThan1050] = useMediaQuery("(max-width: 1050px)");
 
   const [currentLang, setCurrentLang] = useState(0);
-
-  // Use a ref to throttle the mouse move event handling
   const throttleTimeout = useRef(null);
 
   useEffect(() => {
+    const mq = window.matchMedia("(max-width: 1050px)");
     let interval;
-    if (isLessThan1050) {
-      interval = setInterval(() => {
-        setCurrentLang(Math.floor(Math.random() * langs.length));
-      }, 250); // Adjust the interval time as needed
-    }
-    return () => {
-      if (interval) {
-        clearInterval(interval);
+    const start = () => {
+      if (mq.matches) {
+        interval = setInterval(() => {
+          setCurrentLang(Math.floor(Math.random() * langs.length));
+        }, 250);
       }
     };
-  }, [isLessThan1050]);
+    start();
+    mq.addEventListener("change", () => {
+      clearInterval(interval);
+      start();
+    });
+    return () => clearInterval(interval);
+  }, []);
 
   const handleMouseMove = () => {
     if (
@@ -85,7 +86,14 @@ const Experience = forwardRef(function Experience({ experience }, ref) {
       <ShaderCanvas isDark={colorMode === "dark"} alpha={0.38} viewportAlign />
       <Box position="relative" zIndex={1} display="flex" flexDirection="column">
       {/* Job timeline — add entries via Sanity Studio */}
-      {experience?.length > 0 && (
+      {experience === undefined || experience === null ? (
+        <Flex direction="column" px={[6, 10]} py={10} gap={6}>
+          <Skeleton height="2rem" width="14rem" borderRadius="md" />
+          {[0, 1, 2].map((i) => (
+            <Skeleton key={i} height="8rem" borderRadius="xl" />
+          ))}
+        </Flex>
+      ) : experience.length > 0 && (
         <Flex direction="column" px={[6, 10]} py={10} gap={8}>
           <Text
             fontSize={["2xl", "3xl"]}
@@ -147,7 +155,7 @@ const Experience = forwardRef(function Experience({ experience }, ref) {
 
       {/* Skills animation */}
       <Flex
-        height={isLessThan1050 ? `${height * 4}vh` : `${height * 6}vh`}
+        height={[`${height * 4}vh`, `${height * 4}vh`, `${height * 6}vh`]}
         direction="column"
         mx={10}
         fontSize={["3xl", "3xl", "4xl", "6xl", "6xl", "4.5rem"]}

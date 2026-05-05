@@ -8,7 +8,12 @@ import Experience from "./sections/experience";
 import Contact from "./sections/contact";
 import Spacer from "./components/spacer";
 
-export default function HomePageClient({ caseStudies, resumeUrl, experience }) {
+export default function HomePageClient({
+  caseStudies,
+  resumeUrl,
+  experience,
+  availableForWork,
+}) {
   const HeroRef = useRef(null);
   const CaseStudiesRef = useRef(null);
   const ExperienceRef = useRef(null);
@@ -16,7 +21,7 @@ export default function HomePageClient({ caseStudies, resumeUrl, experience }) {
 
   return (
     <Layout refs={{ HeroRef, CaseStudiesRef, ExperienceRef, ContactRef }}>
-      <Hero ref={HeroRef} />
+      <Hero ref={HeroRef} availableForWork={availableForWork} />
       <Spacer />
       <Spacer />
       <CaseStudies ref={CaseStudiesRef} caseStudies={caseStudies} />

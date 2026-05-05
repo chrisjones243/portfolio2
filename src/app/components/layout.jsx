@@ -5,7 +5,6 @@ import {
   GridItem,
   Text,
   Link,
-  useMediaQuery,
 } from "@chakra-ui/react";
 import { useDimensions } from "../../dimensions";
 
@@ -13,19 +12,11 @@ import NavBar from "./navBar";
 import Contents from "./contents";
 import ShaderCanvas from "./shaderCanvas";
 import { useColorMode } from "../color-mode";
-import { useEffect } from "react";
 
 function Layout({ children, scrollTo, refs }) {
-  const [isLessThan1050] = useMediaQuery("(max-width: 1050px)");
   const width = "calc(100% - 5)";
-  const { height, setBlockWidth } = useDimensions();
+  const { height } = useDimensions();
   const { colorMode } = useColorMode();
-
-  useEffect(() => {
-    if (isLessThan1050) {
-      setBlockWidth(`calc(${100 / 4}% + 1px)`);
-    }
-  }, [isLessThan1050, setBlockWidth]);
 
   return (
     <Box
@@ -48,16 +39,14 @@ function Layout({ children, scrollTo, refs }) {
         <ShaderCanvas isDark={colorMode === "dark"} alpha={0.28} />
       </Box>
       <Grid templateColumns="repeat(5, 1fr)}">
-        <GridItem colSpan={isLessThan1050 ? 5 : 4}>
+        <GridItem colSpan={[5, 5, 4]}>
           <NavBar />
           <Box height={`${height}vh`} />
           <Box>{children}</Box>
         </GridItem>
-        {isLessThan1050 ? null : (
-          <GridItem colSpan={1}>
-            <Contents scrollTo={scrollTo} refs={refs} />
-          </GridItem>
-        )}
+        <GridItem colSpan={1} display={["none", "none", "block"]}>
+          <Contents scrollTo={scrollTo} refs={refs} />
+        </GridItem>
       </Grid>
       <Text
         fontSize={["xs", "xs", "sm"]}

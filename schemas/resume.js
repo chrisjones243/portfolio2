@@ -5,10 +5,12 @@ export default defineType({
   title: "Resume",
   type: "document",
   fields: [
+    defineField({ name: "file", title: "File", type: "file" }),
     defineField({
-      name: "file",
-      title: "File",
-      type: "file",
+      name: "availableForWork",
+      title: "Available for Work",
+      type: "boolean",
+      initialValue: false,
     }),
   ],
 });
