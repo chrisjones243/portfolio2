@@ -63,25 +63,28 @@ const Contact = forwardRef(function Contact({ resumeUrl }, ref) {
     : SOCIALS;
 
   return (
-    <Box
+    <Flex
       ref={ref}
+      direction="column"
+      gap={[4, 4, 0]}
       w="full"
-      bg="bgInverse"
-      color="fgInverse"
-      overflow="hidden"
-      borderRadius="2xl"
     >
       <Grid
         templateColumns={["1fr", "1fr", "1fr 1fr"]}
         position="relative"
         zIndex={1}
+        bg="bgInverse"
+        color="fgInverse"
+        overflow="hidden"
+        borderRadius="2xl"
       >
         {/* Left — contact form */}
         <GridItem
           borderRightWidth={["0", "0", "1px"]}
           borderRightColor="stroke"
-          borderBottomWidth={["1px", "1px", "0"]}
-          borderBottomColor="stroke"
+          bg={["bgInverse", "bgInverse", "transparent"]}
+          borderRadius={["2xl", "2xl", "0"]}
+          overflow="hidden"
         >
           <motion.div {...fadeUp}>
             <Box px={10} pt={10} pb={6}>
@@ -106,8 +109,8 @@ const Contact = forwardRef(function Contact({ resumeUrl }, ref) {
           <SendEmail />
         </GridItem>
 
-        {/* Right — social links */}
-        <GridItem display="flex" flexDirection="column">
+        {/* Right — social links (desktop only in this Grid) */}
+        <GridItem display={["none", "none", "flex"]} flexDirection="column">
           <motion.div
             {...fadeUp}
             transition={{ ...fadeUp.transition, delay: 0.1 }}
@@ -139,13 +142,57 @@ const Contact = forwardRef(function Contact({ resumeUrl }, ref) {
                 label={s.label}
                 href={s.href}
                 delay={0.15 + i * 0.07}
-                borderBottom={i === allLinks.length - 1}
+                borderBottom={false}
               />
             ))}
           </Flex>
         </GridItem>
       </Grid>
-    </Box>
+
+      {/* Right — social links (mobile only, separate box) */}
+      <Box
+        display={["block", "block", "none"]}
+        bg="bgInverse"
+        color="fgInverse"
+        borderRadius="2xl"
+        overflow="hidden"
+      >
+        <motion.div
+          {...fadeUp}
+          transition={{ ...fadeUp.transition, delay: 0.1 }}
+        >
+          <Box px={10} pt={10} pb={6}>
+            <Text
+              fontWeight="900"
+              fontSize={["2xl", "3xl"]}
+              lineHeight="1.1"
+            >
+              Connect.
+            </Text>
+            <Text
+              mt={2}
+              opacity={0.45}
+              fontSize={["xs", "sm"]}
+              textTransform="uppercase"
+              letterSpacing="wider"
+            >
+              Find me online
+            </Text>
+          </Box>
+        </motion.div>
+        <Flex direction="column">
+          {allLinks.map((s, i) => (
+            <SocialRow
+              key={s.label}
+              label={s.label}
+              href={s.href}
+              delay={0.15 + i * 0.07}
+              borderBottom={false}
+            />
+          ))}
+        </Flex>
+      </Box>
+    </Flex>
   );
 });
 
