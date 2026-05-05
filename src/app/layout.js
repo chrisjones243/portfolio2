@@ -1,7 +1,6 @@
 import { Providers } from "./providers";
 
-const DESCRIPTION =
-  "Junior Software Developer and ML Engineer — building performant web applications and intelligent solutions.";
+const DESCRIPTION = "Junior Software Developer and ML Engineer.";
 
 export const metadata = {
   metadataBase: new URL("https://chris-jones.co.uk"),
