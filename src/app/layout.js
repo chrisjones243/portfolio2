@@ -5,10 +5,7 @@ const DESCRIPTION =
 
 export const metadata = {
   metadataBase: new URL("https://chris-jones.co.uk"),
-  title: {
-    default: "Chris Jones",
-    template: "%s | Chris Jones",
-  },
+  title: { default: "Chris Jones", template: "%s | Chris Jones" },
   description: DESCRIPTION,
   icons: { icon: "/favicon/favicon.ico" },
   openGraph: {
