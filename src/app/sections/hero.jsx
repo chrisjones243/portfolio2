@@ -22,7 +22,7 @@ const Hero = forwardRef(function Hero({ availableForWork }, ref) {
       position="relative"
       overflow="hidden"
       borderRadius="2xl"
-      h={[null, null, `${h}vh`]}
+      h={[null, null, `clamp(420px, ${h}vh, calc(320px + 28vw))`]}
       fontSize={["2xl", "4xl", "5xl", "5xl", "6xl", "5rem"]}
       letterSpacing={[2, 2, 4]}
     >

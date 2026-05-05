@@ -4,8 +4,7 @@ const DESCRIPTION =
   "Junior Software Developer and ML Engineer — building performant web applications and intelligent solutions.";
 
 export const metadata = {
-  // TODO: replace with your production URL before deploying
-  metadataBase: new URL("https://example.com"),
+  metadataBase: new URL("https://chris-jones.co.uk"),
   title: {
     default: "Chris Jones",
     template: "%s | Chris Jones",
@@ -16,14 +15,13 @@ export const metadata = {
     title: "Chris Jones",
     description: DESCRIPTION,
     type: "website",
-    // Uncomment once you have an OG image at /public/og-image.png:
-    // images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Chris Jones" }],
+    url: "https://chris-jones.co.uk",
+    siteName: "Chris Jones",
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: "Chris Jones",
     description: DESCRIPTION,
-    // images: ["/og-image.png"],
   },
 };
 
