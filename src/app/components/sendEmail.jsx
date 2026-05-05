@@ -140,10 +140,10 @@ function SendEmail() {
             fontSize={["md", "lg", "xl"]}
             cursor={isSubmitting ? "not-allowed" : "pointer"}
             bg="transparent"
-            color="fg"
+            color="fgInverse"
             opacity={isSubmitting ? 0.5 : 1}
             transition="background 0.25s ease, color 0.25s ease"
-            _hover={isSubmitting ? {} : { bg: "fg", color: "bg" }}
+            _hover={isSubmitting ? {} : { bg: "fgInverse", color: "bgInverse" }}
           >
             Send
           </Flex>

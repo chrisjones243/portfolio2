@@ -37,7 +37,6 @@ const langsColor = [
 const Experience = forwardRef(function Experience({ experience }, ref) {
   const { height } = useDimensions();
   const { colorMode } = useColorMode();
-
   const [isLessThan1050] = useMediaQuery("(max-width: 1050px)");
 
   const [currentLang, setCurrentLang] = useState(0);

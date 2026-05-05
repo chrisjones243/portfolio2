@@ -1,10 +1,8 @@
 "use client";
 import { Flex, Text, Grid, GridItem, Box } from "@chakra-ui/react";
 import { motion } from "framer-motion";
-import { useColorMode } from "../color-mode";
 import { useDimensions } from "../../dimensions";
 import { forwardRef } from "react";
-import ShaderCanvas from "../components/shaderCanvas";
 import SendEmail from "../components/sendEmail";
 
 const SOCIALS = [
@@ -47,9 +45,9 @@ function SocialRow({ label, href, delay, borderBottom }) {
         justifyContent="space-between"
         cursor="pointer"
         bg="transparent"
-        color="fg"
+        color="fgInverse"
         transition="background 0.25s ease, color 0.25s ease"
-        _hover={{ bg: "fg", color: "bg" }}
+        _hover={{ bg: "fgInverse", color: "bgInverse" }}
       >
         <Text fontWeight="600" fontSize={["md", "lg", "xl"]} color="inherit">{label}</Text>
       </Flex>
@@ -59,7 +57,6 @@ function SocialRow({ label, href, delay, borderBottom }) {
 
 const Contact = forwardRef(function Contact({ resumeUrl }, ref) {
   const { height } = useDimensions();
-  const { colorMode } = useColorMode();
 
   const allLinks = resumeUrl
     ? [...SOCIALS, { label: "CV / Resume", href: resumeUrl }]
@@ -69,13 +66,11 @@ const Contact = forwardRef(function Contact({ resumeUrl }, ref) {
     <Box
       ref={ref}
       w="full"
-      bg="bg"
+      bg="bgInverse"
+      color="fgInverse"
       overflow="hidden"
       borderRadius="2xl"
-      position="relative"
     >
-      <ShaderCanvas isDark={colorMode === "dark"} alpha={0.38} viewportAlign />
-
       <Grid
         templateColumns={["1fr", "1fr", "1fr 1fr"]}
         position="relative"

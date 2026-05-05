@@ -13,7 +13,7 @@ const VERT = `
 
 const FRAG = `
   #ifdef GL_ES
-  precision highp float;
+  precision mediump float;
   #endif
 
   uniform float iTime;
@@ -28,7 +28,7 @@ const FRAG = `
   const float velocity_y = 0.2;
   const float twist      = 50.0;
   const float detail     = 200.0;
-  const int   iterations = 18;
+  const int   iterations = 10;
 
   const vec3 luma = vec3(0.2126, 0.7152, 0.0722);
 
@@ -171,6 +171,8 @@ export default function ShaderCanvas({ isDark, alpha = 0.30, viewportAlign = fal
     gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
 
     let raf;
+    let offscreen = false;
+
     function render() {
       const elapsed = (Date.now() - START_TIME) / 1000;
       const dpr = Math.min(window.devicePixelRatio, 1.5);
@@ -181,8 +183,6 @@ export default function ShaderCanvas({ isDark, alpha = 0.30, viewportAlign = fal
       let vpH = canvas.height;
 
       if (viewportAlign) {
-        // Calculate this canvas's bottom-left corner in WebGL viewport coords
-        // (WebGL origin is bottom-left, browser origin is top-left)
         const rect = canvas.getBoundingClientRect();
         vpW = Math.floor(window.innerWidth  * dpr);
         vpH = Math.floor(window.innerHeight * dpr);
@@ -200,7 +200,6 @@ export default function ShaderCanvas({ isDark, alpha = 0.30, viewportAlign = fal
       gl.clear(gl.COLOR_BUFFER_BIT);
       gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
 
-      // Reveal the canvas after the first successful frame
       if (!readyRef.current) {
         readyRef.current = true;
         canvas.style.opacity = "1";
@@ -208,11 +207,37 @@ export default function ShaderCanvas({ isDark, alpha = 0.30, viewportAlign = fal
 
       raf = requestAnimationFrame(render);
     }
-    render();
+
+    function tryStart() {
+      if (!offscreen && !document.hidden) render();
+    }
+
+    function onVisibility() {
+      if (document.hidden) {
+        cancelAnimationFrame(raf);
+      } else if (!offscreen) {
+        render();
+      }
+    }
+    document.addEventListener("visibilitychange", onVisibility);
+
+    const io = new IntersectionObserver(([entry]) => {
+      offscreen = !entry.isIntersecting;
+      if (offscreen) {
+        cancelAnimationFrame(raf);
+      } else if (!document.hidden) {
+        render();
+      }
+    }, { threshold: 0 });
+    io.observe(canvas);
+
+    tryStart();
 
     return () => {
       cancelAnimationFrame(raf);
       ro.disconnect();
+      io.disconnect();
+      document.removeEventListener("visibilitychange", onVisibility);
       gl.deleteProgram(program);
     };
   }, [viewportAlign]);

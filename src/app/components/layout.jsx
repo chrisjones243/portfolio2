@@ -45,7 +45,7 @@ function Layout({ children, scrollTo, refs }) {
         zIndex={0}
         pointerEvents="none"
       >
-        <ShaderCanvas isDark={colorMode === "dark"} alpha={0.15} />
+        <ShaderCanvas isDark={colorMode === "dark"} alpha={0.28} />
       </Box>
       <Grid templateColumns="repeat(5, 1fr)}">
         <GridItem colSpan={isLessThan1050 ? 5 : 4}>
