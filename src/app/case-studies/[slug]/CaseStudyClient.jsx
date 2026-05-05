@@ -1,6 +1,7 @@
 "use client";
 import { Grid, GridItem, Box, Flex, Icon, Text } from "@chakra-ui/react";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import { BsArrowLeft } from "react-icons/bs";
 import { TAG_COLORS } from "../../components/tagColors";
 import CaseStudyHero from "./CaseStudyHero";
@@ -10,6 +11,11 @@ import CaseStudyLinks from "./CaseStudyLinks";
 
 export default function CaseStudyClient({ data }) {
   const { title, markdown, links, imageUrl, videoUrl, tags } = data;
+  const router = useRouter();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "instant" });
+  }, []);
 
   return (
     <Box
@@ -22,8 +28,9 @@ export default function CaseStudyClient({ data }) {
     >
       {/* Header: back link then title, stacked left */}
       <Box mb={4}>
-        <Link href="/#case-studies" style={{ textDecoration: "none" }}>
-          <Flex
+        <Flex
+            as="button"
+            onClick={() => router.back()}
             alignItems="center"
             gap={2}
             opacity={0.5}
@@ -32,11 +39,14 @@ export default function CaseStudyClient({ data }) {
             fontSize={["sm", "md"]}
             fontWeight="500"
             mb={40}
+            cursor="pointer"
+            background="none"
+            border="none"
+            color="fg"
           >
             <Icon as={BsArrowLeft} w={4} h={4} />
             <Text>Case Studies</Text>
           </Flex>
-        </Link>
         <Text
           fontWeight={900}
           fontSize={["2xl", "3xl", "4xl", "5xl"]}

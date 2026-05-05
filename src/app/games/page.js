@@ -1,7 +1,8 @@
 "use client";
 import { Box, Flex, Grid, GridItem, Text, Icon } from "@chakra-ui/react";
 import { motion } from "framer-motion";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import { BsArrowLeft } from "react-icons/bs";
 import { useColorMode } from "../color-mode";
 import ShaderCanvas from "../components/shaderCanvas";
@@ -52,6 +53,11 @@ function GamePanel({ title, description, delay, children }) {
 
 export default function GamesPage() {
   const { colorMode } = useColorMode();
+  const router = useRouter();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "instant" });
+  }, []);
 
   return (
     <Box position="relative" minH="100vh" bg="bg">
@@ -67,8 +73,8 @@ export default function GamesPage() {
         {/* Back link */}
         <motion.div {...fadeUp}>
           <Flex
-            as={Link}
-            href="/"
+            as="button"
+            onClick={() => router.back()}
             display="inline-flex"
             alignItems="center"
             gap={2}
@@ -78,6 +84,10 @@ export default function GamesPage() {
             mb={10}
             fontSize="sm"
             fontWeight="500"
+            cursor="pointer"
+            background="none"
+            border="none"
+            color="fg"
           >
             <Icon as={BsArrowLeft} w={4} h={4} />
             <Text>Back</Text>
