@@ -5,7 +5,7 @@ import CaseStudyClient from "./CaseStudyClient";
 // Pre-render all known slugs at build time
 export async function generateStaticParams() {
   const slugs = await serverClient.fetch(
-    `*[_type == "caseStudy" && defined(slug.current)]{ "slug": slug.current }`
+    `*[_type == "caseStudy" && defined(slug.current)]{ "slug": slug.current }`,
   );
   return slugs.map((s) => ({ slug: s.slug }));
 }
@@ -24,7 +24,7 @@ export default async function CaseStudyPage({ params }) {
       "imageDimensions": image.asset->metadata.dimensions,
       "videoUrl": video.asset->url,
     }`,
-    { slug }
+    { slug },
   );
 
   if (!data) notFound();

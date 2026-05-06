@@ -16,12 +16,8 @@ const NavBar = () => {
   const rotateDeg = useTransform(scrollYProgress, [0, 1], [0, 360]);
   const maskImage = useMotionTemplate`conic-gradient(from -90deg, black 0deg, black ${rotateDeg}deg, transparent ${rotateDeg}deg)`;
 
-  const bgColor = colorMode === "dark"
-    ? "rgba(17, 17, 17, 0.75)"
-    : "rgba(222, 221, 205, 0.75)";
-  const ring = colorMode === "dark"
-    ? "0 0 0 1px rgba(255,255,255,0.08), 0 4px 24px rgba(0,0,0,0.4)"
-    : "0 0 0 1px rgba(0,0,0,0.08), 0 4px 24px rgba(0,0,0,0.08)";
+  const bgColor = "var(--nav-bg)";
+  const ring = "var(--nav-ring)";
 
   const pillH = `${height * 0.65}vh`;
 

@@ -1,3 +1,13 @@
+:root {
+  --nav-bg: rgba(17, 17, 17, 0.75);
+  --nav-ring: 0 0 0 1px rgba(255,255,255,0.08), 0 4px 24px rgba(0,0,0,0.4);
+}
+
+:root.light {
+  --nav-bg: rgba(222, 221, 205, 0.75);
+  --nav-ring: 0 0 0 1px rgba(0,0,0,0.08), 0 4px 24px rgba(0,0,0,0.08);
+}
+
 .grecaptcha-badge {
   visibility: hidden !important;
 }
