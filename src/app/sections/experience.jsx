@@ -84,7 +84,14 @@ const Experience = forwardRef(function Experience({ experience }, ref) {
       position="relative"
     >
       <ShaderCanvas isDark={colorMode === "dark"} alpha={0.38} viewportAlign />
-      <Box position="relative" zIndex={1} display="flex" flexDirection="column">
+      <Box
+        position="relative"
+        zIndex={1}
+        display="flex"
+        flexDirection="column"
+        onMouseMove={handleMouseMove}
+        onClick={handleMouseMove}
+      >
         {/* Job timeline — add entries via Sanity Studio */}
         {experience === undefined || experience === null ? (
           <Flex direction="column" px={[6, 10]} py={10} gap={6}>
@@ -167,8 +174,6 @@ const Experience = forwardRef(function Experience({ experience }, ref) {
           fontSize={["3xl", "3xl", "4xl", "6xl", "6xl", "4.5rem"]}
           letterSpacing={3}
           justifyContent="center"
-          onMouseMove={handleMouseMove}
-          onClick={handleMouseMove}
         >
           <Flex>
             <Text fontStyle="italic" fontWeight="900">
