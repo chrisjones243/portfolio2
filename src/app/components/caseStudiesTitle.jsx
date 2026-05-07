@@ -1,106 +1,101 @@
 "use client";
 import { Box, Text, Flex } from "@chakra-ui/react";
-import { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-// import Image from "next/image";
+import {
+  motion,
+  useAnimationFrame,
+  useMotionValue,
+  useMotionValueEvent,
+  useScroll,
+} from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 import { useDimensions } from "../../dimensions";
 
 function CaseStudiesTitle() {
-  const { height, blockWidth } = useDimensions();
-
-  const image = "✦";
-
-  const firstLine = useRef(null);
-  const secondLine = useRef(null);
-  const slider = useRef(null);
-
-  const xPercent = useRef(0);
-  const direction = useRef(-1);
-  const rafId = useRef(null);
+  const { height } = useDimensions();
+  const { scrollY } = useScroll();
+  const x = useMotionValue(0);
+  const [segmentWidth, setSegmentWidth] = useState(0);
+  const firstSegmentRef = useRef(null);
+  const prevScrollY = useRef(0);
+  const scrollBoost = useRef(0);
 
   useEffect(() => {
-    if (!firstLine.current || !secondLine.current || !slider.current) return;
+    if (!firstSegmentRef.current) return;
 
-    gsap.registerPlugin(ScrollTrigger);
-
-    const ctx = gsap.context(() => {
-      gsap.set(secondLine.current, {
-        left: secondLine.current.getBoundingClientRect().width,
-      });
-
-      gsap.to(slider.current, {
-        scrollTrigger: {
-          trigger: document.documentElement,
-          scrub: 0.5,
-          start: 0,
-          onUpdate: (e) => (direction.current = e.direction * -1),
-        },
-        x: "-200px",
-      });
-    });
-
-    const animate = () => {
-      if (!firstLine.current || !secondLine.current) return;
-
-      if (xPercent.current < -100) {
-        xPercent.current = 0;
-      }
-
-      gsap.set(firstLine.current, { xPercent: xPercent.current });
-      gsap.set(secondLine.current, { xPercent: xPercent.current });
-
-      xPercent.current -= 0.02 * direction.current;
-      rafId.current = requestAnimationFrame(animate);
+    const measure = () => {
+      if (!firstSegmentRef.current) return;
+      setSegmentWidth(firstSegmentRef.current.getBoundingClientRect().width);
     };
 
-    rafId.current = requestAnimationFrame(animate);
+    measure();
 
+    const resizeObserver = new ResizeObserver(measure);
+    resizeObserver.observe(firstSegmentRef.current);
+
+    window.addEventListener("resize", measure);
     return () => {
-      if (rafId.current) cancelAnimationFrame(rafId.current);
-      ctx.revert();
+      resizeObserver.disconnect();
+      window.removeEventListener("resize", measure);
     };
   }, []);
 
-  return (
-    <Box
-      // border={`1px solid ${useTheme().colors.stroke}`}
-      // bg={`background.${colorMode}`}
-      overflow={"hidden"}
-      h={`${height}vh`}
-    >
-      <Flex
-        position={"relative"}
-        whiteSpace={"nowrap"}
-        fontSize={["md", "lg", "2xl", "4xl"]}
-        ref={slider}
-        h={`${height}vh`}
-        display={"flex"}
-        flexDirection={"row"}
-        align={"center"}
-      >
-        <Flex flexDirection={"row"} ref={firstLine}>
-          <Text fontWeight={"400"}>&nbsp;Case Studies&nbsp;</Text>
-          {image} <Text fontWeight={"900"}>&nbsp;Case Studies&nbsp;</Text>
-          {image} <Text fontWeight={"400"}>&nbsp;Selected Work&nbsp;</Text>
-          {image} <Text fontWeight={"900"}>&nbsp;Case Studies&nbsp;</Text>
-          {image} <Text fontWeight={"400"}>&nbsp;Case Studies&nbsp;</Text>
-          {image}
-        </Flex>
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    const delta = Math.abs(latest - prevScrollY.current);
+    prevScrollY.current = latest;
+    scrollBoost.current = Math.min(scrollBoost.current + delta * 0.06, 8);
+  });
 
-        <Flex
-          position={"absolute"}
-          left={firstLine?.current?.offsetWidth}
-          flexDirection={"row"}
-          ref={secondLine}
-        >
-          <Text fontWeight={"400"}>&nbsp;Case Studies&nbsp;</Text>
-          {image} <Text fontWeight={"900"}>&nbsp;Case Studies&nbsp;</Text>
-          {image} <Text fontWeight={"400"}>&nbsp;Selected Work&nbsp;</Text>
-          {image} <Text fontWeight={"900"}>&nbsp;Case Studies&nbsp;</Text>
-          {image} <Text fontWeight={"400"}>&nbsp;Case Studies&nbsp;</Text>
-          {image}
+  useAnimationFrame((_, delta) => {
+    if (segmentWidth <= 0) return;
+
+    scrollBoost.current *= 0.9;
+
+    // Always drift left, then temporarily speed up while scrolling.
+    const pxPerFrame = 0.45 + scrollBoost.current;
+    let nextX = x.get() - pxPerFrame * (delta / 16.67);
+
+    if (nextX <= -segmentWidth) {
+      nextX += segmentWidth;
+    }
+
+    x.set(nextX);
+  });
+
+  const sequence = [
+    { label: "Case Studies", weight: "400" },
+    { label: "Case Studies", weight: "900" },
+    { label: "Selected Work", weight: "400" },
+    { label: "Case Studies", weight: "900" },
+    { label: "Case Studies", weight: "400" },
+  ];
+
+  const segment = (
+    <Flex flexDirection="row" align="center" minW="max-content">
+      {sequence.map((item, i) => (
+        <Flex key={`${item.label}-${item.weight}-${i}`} align="center">
+          <Text fontWeight={item.weight} px={2}>
+            {item.label}
+          </Text>
+          <Text px={2}>✦</Text>
         </Flex>
+      ))}
+    </Flex>
+  );
+
+  return (
+    <Box overflow="hidden" h={`${height}vh`} display="flex" alignItems="center">
+      <Flex
+        as={motion.div}
+        style={{ x }}
+        whiteSpace="nowrap"
+        fontSize={["md", "lg", "2xl", "4xl"]}
+        h={`${height}vh`}
+        align="center"
+        minWidth="max-content"
+        willChange="transform"
+      >
+        <Flex ref={firstSegmentRef}>{segment}</Flex>
+        {segment}
       </Flex>
     </Box>
   );
