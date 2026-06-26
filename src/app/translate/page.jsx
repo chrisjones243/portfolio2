@@ -2,9 +2,9 @@
 import TranslatorUI from "./TranslatorUI";
 import { Box, Flex, Text, Icon } from "@chakra-ui/react";
 import { motion } from "framer-motion";
-import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { BsArrowLeft } from "react-icons/bs";
+import { useSafeBack } from "../hooks/useSafeBack";
 import { useColorMode } from "../color-mode";
 import ShaderCanvas from "../components/shaderCanvas";
 
@@ -15,7 +15,7 @@ const fadeUp = {
 };
 
 export default function TranslatePage() {
-  const router = useRouter();
+  const back = useSafeBack();
   const { colorMode } = useColorMode();
 
   useEffect(() => {
@@ -40,7 +40,7 @@ export default function TranslatePage() {
         <motion.div {...fadeUp}>
           <Flex
             as="button"
-            onClick={() => router.back()}
+            onClick={() => back()}
             display="inline-flex"
             alignItems="center"
             gap={2}

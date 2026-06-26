@@ -1,8 +1,8 @@
 "use client";
 import { Grid, GridItem, Box, Flex, Icon, Text } from "@chakra-ui/react";
-import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { BsArrowLeft } from "react-icons/bs";
+import { useSafeBack } from "../../hooks/useSafeBack";
 import { TAG_COLORS } from "../../components/tagColors";
 import { useColorMode } from "../../color-mode";
 import ShaderCanvas from "../../components/shaderCanvas";
@@ -13,7 +13,7 @@ import CaseStudyLinks from "./CaseStudyLinks";
 
 export default function CaseStudyClient({ data }) {
   const { title, markdown, links, imageUrl, videoUrl, tags } = data;
-  const router = useRouter();
+  const back = useSafeBack();
   const { colorMode } = useColorMode();
 
   useEffect(() => {
@@ -38,7 +38,7 @@ export default function CaseStudyClient({ data }) {
       <Box mb={4}>
         <Flex
             as="button"
-            onClick={() => router.back()}
+            onClick={() => back()}
             alignItems="center"
             gap={2}
             opacity={0.5}
